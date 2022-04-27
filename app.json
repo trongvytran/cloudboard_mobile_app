@@ -2,6 +2,7 @@
   "expo": {
     "name": "billboard-capstone-project-mobile-app",
     "slug": "billboard-capstone-project-mobile-app",
+    "scheme": "billboard-capstone-project-mobile-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

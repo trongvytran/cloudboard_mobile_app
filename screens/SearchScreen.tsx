@@ -1,4 +1,3 @@
-import { StyleSheet, TextInput } from 'react-native'
 import React from 'react'
 import LayoutView from '../components/Views/LayoutView'
 import TitleText from '../components/TitleText'
@@ -17,11 +16,3 @@ const SearchScreen = () => {
 }
 
 export default SearchScreen
-
-const styles = StyleSheet.create({
-  input: {
-    height: 40,
-    borderWidth: 1,
-    padding: 10,
-  },
-})
