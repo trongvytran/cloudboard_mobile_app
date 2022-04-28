@@ -1,6 +1,7 @@
-import { StyleSheet, Button } from 'react-native'
+import { StyleSheet, Text, Pressable, Platform } from 'react-native'
 import * as Google from 'expo-auth-session/providers/google'
-import React, { useEffect } from 'react'
+import Ionicons from '@expo/vector-icons/Ionicons'
+import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { addAccessToken } from '../../../features/auth/accessTokenSlice'
 
@@ -19,19 +20,53 @@ const GoogleView = () => {
   useEffect(() => {
     if (response?.type === 'success') {
       dispatch(addAccessToken(response.params.access_token))
+      fetch(
+        `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${response.params.access_token}`
+      )
+        .then((response) => response.json())
+        .then((data) => console.log(data))
     }
   }, [response])
+
   return (
-    <Button
+    <Pressable
       disabled={!request}
+      style={styles.button}
       onPress={() => {
         promptAsync({ useProxy: true, showInRecents: true })
       }}
-      title="Sign In with Google"
-    />
+    >
+      <Ionicons style={styles.icon} name="logo-google" size={20} />
+      <Text style={styles.text}>Sign in with Google</Text>
+    </Pressable>
   )
 }
 
 export default GoogleView
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 8,
+    elevation: 3,
+    backgroundColor: '#EA4335',
+    marginTop: 4,
+    marginBottom: 4,
+  },
+  text: {
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: 'bold',
+    letterSpacing: 0.25,
+    color: 'white',
+  },
+  icon: {
+    color: 'white',
+    position: 'absolute',
+    left: 18,
+  },
+})

@@ -1,5 +1,4 @@
 import { ScrollView, StyleSheet } from 'react-native'
-import React from 'react'
 
 const ContainerView = ({ children }: any) => {
   return <ScrollView style={styles.container}>{children}</ScrollView>
