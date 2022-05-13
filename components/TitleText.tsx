@@ -1,3 +1,4 @@
+import React from 'react'
 import { StyleSheet, Text } from 'react-native'
 
 const TitleText = ({ children }: any) => {
@@ -10,8 +11,8 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 34,
     fontWeight: 'bold',
-    width: 200,
-    marginBottom: 12,
-    marginTop: 47
+    marginTop: 47,
+    width: "auto",
+    marginBottom: 12
   },
 })

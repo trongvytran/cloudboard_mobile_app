@@ -8,6 +8,7 @@ import FacebookView from '../components/Views/Auth/FacebookView'
 import { clearAccessToken } from '../features/auth/accessTokenSlice'
 import ProfileCard from '../components/Profile/ProfileCard'
 import ProfileItem from '../components/Profile/ProfileItem'
+import React from 'react'
 
 const ProfileScreen = ({ navigation }: any) => {
   const DATA = [

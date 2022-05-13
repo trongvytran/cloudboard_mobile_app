@@ -7,6 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import 'react-native-gesture-handler'
 
 const Stack = createStackNavigator()
+import React from 'react'
 
 const store = configureStore({
   reducer: rootReducer,

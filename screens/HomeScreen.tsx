@@ -1,21 +1,23 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Image, View } from 'react-native'
 import React from 'react'
 import LayoutView from '../components/Views/LayoutView'
 import TitleText from '../components/TitleText'
 import Card from '../components/Card'
 import ContainerView from '../components/Views/ContainerView'
+import HeaderView from '../components/HeaderBar'
 
 const HomeScreen = () => {
   return (
-    <LayoutView>
+   <LayoutView>
       <ContainerView>
-        <TitleText>Find your billboard</TitleText>
+        <TitleText>Find Your Billboard</TitleText>
         <Card />
         <Card />
         <Card />
       </ContainerView>
-    </LayoutView>
+      </LayoutView>
   )
+
 }
 
 export default HomeScreen
