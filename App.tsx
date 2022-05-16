@@ -1,8 +1,12 @@
 import { NavigationContainer } from '@react-navigation/native'
-import BottomTabs from './components/BottomTabs'
+import Main from './components/Main'
 import { Provider } from 'react-redux'
 import rootReducer from './reducers'
 import { configureStore } from '@reduxjs/toolkit'
+import { createStackNavigator } from '@react-navigation/stack'
+import 'react-native-gesture-handler'
+
+const Stack = createStackNavigator()
 
 const store = configureStore({
   reducer: rootReducer,
@@ -12,7 +16,13 @@ const App = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <BottomTabs />
+        <Stack.Navigator>
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name="Main"
+            component={Main}
+          />
+        </Stack.Navigator>
       </NavigationContainer>
     </Provider>
   )

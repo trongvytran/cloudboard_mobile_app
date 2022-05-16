@@ -1,5 +1,6 @@
 import { Keyboard, StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import Colors from '../../constants/color'
 
 const LayoutView = ({ children }: any) => {
 
@@ -23,8 +24,7 @@ export default LayoutView
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 47,
-    backgroundColor: '#ffffff',
-    flex: 1,
+    backgroundColor: Colors.layoutColor,
+    flex: 1
   },
 })

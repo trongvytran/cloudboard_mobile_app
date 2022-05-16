@@ -1,7 +1,11 @@
-import { ScrollView, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 
-const ContainerView = ({ children }: any) => {
-  return <ScrollView style={styles.container}>{children}</ScrollView>
+interface ContainerViewProps {
+  children: JSX.Element[] | JSX.Element
+}
+
+const ContainerView = ({ children }: ContainerViewProps) => {
+  return <View style={styles.container}>{children}</View>
 }
 
 export default ContainerView
