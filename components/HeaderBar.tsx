@@ -11,7 +11,11 @@ const HeaderBar = () => {
     <View style={styles.menu}>
       <Image
         style={styles.logo}
+<<<<<<< HEAD
         source={require('../assets/img/cloudboard.svg')}
+=======
+        source={require('../assets/img/cloudboard.png')}
+>>>>>>> fde2da5 (Fix some error)
         resizeMode="contain"
       />
       <Ionicons
@@ -36,7 +40,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     flex: 1,
-    height: 50,
+    height: 20,
     maxWidth: 500,
     alignSelf: 'center',
   },

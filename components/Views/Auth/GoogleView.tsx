@@ -4,6 +4,7 @@ import Ionicons from '@expo/vector-icons/Ionicons'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { addAccessToken } from '../../../features/auth/accessTokenSlice'
+import React from 'react'
 
 const GoogleView = () => {
   const dispatch = useDispatch()

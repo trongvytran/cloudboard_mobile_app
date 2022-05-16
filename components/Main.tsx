@@ -4,6 +4,7 @@ import HomeScreen from '../screens/HomeScreen'
 import Colors from '../constants/color'
 import ProfileNavigator from '../navigators/ProfileNavigator'
 import SubscriptionScreen from '../screens/SubscriptionScreen'
+import React from 'react'
 
 const Tab = createBottomTabNavigator()
 
