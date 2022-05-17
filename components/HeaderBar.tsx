@@ -11,11 +11,7 @@ const HeaderBar = () => {
     <View style={styles.menu}>
       <Image
         style={styles.logo}
-<<<<<<< HEAD
-        source={require('../assets/img/cloudboard.svg')}
-=======
         source={require('../assets/img/cloudboard.png')}
->>>>>>> fde2da5 (Fix some error)
         resizeMode="contain"
       />
       <Ionicons
