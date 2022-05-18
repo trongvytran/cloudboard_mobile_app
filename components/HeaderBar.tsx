@@ -1,12 +1,8 @@
 import React from 'react'
 import { View, Image, StyleSheet } from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons'
-import SearchScreen from '../screens/SearchScreen'
-import { createStackNavigator } from '@react-navigation/stack'
 
-const Header = createStackNavigator()
-
-const HeaderBar = () => {
+const HeaderBar = ({navigation} : any) => {
   return (
     <View style={styles.menu}>
       <Image
@@ -18,11 +14,12 @@ const HeaderBar = () => {
         style={styles.icon}
         name="ios-search"
         size={40}
-        onPress={() => SearchScreen}
+        onPress={() => navigation.navigate('Search')}
       />
     </View>
   )
 }
+
 
 export default HeaderBar
 
