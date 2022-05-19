@@ -1,13 +1,17 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar,StyleSheet, Text, View,ScrollView } from 'react-native';
 import Input from './Input';
 import Button from '../UI/Button'
-
-function ProfileForm() {
-
+import  Avatar  from "./Avatar";
+function ProfileForm() { 
   return (
     <View>
+      <ScrollView>
       <Text style={styles.title}>Personal Information</Text>
+      <View>
+      <Avatar/>
+      
+      </View>
       <Input label="Full Name"
         textInputConfig={{
           
@@ -34,6 +38,7 @@ function ProfileForm() {
           Confirm
         </Button>
       </View>
+      </ScrollView>
     </View>
 
   );
@@ -59,7 +64,19 @@ const styles = StyleSheet.create({
   rowInput: {
     flex: 1,
   },
- 
+  scroll: {
+    backgroundColor: "white",
+    flex: 1,
+  },
+  userRow: {
+    alignItems: "center",
+    padding: 15,
+    marginTop: 70,
+  },
+  content: {
+    flex: 1,
+    backgroundColor: "#d8d8db",
+  },
   buttons: {
     flexDirection: 'row',
     justifyContent: 'center',

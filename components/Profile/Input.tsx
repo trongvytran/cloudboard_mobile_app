@@ -1,6 +1,6 @@
 import {  StyleSheet, Text, TextInput, View } from 'react-native';
 
-
+import Button from '../UI/Button'
 
 function Input({ label, textInputConfig }) {
 
@@ -10,7 +10,7 @@ function Input({ label, textInputConfig }) {
         <View>
       <Text style={styles.label}>{label}</Text>
       </View>
-      <TextInput style={styles.input}  {...textInputConfig} />
+      <TextInput style={styles.input}  {...textInputConfig} />      
     </View>
   );
 }
@@ -37,4 +37,5 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         fontSize: 18,
       },
+     
 });
