@@ -1,15 +1,22 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, ScrollView } from 'react-native'
 import React from 'react'
-import LayoutView from '../components/Views/LayoutView'
+import ContainerView from '../components/Views/ContainerView'
+import Colors from '../constants/color'
 
 const PaymentMethodScreen = () => {
   return (
-    <LayoutView>
-      <Text>PaymentMethodScreen</Text>
-    </LayoutView>
+    <ScrollView style={styles.container}>
+      <ContainerView>
+        <Text>PaymentMethodScreen</Text>
+      </ContainerView>
+    </ScrollView>
   )
 }
 
 export default PaymentMethodScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: Colors.layoutColor,
+  },
+})

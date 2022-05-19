@@ -1,50 +1,44 @@
-import { useState } from 'react';
-import { StatusBar,StyleSheet, Text, View,ScrollView } from 'react-native';
-import Input from './Input';
+import { StyleSheet, Text, View, ScrollView } from 'react-native'
+import Input from './Input'
 import Button from '../UI/Button'
-import  Avatar  from "./Avatar";
-function ProfileForm() { 
+import Avatar from './Avatar'
+import React from 'react'
+function ProfileForm() {
   return (
     <View>
-      <ScrollView>
       <Text style={styles.title}>Personal Information</Text>
       <View>
-      <Avatar/>
-      
+        <Avatar />
       </View>
-      <Input label="Full Name"
-        textInputConfig={{
-          
-        }} />
-      <Input label="Date of Birth"
+      <Input label="Full Name" textInputConfig={{}} />
+      <Input
+        label="Date of Birth"
         textInputConfig={{
           Placeholder: 'YYYY-MM-DD',
-          Maxlength: '10'
-        }} />
-      <Input label="Phone Number"
+          Maxlength: '10',
+        }}
+      />
+      <Input
+        label="Phone Number"
         textInputConfig={{
           keyboardType: 'decimal-pad',
-        }} />
-         <Input label="Email"
-        textInputConfig={{
-          
-        }} />
-        <Input label="Password"
+        }}
+      />
+      <Input label="Email" textInputConfig={{}} />
+      <Input
+        label="Password"
         textInputConfig={{
           multiline: true,
-        }} />
-        <View style={styles.buttons}>
-        <Button style={styles.button} >
-          Confirm
-        </Button>
+        }}
+      />
+      <View style={styles.buttons}>
+        <Button style={styles.button}>Confirm</Button>
       </View>
-      </ScrollView>
     </View>
-
-  );
+  )
 }
 
-export default ProfileForm;
+export default ProfileForm
 
 const styles = StyleSheet.create({
   form: {
@@ -53,9 +47,8 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    
+
     marginVertical: 24,
-    
   },
   inputsRow: {
     flexDirection: 'row',
@@ -65,17 +58,17 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scroll: {
-    backgroundColor: "white",
+    backgroundColor: 'white',
     flex: 1,
   },
   userRow: {
-    alignItems: "center",
+    alignItems: 'center',
     padding: 15,
     marginTop: 70,
   },
   content: {
     flex: 1,
-    backgroundColor: "#d8d8db",
+    backgroundColor: '#d8d8db',
   },
   buttons: {
     flexDirection: 'row',
@@ -85,5 +78,5 @@ const styles = StyleSheet.create({
   button: {
     minWidth: 120,
     marginHorizontal: 8,
-  },  
-});
+  },
+})

@@ -1,10 +1,10 @@
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import HomeScreen from '../screens/HomeScreen'
 import Colors from '../constants/color'
 import ProfileNavigator from '../navigators/ProfileNavigator'
 import SubscriptionScreen from '../screens/SubscriptionScreen'
 import React from 'react'
+import HomeNavigator from '../navigators/HomeNavigator'
 
 const Tab = createBottomTabNavigator()
 
@@ -35,7 +35,7 @@ const Main = () => {
         tabBarActiveTintColor: Colors.primaryColor,
       })}
     >
-      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Home" component={HomeNavigator} />
       <Tab.Screen name="Subscription" component={SubscriptionScreen} />
       <Tab.Screen name="My Profile" component={ProfileNavigator} />
     </Tab.Navigator>
