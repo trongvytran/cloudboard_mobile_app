@@ -27,7 +27,17 @@ const HomeScreen = ({ navigation }: any) => {
   return (
     <ScrollView style={styles.container}>
       <ContainerView>
+        <ScrollView>
         <Text style={styles.title}>Find Your Billboard</Text>
+        <View style={styles.heading}>
+        <Text style={styles.title}>Recommendations</Text>
+        <Text style={styles.seeMore}>See more</Text>
+        </View>
+        <View style={styles.heading}>
+        <Text style={styles.title}>Top Billboards</Text>
+        <Text style={styles.seeMore}>See more</Text>
+        </View>
+        </ScrollView>
       </ContainerView>
     </ScrollView>
   )
@@ -38,6 +48,15 @@ const styles = StyleSheet.create({
     flex:1, 
     marginVertical:19,
     paddingLeft:17
+  },
+  heading:{
+    flex:1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems:'center'
+  },
+  seeMore:{
+    color: '#F59E0B'
   },
   logo: {
     flex:1, 
