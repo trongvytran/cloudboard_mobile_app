@@ -17,6 +17,6 @@ const styles = StyleSheet.create({
   logo: {
     height: 20,
     maxWidth: 180,
-    flex: 1,
+    flex: 1
   },
 })

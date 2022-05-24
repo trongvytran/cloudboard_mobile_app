@@ -10,12 +10,9 @@ const HomeNavigator = () => {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen
-        options={{
-          headerTitleAlign: 'left',
-          headerTitle: (props) => <LogoTitle {...props} />,
-        }}
         name="Home"
         component={HomeScreen}
+        options={{ headerTitle: (props) => <LogoTitle {...props} /> }}
       />
       <HomeStack.Screen name="Search" component={SearchScreen} />
     </HomeStack.Navigator>
