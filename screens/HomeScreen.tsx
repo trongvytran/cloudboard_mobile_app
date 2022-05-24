@@ -1,16 +1,19 @@
 import React from 'react'
 import Card from '../components/Card'
 import ContainerView from '../components/Views/ContainerView'
-import { StyleSheet, ScrollView, Text, Image } from 'react-native'
+import { StyleSheet, ScrollView, Text, Image, View } from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import Colors from '../constants/color'
 // import CustomSlider from '../components/Home/CustomSlider'
-import data from '../data'
 
 const HomeScreen = ({ navigation }: any) => {
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      headerLeft: () => (<Image style={{flex:1, maxWidth:1000}} source={require('../assets/img/cloudboard.png')}/>),
+      headerLeft: () => (
+        <View style={styles.headerContainer}>
+      <Image style={styles.logo} source={require('../assets/img/cloudboard.png')}/>
+        </View>
+      ),
       headerRight: () => (
         <Ionicons
           style={styles.icon}
@@ -25,13 +28,21 @@ const HomeScreen = ({ navigation }: any) => {
     <ScrollView style={styles.container}>
       <ContainerView>
         <Text style={styles.title}>Find Your Billboard</Text>
-        <CustomSlider data={data} />
       </ContainerView>
     </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
+  headerContainer:{
+    flex:1, 
+    marginVertical:19,
+    paddingLeft:17
+  },
+  logo: {
+    flex:1, 
+    width:250
+  },
   container: {
     backgroundColor: Colors.layoutColor
   },
