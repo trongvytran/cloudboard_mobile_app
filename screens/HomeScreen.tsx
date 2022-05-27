@@ -1,10 +1,10 @@
 import React from 'react'
-import Card from '../components/Card'
 import ContainerView from '../components/Views/ContainerView'
 import { StyleSheet, ScrollView, Text, Image, View } from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import Colors from '../constants/color'
-// import CustomSlider from '../components/Home/CustomSlider'
+import Carousel from '../components/Home/Carousel'
+import data from '../data'
 
 const HomeScreen = ({ navigation }: any) => {
   React.useLayoutEffect(() => {
@@ -28,7 +28,10 @@ const HomeScreen = ({ navigation }: any) => {
     <ScrollView style={styles.container}>
       <ContainerView>
         <ScrollView>
+          <View>
         <Text style={styles.title}>Find Your Billboard</Text>
+        <Carousel data={data}/>
+        </View>
         <View style={styles.heading}>
         <Text style={styles.title}>Recommendations</Text>
         <Text style={styles.seeMore}>See more</Text>
