@@ -19,12 +19,13 @@ const CarouselItem = ({item}: any) => {
 const styles = StyleSheet.create({
     card:{
         flex: 1,
-        width:width - 20,
+        width: width - 20,
         height: height / 3,
         backgroundColor: 'white',
         marginVertical: 17,
+        marginRight: 10,
         borderRadius: 10,
-        elevation:5
+        elevation:5,
 
     },
     text:{

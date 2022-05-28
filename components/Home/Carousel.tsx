@@ -4,26 +4,23 @@ import CarouselItem from '../Home/CarouselItem'
 
 const {width, height} = Dimensions.get('window')
 
-let flatList: any
+// const infiniteScroll = (dataList: any[]) => {
+//     const numberOfData= dataList.length
+//     let scrollValue = 0, scrolled = 0
+    
+//     setInterval(() => {
+//         scrolled++
+//         if(scrolled < numberOfData){
+//         scrolled= scrollValue + width}
+//         else {[
+//             scrollValue =0,
+//             scrolled =0
+//         ]}
 
-const infiniteScroll = (dataList: string | any[]) => {
-    
-    const numberOfData= dataList.length
-    let scrollValue = 0, scrolled = 0
-    
-    setInterval(() => {
-        scrolled++
-        if(scrolled < numberOfData)
-        scrollValue= scrollValue + width
-        else {
-            scrollValue =0,
-            scrolled =0
-        }
-            
-        
-        flatList.scrollToOffset({animated: true, offset: scrollValue})
-    }, 3000)
-}
+//         // this.flatList.scrollToOffset({animated: true, offset: scrollValue})
+
+//     }, 3000)
+// }
 const Carousel = ({data}: any) => {
     
     const scrollX = new Animated.Value(0)
@@ -32,14 +29,15 @@ const Carousel = ({data}: any) => {
 
     useEffect(() =>{
         setDataList(data)
-        infiniteScroll(dataList)
+        // infiniteScroll(dataList)
     })
 
     if(data && data.length){
         return(
             <View>
-                <FlatList data= {data} keyExtractor={(_item, index) => 'key' + index} 
-                ref={flatList}
+                <FlatList data= {data}
+                // ref={(flatList) => {this.flatList = flatList}}
+                keyExtractor={(item) => item.id} 
                 horizontal
                 pagingEnabled 
                 scrollEnabled 
@@ -47,13 +45,13 @@ const Carousel = ({data}: any) => {
                 scrollEventThrottle={16} 
                 decelerationRate = {'fast'}
                 showsHorizontalScrollIndicator = {false}
-                renderItem = {({item}) => {return <CarouselItem item = {item} /> }
+                renderItem = {({item: item}) => {return <CarouselItem item = {item} />}
                 }
 
-                onScroll = {Animated.event([{nativeEvent: {contentOffset: scrollX}}])} 
+                // onScroll = {Animated.event([{nativeEvent: {contentOffset: scrollX}}])} 
 
                 />
-                <View style={styles.dotView}>
+                {/* <View style={styles.dotView}>
                     {data.map((_: any, i: number) => {
                         let opacity = position.interpolate({
                             inputRange: [i - 1, i, i + 1],
@@ -62,11 +60,11 @@ const Carousel = ({data}: any) => {
                             return(
                                 <Animated.View
                                 key = {i}
-                                style = {{opacity, height:10, width, backgroundColor:'#595959', margin: 8, borderRadius: 5}}
+                                style = {[styles.dot, opacity]}
                                 />
                             )
                         })}
-                </View>
+                </View> */}
             </View>
             
         )
@@ -77,9 +75,16 @@ const Carousel = ({data}: any) => {
 
 const styles = StyleSheet.create({
     dotView: {
-        flex:1,
+        flex: 2,
         flexDirection: 'row',
         justifyContent:'center'
+    },
+    dot: {
+        height:10, 
+        width, 
+        backgroundColor:'#595959', 
+        margin: 1, 
+        borderRadius: 5
     }
 })
 export default Carousel

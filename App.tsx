@@ -20,7 +20,7 @@ const App = () => {
         <Stack.Navigator>
           <Stack.Screen
             options={{ headerShown: false }}
-            name="Main"
+            name="main"
             component={Main}
           />
         </Stack.Navigator>

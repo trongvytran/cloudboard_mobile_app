@@ -9,11 +9,6 @@ import data from '../data'
 const HomeScreen = ({ navigation }: any) => {
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      headerLeft: () => (
-        <View style={styles.headerContainer}>
-      <Image style={styles.logo} source={require('../assets/img/cloudboard.png')}/>
-        </View>
-      ),
       headerRight: () => (
         <Ionicons
           style={styles.icon}
@@ -28,9 +23,11 @@ const HomeScreen = ({ navigation }: any) => {
     <ScrollView style={styles.container}>
       <ContainerView>
         <ScrollView>
-          <View>
+        <View>
         <Text style={styles.title}>Find Your Billboard</Text>
+        <View>
         <Carousel data={data}/>
+        </View>
         </View>
         <View style={styles.heading}>
         <Text style={styles.title}>Recommendations</Text>
@@ -48,9 +45,9 @@ const HomeScreen = ({ navigation }: any) => {
 
 const styles = StyleSheet.create({
   headerContainer:{
-    flex:1, 
-    marginVertical:19,
-    paddingLeft:17
+    flex:1,
+    paddingTop:17,
+    paddingLeft:17,
   },
   heading:{
     flex:1,
@@ -59,14 +56,17 @@ const styles = StyleSheet.create({
     alignItems:'center'
   },
   seeMore:{
-    color: '#F59E0B'
+    color: '#F59E0B',
+    paddingRight:10
   },
   logo: {
     flex:1, 
-    width:250
+    width:'100%',
+    
   },
   container: {
-    backgroundColor: Colors.layoutColor
+    backgroundColor: Colors.layoutColor,
+    overflow:'visible'
   },
   title: {
     fontSize: 18,
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     color: '#F59E0B',
-    paddingRight: 16,
+    paddingRight: 40,
   },
 })
 
