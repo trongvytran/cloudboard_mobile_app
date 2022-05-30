@@ -4,7 +4,12 @@ import { StyleSheet, ScrollView, Text, Image, View } from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import Colors from '../constants/color'
 import Carousel from '../components/Home/Carousel'
+import RecommendationStack from '../components/Home/RecommendationStack'
+import TopBillboardStack from '../components/Home/TopBillboardStack'
+
 import data from '../data'
+import cardstackdata from '../cardstackdata'
+
 
 const HomeScreen = ({ navigation }: any) => {
   React.useLayoutEffect(() => {
@@ -33,9 +38,15 @@ const HomeScreen = ({ navigation }: any) => {
         <Text style={styles.title}>Recommendations</Text>
         <Text style={styles.seeMore}>See more</Text>
         </View>
+        <View>
+        <RecommendationStack data={cardstackdata}/>
+        </View>
         <View style={styles.heading}>
         <Text style={styles.title}>Top Billboards</Text>
         <Text style={styles.seeMore}>See more</Text>
+        </View>
+        <View>
+        <TopBillboardStack data={cardstackdata}/>
         </View>
         </ScrollView>
       </ContainerView>
