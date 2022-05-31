@@ -1,5 +1,6 @@
 import React from 'react'
 import {View, StyleSheet, Text, Image, Dimensions} from 'react-native'
+import Duration from '../UI/Duration'
 
 const {width, height} = Dimensions.get('window')
 
@@ -15,7 +16,10 @@ const CardStackItem = ({item}: any) => {
         <Text style={styles.title}>{item.title}</Text>
         <Text style={styles.address}>{item.address}</Text>
         </View>
-        <Text style={styles.duration}>{item.duration}</Text>
+        {/* <Text style={styles.duration}>{item.duration}</Text> */}
+        <View>
+        <Duration data={item.duration} />
+        </View>
         </View>
         <Text style={styles.price}>{item.price}</Text>
         </View>
@@ -63,10 +67,6 @@ const styles = StyleSheet.create({
         color:'#F59E0B',
         marginTop:10
 
-    },
-    duration:{
-        marginRight:17,
-        
     }
 
 }
