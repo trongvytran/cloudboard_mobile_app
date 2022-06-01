@@ -1,25 +1,10 @@
 import React from 'react'
 import {View, StyleSheet, Text, Image, Dimensions} from 'react-native'
+import Duration from '../UI/Duration'
 
 const {width, height} = Dimensions.get('window')
 
-const CardStackItem = ({item}: any) => {    
-    const durationStyles = [styles.duration];
-    if (item.duration==='3 months') {
-        durationStyles.push(styles.threemo);
-      }
-    if (item.duration==='6 months') {
-        durationStyles.push(styles.sixmo);
-      }
-    if (item.duration==='12 months') {
-        durationStyles.push(styles.twelvemo);
-      }
-    if (item.duration==='24 months') {
-        durationStyles.push(styles.twentyfomo);
-      }
-    if (item.duration==='36 months') {
-        durationStyles.push(styles.thirtysixmo);
-      }            
+const CardStackItem = ({item}: any) => {             
     return (
         <View style={{flex:1, flexDirection: 'column'}}>
         <View style={styles.card}>
@@ -31,13 +16,15 @@ const CardStackItem = ({item}: any) => {
         <Text style={styles.title}>{item.title}</Text>
         <Text style={styles.address}>{item.address}</Text>
         </View>
-        <View >
-        <Text style={durationStyles}>{item.duration}</Text>
+        {/* <Text style={styles.duration}>{item.duration}</Text> */}
+        <View>
+        <Duration data={item.duration} />
         </View>
         </View>
         <Text style={styles.price}>{item.price}</Text>
         </View>
         </View>
+
 
 )
 }
@@ -80,57 +67,6 @@ const styles = StyleSheet.create({
         marginTop:10
 
     },
-    duration:{
-    },
-    threemo:{
-        paddingHorizontal:8,
-        paddingVertical:4,
-        borderRadius: 4,
-        marginRight:15,
-        backgroundColor:'#cfffd5',
-        color:'green',
-        fontSize:12,
-        fontFamily:'Arial'
-    },
-    sixmo:{
-        paddingHorizontal:8,
-        paddingVertical:4,
-        borderRadius: 4,
-        marginRight:15,
-        backgroundColor:'#ff9999',
-        color:'red',
-        fontSize:12,
-        fontFamily:'Arial'
-    }, 
-    twelvemo:{
-        paddingHorizontal:8,
-        paddingVertical:4,
-        borderRadius: 4,
-        marginRight:15,
-        backgroundColor:'#ffff99',
-        color:'#999900',
-        fontSize:12,
-        fontFamily:'Arial'
-    }, 
-    twentyfomo:{
-        paddingHorizontal:8,
-        paddingVertical:4,
-        borderRadius: 4,
-        marginRight:15,
-        backgroundColor:'#9999ff',
-        color:'#00007f',
-        fontSize:12,
-        fontFamily:'Arial'
-    }, 
-    thirtysixmo:{
-        paddingHorizontal:8,
-        paddingVertical:4,
-        borderRadius: 4,
-        marginRight:15,
-        backgroundColor:'#a4f1f5',
-        color:'#16b0b8',
-        fontSize:12,
-        fontFamily:'Arial'
-    } 
+
 }
 )
