@@ -82,18 +82,6 @@ const styles = StyleSheet.create({
     },
     duration:{
     },
-    colorRed:{
-        marginRight:17,
-        color:'red'      
-    },
-    colorBlue:{
-        marginRight:17,
-        color:'blue'
-    },
-    colorGreen:{
-        marginRight:17,
-        color:'green'
-    },
     threemo:{
         paddingHorizontal:8,
         paddingVertical:4,
