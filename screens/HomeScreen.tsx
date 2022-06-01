@@ -23,6 +23,7 @@ const HomeScreen = ({ navigation }: any) => {
         />
       ),
     })
+    
   }, [navigation])
   return (
     <ScrollView style={styles.container}>

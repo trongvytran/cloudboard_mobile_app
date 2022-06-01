@@ -9,8 +9,9 @@ const RecommendationStack = ({data}: any) => {
 
     useEffect(() =>
         setDataList(data)
+        
     )
-
+    
         if(data && data.length){
             return(
                 <View>
@@ -25,10 +26,12 @@ const RecommendationStack = ({data}: any) => {
                 showsHorizontalScrollIndicator = {false}
                 renderItem = {({item: item}) => {return <CardStackItem item = {item} />}}
                 /> 
+                
                 </View>
             )
         }
         console.log("Card Stack's Error Occured!")
+        
         return null
 }
 
