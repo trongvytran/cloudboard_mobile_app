@@ -1,10 +1,11 @@
-import { StyleSheet, Text, Pressable, Platform } from 'react-native'
+import { StyleSheet, Text, Pressable } from 'react-native'
 import * as Google from 'expo-auth-session/providers/google'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { addAccessToken } from '../../../features/auth/accessTokenSlice'
+import { addUserLoginInfo } from '../../../features/auth/userLoginInfo'
 import React from 'react'
+import axios from 'axios'
 
 const GoogleView = () => {
   const dispatch = useDispatch()
@@ -20,12 +21,17 @@ const GoogleView = () => {
   })
   useEffect(() => {
     if (response?.type === 'success') {
-      dispatch(addAccessToken(response.params.access_token))
-      fetch(
+      axios(
         `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${response.params.access_token}`
-      )
-        .then((response) => response.json())
-        .then((data) => console.log(data))
+      ).then((res) => {
+        axios
+          .post('http://localhost:3000/api/users/login', {
+            name: res.data.name,
+            email: res.data.email,
+            imageUrl: res.data.picture,
+          })
+          .then((res) => dispatch(addUserLoginInfo(res.data)))
+      })
     }
   }, [response])
 

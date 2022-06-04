@@ -3,8 +3,9 @@ import * as Facebook from 'expo-auth-session/providers/facebook'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { addAccessToken } from '../../../features/auth/accessTokenSlice'
+import { addUserLoginInfo } from '../../../features/auth/userLoginInfo'
 import React from 'react'
+import axios from 'axios'
 
 const FacebookView = () => {
   const dispatch = useDispatch()
@@ -14,12 +15,18 @@ const FacebookView = () => {
 
   useEffect(() => {
     if (response?.type === 'success') {
-      dispatch(addAccessToken(response.params.access_token))
-      fetch(
+      axios(
         `https://graph.facebook.com/me?access_token=${response.params.access_token}&fields=id,name,email,picture`
       )
-        .then((response) => response.json())
-        .then((data) => console.log(data))
+      .then((res) => {
+        axios
+          .post('http://localhost:3000/api/users/login', {
+            name: res.data.name,
+            email: res.data.email,
+            imageUrl: res.data.picture.data.url,
+          })
+          .then((res) => dispatch(addUserLoginInfo(res.data)))
+      })
     }
   }, [response])
   return (

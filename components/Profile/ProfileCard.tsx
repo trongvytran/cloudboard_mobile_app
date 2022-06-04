@@ -5,15 +5,13 @@ import Colors from '../../constants/color'
 interface ProfileCardProps {
   name: string
   email: string
+  imageSource: any
 }
 
-const ProfileCard = ({ name, email }: ProfileCardProps) => {
+const ProfileCard = ({ name, email, imageSource }: ProfileCardProps) => {
   return (
     <View style={styles.profileContainer}>
-      <Image
-        style={styles.profileAvatar}
-        source={require('../../assets/img/avatar.webp')}
-      />
+      <Image style={styles.profileAvatar} source={{ uri: imageSource }} />
       <View>
         <Text style={styles.profileTitle}>{name}</Text>
         <Text style={styles.profileSubtitle}>{email}</Text>

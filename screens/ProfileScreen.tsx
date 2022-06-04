@@ -1,11 +1,10 @@
-import { View, FlatList } from 'react-native'
-import { useDispatch, useSelector } from 'react-redux'
+import { View, FlatList, Text } from 'react-native'
+import { useSelector } from 'react-redux'
 import LayoutView from '../components/Views/LayoutView'
 import TitleText from '../components/TitleText'
 import ContainerView from '../components/Views/ContainerView'
 import GoogleView from '../components/Views/Auth/GoogleView'
 import FacebookView from '../components/Views/Auth/FacebookView'
-import { clearAccessToken } from '../features/auth/accessTokenSlice'
 import ProfileCard from '../components/Profile/ProfileCard'
 import ProfileItem from '../components/Profile/ProfileItem'
 import React from 'react'
@@ -16,11 +15,14 @@ const ProfileScreen = ({ navigation }: any) => {
     { id: 2, title: 'Payment methods', subtitle: 'Visa **89' },
     { id: 3, title: 'Settings', subtitle: 'Notifications, password' },
   ]
-  const { accessToken } = useSelector((state: any) => state.accessToken)
-  const dispatch = useDispatch()
-  const validateUser = !accessToken ? (
+  const { userLoginInfo } = useSelector((state: any) => state.userLoginInfo)
+  const validateUser = userLoginInfo ? (
     <View>
-      <ProfileCard name="Hoang An Le Ba" email="hoanganleba@gmail.com" />
+      <ProfileCard
+        imageSource={userLoginInfo.imageUrl}
+        name={userLoginInfo.name}
+        email={userLoginInfo.email}
+      />
       <FlatList
         scrollEnabled={false}
         data={DATA}
