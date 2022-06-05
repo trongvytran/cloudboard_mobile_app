@@ -1,16 +1,18 @@
 import {  StyleSheet, Text, TextInput, View } from 'react-native';
-
+import React from 'react'
 import Button from '../UI/Button'
 
-function Input({ label, textInputConfig }) {
-
-
+function Input({invalid, label, textInputConfig }) {
+  const inputStyles = [styles.input];
+  if (invalid) {
+    inputStyles.push(styles.invalidInput);
+  }
   return (
     <View style={styles.inputContainer} >
         <View>
-      <Text style={styles.label}>{label}</Text>
+      <Text style={[styles.label, invalid && styles.invalidLabel]}>{label}</Text>
       </View>
-      <TextInput style={styles.input}  {...textInputConfig} />      
+      <TextInput style={inputStyles}  {...textInputConfig} />      
     </View>
   );
 }
@@ -37,5 +39,10 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         fontSize: 18,
       },
-     
+      invalidInput: {
+        backgroundColor: '#fcc4e4'
+      },
+      invalidLabel: {
+        color: '#9b095c'
+      },
 });

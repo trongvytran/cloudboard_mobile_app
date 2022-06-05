@@ -4,10 +4,17 @@ import ProfileForm from '../components/Profile/ProfileForm'
 import { ScrollView, StyleSheet } from 'react-native'
 import Colors from '../constants/color'
 const SettingScreen = () => {
+
+  function confirmHandler(data) {
+    console.log(data)
+    console.log('123')
+  }
   return (
     <ScrollView style={styles.container}>
       <ContainerView>
-        <ProfileForm />
+        <ProfileForm 
+        
+        defaultValues=''/>
       </ContainerView>
     </ScrollView>
   )
