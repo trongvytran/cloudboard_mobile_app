@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-import accessTokenReducer from '../features/auth/accessTokenSlice'
+import userLoginInfoReducer from '../features/auth/userLoginInfo'
 
 export default combineReducers({
-  accessToken: accessTokenReducer,
+  userLoginInfo: userLoginInfoReducer,
 })

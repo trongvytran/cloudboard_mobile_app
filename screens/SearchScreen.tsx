@@ -1,18 +1,23 @@
 import React from 'react'
-import LayoutView from '../components/Views/LayoutView'
+import { StyleSheet, ScrollView } from 'react-native'
 import TitleText from '../components/TitleText'
-import ContainerView from '../components/Views/ContainerView'
 import SearchBar from '../components/SearchBar'
+import Colors from '../constants/color'
 
 const SearchScreen = () => {
   return (
-    <LayoutView>
-      <ContainerView>
-        <TitleText>Search</TitleText>
-        <SearchBar />
-      </ContainerView>
-    </LayoutView>
+    <ScrollView style={styles.container}>
+      <TitleText>Search</TitleText>
+      <SearchBar />
+    </ScrollView>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: Colors.layoutColor,
+    overflow: 'visible',
+  },
+})
 
 export default SearchScreen

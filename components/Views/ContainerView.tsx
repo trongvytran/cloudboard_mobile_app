@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: 18,
     paddingLeft: 10,
-    // paddingRight: 0,
-    overflow:'scroll'
+    paddingRight: 10,
   },
 })

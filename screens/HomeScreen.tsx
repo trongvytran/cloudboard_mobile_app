@@ -10,7 +10,6 @@ import TopBillboardStack from '../components/Home/TopBillboardStack'
 import data from '../data'
 import cardstackdata from '../cardstackdata'
 
-
 const HomeScreen = ({ navigation }: any) => {
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -23,32 +22,31 @@ const HomeScreen = ({ navigation }: any) => {
         />
       ),
     })
-    
   }, [navigation])
   return (
     <ScrollView style={styles.container}>
       <ContainerView>
         <ScrollView>
-        <View>
-        <Text style={styles.title}>Find Your Billboard</Text>
-        <View>
-        <Carousel data={data}/>
-        </View>
-        </View>
-        <View style={styles.heading}>
-        <Text style={styles.title}>Recommendations</Text>
-        <Text style={styles.seeMore}>See more</Text>
-        </View>
-        <View>
-        <RecommendationStack data={cardstackdata}/>
-        </View>
-        <View style={styles.heading}>
-        <Text style={styles.title}>Top Billboards</Text>
-        <Text style={styles.seeMore}>See more</Text>
-        </View>
-        <View>
-        <TopBillboardStack data={cardstackdata}/>
-        </View>
+          <View>
+            <Text style={styles.title}>Find Your Billboard</Text>
+            <View>
+              <Carousel data={data} />
+            </View>
+          </View>
+          <View style={styles.heading}>
+            <Text style={styles.title}>Recommendations</Text>
+            <Text style={styles.seeMore}>See more</Text>
+          </View>
+          <View>
+            <RecommendationStack data={cardstackdata} />
+          </View>
+          <View style={styles.heading}>
+            <Text style={styles.title}>Top Billboards</Text>
+            <Text style={styles.seeMore}>See more</Text>
+          </View>
+          <View>
+            <TopBillboardStack data={cardstackdata} />
+          </View>
         </ScrollView>
       </ContainerView>
     </ScrollView>
@@ -56,33 +54,32 @@ const HomeScreen = ({ navigation }: any) => {
 }
 
 const styles = StyleSheet.create({
-  headerContainer:{
-    flex:1,
-    paddingTop:17,
-    paddingLeft:17,
+  headerContainer: {
+    flex: 1,
+    paddingTop: 17,
+    paddingLeft: 17,
   },
-  heading:{
-    flex:1,
+  heading: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems:'center'
+    alignItems: 'center',
   },
-  seeMore:{
+  seeMore: {
     color: '#F59E0B',
-    paddingRight:10
+    paddingRight: 10,
   },
   logo: {
-    flex:1, 
-    width:'100%',
-    
+    flex: 1,
+    width: '100%',
   },
   container: {
     backgroundColor: Colors.layoutColor,
-    overflow:'visible'
+    overflow: 'visible',
   },
   title: {
     fontSize: 18,
-    fontWeight: '700'
+    fontWeight: '700',
   },
   icon: {
     color: '#F59E0B',
