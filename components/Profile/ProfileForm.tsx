@@ -48,7 +48,7 @@ function ProfileForm(  defaultValues) {
 
     const fullNameIsValid = userData.fullName.length > 0;
     const dateIsValid = userData.date.toString() !== 'Invalid Date';
-    const phoneNumberIsValid = !isNaN(userData.phoneNumber) && userData.phoneNumber > 0;
+    const phoneNumberIsValid = !isNaN(userData.phoneNumber) && userData.phoneNumber > 0 && userData.phoneNumber < 11;
     const emailIsValid = userData.email.length > 0;
     const passwordIsValid = userData.password.length > 0;
 
