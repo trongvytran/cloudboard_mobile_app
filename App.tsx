@@ -3,10 +3,8 @@ import Main from './components/Main'
 import { Provider } from 'react-redux'
 import rootReducer from './reducers'
 import { configureStore } from '@reduxjs/toolkit'
-import { createStackNavigator } from '@react-navigation/stack'
 import 'react-native-gesture-handler'
 
-const Stack = createStackNavigator()
 import React from 'react'
 
 const store = configureStore({
@@ -17,13 +15,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="Main"
-            component={Main}
-          />
-        </Stack.Navigator>
+        <Main/>
       </NavigationContainer>
     </Provider>
   )

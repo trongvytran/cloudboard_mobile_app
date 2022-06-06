@@ -1,9 +1,10 @@
-import { StyleSheet, Text, View, ScrollView } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import Input from './Input'
 import Button from '../UI/Button'
 import Avatar from './Avatar'
 import React from 'react'
-function ProfileForm() {
+
+const ProfileForm = () => {
   return (
     <View>
       <Text style={styles.title}>Personal Information</Text>

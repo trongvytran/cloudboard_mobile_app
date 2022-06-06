@@ -5,7 +5,7 @@ import Colors from '../../constants/color'
 interface ProfileCardProps {
   name: string
   email: string
-  imageSource: any
+  imageSource: string
 }
 
 const ProfileCard = ({ name, email, imageSource }: ProfileCardProps) => {
@@ -30,14 +30,14 @@ const styles = StyleSheet.create({
   },
   profileAvatar: {
     borderRadius: 9999,
-    height: 56,
-    width: 56,
+    height: 46,
+    width: 46,
     marginRight: 16,
   },
   profileTitle: {
     fontSize: 18,
     fontWeight: '600',
-    marginBottom: 5,
+    marginBottom: 4.5,
   },
   profileSubtitle: {
     fontSize: 14,
