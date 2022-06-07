@@ -13,8 +13,8 @@ interface BadgeColorValue {
 
 const DurationBadge = ({ value }: DurationBadgeValue) => {
   const [badgeColor, setbadgeColor] = useState<BadgeColorValue>({
-    textColor: '',
-    backgroundColor: '',
+    textColor: Colors.layoutColor,
+    backgroundColor: Colors.layoutColor,
   })
 
   useEffect(() => {

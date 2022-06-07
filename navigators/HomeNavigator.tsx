@@ -10,7 +10,7 @@ const HomeNavigator = () => {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen
-        name="Home"
+        name="HomeScreen"
         component={HomeScreen}
         options={{headerTitle: (props) => <LogoTitle {...props} /> }}
       />
