@@ -51,6 +51,7 @@ const Carousel = ({ data }: any) => {
           scrollEventThrottle={16}
           decelerationRate={'fast'}
           showsHorizontalScrollIndicator={false}
+          ItemSeparatorComponent={() => <View style={{ width: 16 }} />}
           renderItem={({ item: item }) => {
             return <CarouselItem item={item} />
           }}

@@ -26,7 +26,7 @@ export default ProfileItem
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    borderBottomWidth: 1.4,
+    borderBottomWidth: StyleSheet.hairlineWidth,
     borderColor: Colors.borderColor,
     paddingBottom: 17,
     paddingTop: 17,

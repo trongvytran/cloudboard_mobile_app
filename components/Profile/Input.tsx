@@ -14,10 +14,10 @@ function Input({invalid, label, textInputConfig }) {
       </View>
       <TextInput style={inputStyles}  {...textInputConfig} />      
     </View>
-  );
+  )
 }
 
-export default Input;
+export default Input
 
 const styles = StyleSheet.create({
     inputContainer: {

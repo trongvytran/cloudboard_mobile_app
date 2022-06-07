@@ -1,14 +1,13 @@
 import React from 'react-native'
 import { View, StyleSheet, Text, Image, Dimensions } from 'react-native'
-
-const { width, height } = Dimensions.get('window')
+import Colors from '../../constants/color'
 
 const CarouselItem = ({ item }: any) => {
   return (
-    <View style={styles.card}>
-      <Image style={styles.image} source={{ uri: item.url }} />
-      <View style={styles.text}>
-        <Text style={styles.title}>{item.title}</Text>
+    <View style={styles.container}>
+      <Image style={styles.image} source={{ uri: item.imageUrl }} />
+      <View style={styles.body}>
+        <Text style={styles.name}>{item.name}</Text>
         <Text style={styles.description}>{item.description}</Text>
       </View>
     </View>
@@ -16,36 +15,28 @@ const CarouselItem = ({ item }: any) => {
 }
 
 const styles = StyleSheet.create({
-  card: {
-    flex: 1,
-    width: width - 20,
-    height: height / 3,
-    backgroundColor: 'white',
-    marginVertical: 17,
-    marginRight: 10,
-    borderRadius: 10,
-    elevation: 5,
+  container: {
+    marginVertical: 16
   },
-  text: {
+  body: {
     position: 'absolute',
     bottom: 10,
     margin: 10,
     left: 5,
   },
   image: {
-    width: width - 20,
-    height: height / 3,
+    width: Dimensions.get('window').width - 16,
+    aspectRatio: 8 / 5,
     borderRadius: 10,
   },
-  title: {
-    color: 'white',
+  name: {
+    color: Colors.layoutColor,
     fontSize: 22,
     marginBottom: 5,
     fontWeight: 'bold',
-    elevation: 5,
   },
   description: {
-    color: 'white',
+    color: Colors.layoutColor,
     fontSize: 12,
   },
 })

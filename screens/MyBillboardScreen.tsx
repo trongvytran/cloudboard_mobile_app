@@ -1,6 +1,5 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { ScrollView, StyleSheet, Text } from 'react-native'
 import React from 'react'
-import LayoutView from '../components/Views/LayoutView'
 import ContainerView from '../components/Views/ContainerView'
 import Colors from '../constants/color'
 

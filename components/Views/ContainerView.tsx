@@ -13,8 +13,7 @@ export default ContainerView
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 18,
-    paddingLeft: 10,
-    paddingRight: 10,
+    paddingVertical: 16,
+    paddingHorizontal: 10,
   },
 })
