@@ -7,13 +7,13 @@ const SettingScreen = () => {
 
   function confirmHandler(data) {
     console.log(data)
-    console.log('123')
+    
   }
   return (
     <ScrollView style={styles.container}>
       <ContainerView>
         <ProfileForm 
-        
+        onSubmit={confirmHandler}
         defaultValues=''/>
       </ContainerView>
     </ScrollView>

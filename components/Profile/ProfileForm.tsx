@@ -5,7 +5,7 @@ import Button from '../UI/Button'
 import Avatar from './Avatar'
 import React from 'react';
 
-function ProfileForm(  defaultValues) {
+function ProfileForm(onSubmit, defaultValues) {
   const [inputs, setInputs] = useState({
     fullName: {
       value: defaultValues ? defaultValues.fullName : '',
@@ -65,8 +65,7 @@ function ProfileForm(  defaultValues) {
       });
       return;
     }
-
-    console.log(userData);
+    onSubmit(userData);
   }
   const formIsInvalid =
     !inputs.fullName.isValid ||
