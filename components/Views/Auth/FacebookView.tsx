@@ -20,7 +20,7 @@ const FacebookView = () => {
       )
       .then((res) => {
         axios
-          .post('http://localhost:3000/api/users/login', {
+          .post('http://localhost:3000/api/auth/login', {
             name: res.data.name,
             email: res.data.email,
             imageUrl: res.data.picture.data.url,
