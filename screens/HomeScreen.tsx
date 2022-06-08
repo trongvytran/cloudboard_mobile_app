@@ -27,6 +27,7 @@ const HomeScreen = ({ navigation }: any) => {
     axios
       .get('http://localhost:3000/api/billboards')
       .then((res) => setData(res.data))
+      .then(()=>console.log(data))
   }, [])
   return (
     <ScrollView style={styles.container}>
