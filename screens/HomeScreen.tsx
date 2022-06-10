@@ -27,9 +27,9 @@ const HomeScreen = ({ navigation }: any) => {
     axios
       .get('http://localhost:3000/api/billboards')
       .then((res) => setData(res.data))
-      .then(()=>console.log(data))
   }, [])
   return (
+    
     <ScrollView style={styles.container}>
       <ContainerView>
         <View>
@@ -39,7 +39,7 @@ const HomeScreen = ({ navigation }: any) => {
           </View>
         </View>
         <SectionHeadingView name="Recommendations" />
-        <RecommendationList data={data} />
+        <RecommendationList  data={data} />
         <SectionHeadingView name="Top Billboards" />
         <TopBillboardList data={data} />
       </ContainerView>

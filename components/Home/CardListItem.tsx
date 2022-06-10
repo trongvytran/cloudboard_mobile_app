@@ -1,10 +1,19 @@
 import React from 'react'
-import { View, StyleSheet, Text, Image, Dimensions } from 'react-native'
+import { Pressable, View, StyleSheet, Text, Image, Dimensions } from 'react-native'
 import Colors from '../../constants/color'
 import DurationBadge from '../UI/DurationBadge'
-
+import { useNavigation } from '@react-navigation/native';
 const CardListItem = ({ item }: any) => {
+  const navigation = useNavigation();
+  function expensePressHandler() {
+    navigation.navigate('BillboardDetailScreen', {
+      item
+    });
+  }
   return (
+    <Pressable
+    onPress={expensePressHandler}
+    >
     <View style={styles.card}>
       <Image style={styles.image} source={{ uri: item.imageUrl }} />
       <View style={styles.cardBody}>
@@ -16,6 +25,7 @@ const CardListItem = ({ item }: any) => {
       </View>
       <Text style={styles.cardPrice}>{item.price}</Text>
     </View>
+  </Pressable>
   )
 }
 export default CardListItem
