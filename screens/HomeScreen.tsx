@@ -29,6 +29,7 @@ const HomeScreen = ({ navigation }: any) => {
       .then((res) => setData(res.data))
   }, [])
   return (
+    
     <ScrollView style={styles.container}>
       <ContainerView>
         <View>
@@ -38,7 +39,7 @@ const HomeScreen = ({ navigation }: any) => {
           </View>
         </View>
         <SectionHeadingView name="Recommendations" />
-        <RecommendationList data={data} />
+        <RecommendationList  data={data} />
         <SectionHeadingView name="Top Billboards" />
         <TopBillboardList data={data} />
       </ContainerView>
