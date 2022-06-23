@@ -5,7 +5,10 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { addUserLoginInfo } from '../../../features/auth/userLoginInfo'
 import React from 'react'
+import * as WebBrowser from 'expo-web-browser';
 import axios from 'axios'
+
+WebBrowser.maybeCompleteAuthSession();
 
 const GoogleView = () => {
   const dispatch = useDispatch()

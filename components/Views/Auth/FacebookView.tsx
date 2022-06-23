@@ -10,7 +10,7 @@ import axios from 'axios'
 const FacebookView = () => {
   const dispatch = useDispatch()
   const [request, response, promptAsync] = Facebook.useAuthRequest({
-    clientId: '403771287819141',
+    iosClientId: '403771287819141',
   })
 
   useEffect(() => {
