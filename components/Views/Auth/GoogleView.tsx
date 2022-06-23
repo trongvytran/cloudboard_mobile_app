@@ -25,7 +25,7 @@ const GoogleView = () => {
         `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${response.params.access_token}`
       ).then((res) => {
         axios
-          .post('http://localhost:3000/api/users/login', {
+          .post('http://192.168.1.12:3000/api/auth/login', {
             name: res.data.name,
             email: res.data.email,
             imageUrl: res.data.picture,

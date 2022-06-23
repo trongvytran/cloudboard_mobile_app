@@ -15,6 +15,8 @@ const userLoginInfo = createSlice({
   },
 })
 
+
 export const { addUserLoginInfo, clearUserLoginInfo } = userLoginInfo.actions
 
 export default userLoginInfo.reducer
+

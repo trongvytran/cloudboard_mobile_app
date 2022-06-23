@@ -1,9 +1,11 @@
 import { Pressable, View, StyleSheet, Text, Image, Dimensions } from 'react-native'
 import Colors from '../../constants/color'
 import DurationBadge from '../UI/DurationBadge'
+import Location from '../UI/Location'
 import React from 'react'
 const BillboardDetail = ({ items }: any) => {
     console.log(items)
+    console.log(items.videoUrl)
     return (
         <View>
             <Image style={styles.image} source={{ uri: items.imageUrl }} />
@@ -29,7 +31,9 @@ const BillboardDetail = ({ items }: any) => {
 
                 </View>
             </View>
-
+         
+        <Location data={items.videoUrl}/>
+     
         </View>
     )
 }
