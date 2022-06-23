@@ -1,5 +1,5 @@
-import { Button,View, FlatList, Text } from 'react-native'
-import { useSelector } from 'react-redux'
+import { Button, View, FlatList } from 'react-native'
+import { useDispatch, useSelector } from 'react-redux'
 import LayoutView from '../components/Views/LayoutView'
 import TitleText from '../components/TitleText'
 import ContainerView from '../components/Views/ContainerView'
@@ -9,16 +9,20 @@ import ProfileCard from '../components/Profile/ProfileCard'
 import ProfileItem from '../components/Profile/ProfileItem'
 import React from 'react'
 import { clearUserLoginInfo } from '../features/auth/userLoginInfo'
+import { clearUserToken } from '../features/auth/userToken'
 
-const logout = () => {
- 
-};
 const ProfileScreen = ({ navigation }: any) => {
+  const dispatch = useDispatch()
   const DATA = [
     { id: 1, title: 'My billboards', subtitle: 'Already have 5 billboards' },
     { id: 2, title: 'Payment methods', subtitle: 'Visa **89' },
     { id: 3, title: 'Settings', subtitle: 'Notifications, password' },
   ]
+
+  const logout = () => {
+    dispatch(clearUserLoginInfo())
+    dispatch(clearUserToken())
+  }
 
   const { userLoginInfo } = useSelector((state: any) => state.userLoginInfo)
   const validateUser = userLoginInfo ? (
@@ -40,6 +44,7 @@ const ProfileScreen = ({ navigation }: any) => {
         )}
         keyExtractor={(item) => item.id}
       />
+      <Button onPress={logout} title="Logout" />
     </View>
   ) : (
     <View>
@@ -52,7 +57,6 @@ const ProfileScreen = ({ navigation }: any) => {
       <ContainerView>
         <TitleText>Profile</TitleText>
         {validateUser}
-      <Button onPress={logout} title="Logout" />
       </ContainerView>
     </LayoutView>
   )

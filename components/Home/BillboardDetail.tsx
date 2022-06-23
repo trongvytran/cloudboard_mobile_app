@@ -1,45 +1,42 @@
-import {
-  View,
-  StyleSheet,
-  Text,
-  Image,
-  Dimensions,
-} from 'react-native'
+import { View, StyleSheet, Text, Image, Dimensions } from 'react-native'
 import Colors from '../../constants/color'
 import DurationBadge from '../UI/DurationBadge'
 import Location from '../UI/Location'
 import React from 'react'
 const BillboardDetail = ({ items }: any) => {
-    console.log(items)
-    console.log(items.videoUrl)
-    return (
+  console.log(items)
+  console.log(items.videoUrl)
+  return (
+    <View>
+      <View>
         <View>
-            <Image style={styles.image} source={{ uri: items.imageUrl }} />
+          <Image style={styles.image} source={{ uri: items.imageUrl }} />
 
-            <View style={styles.cardBody}>
-                <View>
-                    <Text style={styles.cardName}>{items.address}</Text>
-                </View>
-                <DurationBadge value={items.duration} />
-            </View>
+          <View style={styles.cardBody}>
             <View>
-                <Text style={styles.cardPrice}>{items.price}</Text>
+              <Text style={styles.cardName}>{items.address}</Text>
             </View>
-            <Text style={styles.cardDescription}>Description</Text>
-            <Text >{items.description}</Text>
-            <View style={styles.container}>
-                <Text style={styles.sectionHeadingSeeMore}>Read more</Text>
+            <DurationBadge value={items.duration} />
+          </View>
+          <View>
+            <Text style={styles.cardPrice}>{items.price}</Text>
+          </View>
+          <Text style={styles.cardDescription}>Description</Text>
+          <Text>{items.description}</Text>
+          <View style={styles.container}>
+            <Text style={styles.sectionHeadingSeeMore}>Read more</Text>
+          </View>
+          <View style={styles.profileContainer}>
+            <Image
+              style={styles.profileAvatar}
+              source={{ uri: items.user.imageUrl }}
+            />
+            <View>
+              <Text style={styles.profileTitle}>{items.user.name}</Text>
             </View>
-            <View style={styles.profileContainer}>
-                <Image style={styles.profileAvatar} source={{ uri: items.user.imageUrl }} />
-                <View>
-                    <Text style={styles.profileTitle}>{items.user.name}</Text>
+          </View>
 
-                </View>
-            </View>
-         
-        <Location data={items.videoUrl}/>
-     
+          <Location data={items.videoUrl} />
         </View>
         <DurationBadge value={items.duration} />
       </View>
