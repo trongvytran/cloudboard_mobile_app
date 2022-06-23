@@ -1,4 +1,4 @@
-import { View, FlatList, Text } from 'react-native'
+import { Button,View, FlatList, Text } from 'react-native'
 import { useSelector } from 'react-redux'
 import LayoutView from '../components/Views/LayoutView'
 import TitleText from '../components/TitleText'
@@ -8,13 +8,18 @@ import FacebookView from '../components/Views/Auth/FacebookView'
 import ProfileCard from '../components/Profile/ProfileCard'
 import ProfileItem from '../components/Profile/ProfileItem'
 import React from 'react'
+import { clearUserLoginInfo } from '../features/auth/userLoginInfo'
 
+const logout = () => {
+ 
+};
 const ProfileScreen = ({ navigation }: any) => {
   const DATA = [
     { id: 1, title: 'My billboards', subtitle: 'Already have 5 billboards' },
     { id: 2, title: 'Payment methods', subtitle: 'Visa **89' },
     { id: 3, title: 'Settings', subtitle: 'Notifications, password' },
   ]
+
   const { userLoginInfo } = useSelector((state: any) => state.userLoginInfo)
   const validateUser = userLoginInfo ? (
     <View>
@@ -47,6 +52,7 @@ const ProfileScreen = ({ navigation }: any) => {
       <ContainerView>
         <TitleText>Profile</TitleText>
         {validateUser}
+      <Button onPress={logout} title="Logout" />
       </ContainerView>
     </LayoutView>
   )
