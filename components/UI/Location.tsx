@@ -21,7 +21,7 @@ function Location({ data }: any) {
   ) : (
     <View style={{ flex: 1 }}>
       <WebView
-        source={{ uri: "https://www.youtube.com/embed/ZZ5LpwO-An4?rel=0&autoplay=0&showinfo=0&controls=0" }}
+        source={{ uri: data }}
         style={{marginTop: 22, flex: 1}}
       />
     </View>
