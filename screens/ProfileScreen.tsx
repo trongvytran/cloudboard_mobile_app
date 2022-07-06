@@ -7,6 +7,7 @@ import GoogleView from '../components/Views/Auth/GoogleView'
 import FacebookView from '../components/Views/Auth/FacebookView'
 import ProfileCard from '../components/Profile/ProfileCard'
 import ProfileItem from '../components/Profile/ProfileItem'
+import LogoutButton from '../components/Profile/LogoutButton'
 import React from 'react'
 
 const ProfileScreen = ({ navigation }: any) => {
@@ -35,6 +36,7 @@ const ProfileScreen = ({ navigation }: any) => {
         )}
         keyExtractor={(item) => item.id}
       />
+       <LogoutButton/>
     </View>
   ) : (
     <View>
