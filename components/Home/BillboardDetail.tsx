@@ -5,6 +5,7 @@ import {
   Image,
   Dimensions,
 } from 'react-native'
+import MapView from 'react-native-maps';
 import Colors from '../../constants/color'
 import DurationBadge from '../UI/DurationBadge'
 import React from 'react'
@@ -36,6 +37,12 @@ const BillboardDetail = ({ items }: any) => {
           <Text style={styles.profileTitle}>{items.user.name}</Text>
         </View>
       </View>
+      <View>
+        <Text style={styles.mapTitle}>Location</Text>
+      <View>
+      <MapView style={styles.map} />
+    </View>
+    </View>
     </View>
   )
 }
@@ -63,10 +70,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   cardDescription: {
-    paddingTop: 10,
+    paddingVertical: 10,
     fontWeight: 'bold',
   },
   sectionHeadingSeeMore: {
+    paddingTop: 10,
     color: Colors.primaryColor,
   },
   container: {
@@ -77,7 +85,7 @@ const styles = StyleSheet.create({
   profileContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 14,
+    marginVertical: 14,
   },
   profileAvatar: {
     borderRadius: 9999,
@@ -90,4 +98,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 4.5,
   },
+  map: {
+    width: Dimensions.get('window').width,
+    marginRight:100,
+    height: Dimensions.get('window').height/3,
+  },
+  mapTitle: {
+    fontWeight: 'bold',
+    paddingBottom:10,
+    marginBottom: 4.5,
+  }
 })
