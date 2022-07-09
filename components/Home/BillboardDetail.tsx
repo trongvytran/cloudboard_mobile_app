@@ -4,16 +4,20 @@ import {
   Text,
   Image,
   Dimensions,
+  TouchableOpacity,
 } from 'react-native'
 import MapView from 'react-native-maps';
 import Colors from '../../constants/color'
 import DurationBadge from '../UI/DurationBadge'
 import React from 'react'
+import DetailBillboardMenu from './DetailBillboardMenu';
 const BillboardDetail = ({ items }: any) => {
   return (
     <View>
+      <View>
       <Image style={styles.image} source={{ uri: items.imageUrl }} />
-
+      <DetailBillboardMenu/>
+      </View>
       <View style={styles.cardBody}>
         <View>
           <Text style={styles.cardName}>{items.address}</Text>
@@ -35,7 +39,7 @@ const BillboardDetail = ({ items }: any) => {
         />
         <View>
           <Text style={styles.profileTitle}>{items.user.name}</Text>
-        </View>
+        </View> 
       </View>
       <View>
         <Text style={styles.mapTitle}>Location</Text>
@@ -50,9 +54,9 @@ export default BillboardDetail
 
 const styles = StyleSheet.create({
   image: {
-    width: Dimensions.get('window').width,
-    aspectRatio: 4 / 3,
-    borderRadius: 8,
+    marginHorizontal:-10,
+    marginTop:-20,
+    height: Dimensions.get('screen').height/3,
   },
   cardBody: {
     flexDirection: 'row',
@@ -99,13 +103,21 @@ const styles = StyleSheet.create({
     marginBottom: 4.5,
   },
   map: {
-    width: Dimensions.get('window').width,
-    marginRight:100,
-    height: Dimensions.get('window').height/3,
+    height: Dimensions.get('screen').height/3,
+    borderRadius: 8,
   },
   mapTitle: {
     fontWeight: 'bold',
     paddingBottom:10,
     marginBottom: 4.5,
+  },
+  menuButton: {
+    flex:1,
+    flexDirection:'row',
+    justifyContent:'space-between',
+    alignItems:'center',
+    margin: 10,
+    color:'black',
+    borderRadius:9999,
   }
 })
