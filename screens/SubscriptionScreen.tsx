@@ -1,16 +1,26 @@
-import { Text } from 'react-native'
+import { Text, StyleSheet, ScrollView } from 'react-native'
 import React from 'react'
-import LayoutView from '../components/Views/LayoutView'
 import ContainerView from '../components/Views/ContainerView'
+import Subscription from '../components/Home/Subscription'
+import Colors from '../constants/color'
 
+// const SubscriptionScreen = ({route}) => {
+//   const items = route.params.item;
 const SubscriptionScreen = () => {
   return (
-    <LayoutView>
+    <ScrollView style={styles.container}>
       <ContainerView>
-        <Text>SubscriptionScreen</Text>
+        {/* <Subscription items = {items} /> */}
+        <Subscription/>
       </ContainerView>
-    </LayoutView>
+    </ScrollView>
   )
 }
 
 export default SubscriptionScreen
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: Colors.layoutColor,
+  },
+})
