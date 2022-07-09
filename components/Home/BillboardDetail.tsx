@@ -10,13 +10,14 @@ import MapView from 'react-native-maps';
 import Colors from '../../constants/color'
 import DurationBadge from '../UI/DurationBadge'
 import React from 'react'
-import DetailBillboardMenu from './DetailBillboardMenu';
+import DetailBillboardMenu from '../UI/DetailBillboardMenu'
+import Ionicons from '@expo/vector-icons/Ionicons'
 const BillboardDetail = ({ items }: any) => {
   return (
     <View>
       <View>
       <Image style={styles.image} source={{ uri: items.imageUrl }} />
-      <DetailBillboardMenu/>
+      {/* <DetailBillboardMenu/> */}
       </View>
       <View style={styles.cardBody}>
         <View>
