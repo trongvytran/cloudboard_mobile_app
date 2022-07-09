@@ -4,19 +4,19 @@ import LogoTitle from '../components/LogoTitle'
 import HomeScreen from '../screens/HomeScreen'
 import SearchScreen from '../screens/SearchScreen'
 import BillboardDetailScreen from '../screens/BillboardDetailScreen'
-const HomeStack = createStackNavigator()
+const BillboardDetailStack = createStackNavigator()
 
 const HomeNavigator = () => {
   return (
-    <HomeStack.Navigator>
-      <HomeStack.Screen
+    <BillboardDetailStack.Navigator>
+      <BillboardDetailStack.Screen
         name="HomeScreen"
         component={HomeScreen}
         options={{headerTitle: (props) => <LogoTitle {...props} /> }}
       />
-      <HomeStack.Screen name="Search" component={SearchScreen} />
-      <HomeStack.Screen name="BillboardDetailScreen" component={BillboardDetailScreen} options={{headerShown: false, }} />
-    </HomeStack.Navigator>
+      <BillboardDetailStack.Screen name="Share" component={SearchScreen} />
+      <BillboardDetailStack.Screen name="Like" component={BillboardDetailScreen} options={{headerShown: false, }} />
+    </BillboardDetailStack.Navigator>
   )
 }
 
