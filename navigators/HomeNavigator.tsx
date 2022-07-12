@@ -4,7 +4,7 @@ import LogoTitle from '../components/LogoTitle'
 import HomeScreen from '../screens/HomeScreen'
 import SearchScreen from '../screens/SearchScreen'
 import BillboardDetailScreen from '../screens/BillboardDetailScreen'
-import { TouchableOpacity, View, StyleSheet} from 'react-native'
+import { TouchableOpacity, View, StyleSheet, Animated} from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { useNavigation } from '@react-navigation/native'
 
@@ -17,7 +17,10 @@ const HomeNavigator = () => {
       <HomeStack.Screen
         name="HomeScreen"
         component={HomeScreen}
-        options={{headerTitle: (props) => <LogoTitle {...props} /> }}
+        options={{headerTitle: (props) => <LogoTitle {...props} />,
+                  headerStyle: {
+                    shadowColor:'transparent'
+                }}}
       />
       <HomeStack.Screen name="Search" component={SearchScreen} />
       <HomeStack.Screen 
@@ -36,7 +39,7 @@ const HomeNavigator = () => {
                   <TouchableOpacity style={styles.like}>
                     <Ionicons name="heart-outline" size={24} color="white" />
                   </TouchableOpacity>
-                  </View>  
+                  </View>   
                 )}} />
     </HomeStack.Navigator>
   )
