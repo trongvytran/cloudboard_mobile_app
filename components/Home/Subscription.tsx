@@ -13,9 +13,6 @@ import {
   const Subscription = ({}: any) => {
     return (
       <View>
-        <Text style={{fontWeight:'bold', fontSize: 24, marginTop: 64}}>
-            Your Subscription
-        </Text>
         <Text style={{fontWeight:'100', flex:1, justifyContent:'center', alignContent:'center', margin:90}}>You have no subscription yet</Text>
       </View>
     )

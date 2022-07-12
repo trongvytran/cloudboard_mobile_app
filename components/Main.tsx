@@ -2,7 +2,7 @@ import Ionicons from '@expo/vector-icons/Ionicons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Colors from '../constants/color'
 import ProfileNavigator from '../navigators/ProfileNavigator'
-import SubscriptionScreen from '../screens/SubscriptionScreen'
+import SubscriptionNavigator from '../navigators/SubscriptionNavigator'
 import React from 'react'
 import HomeNavigator from '../navigators/HomeNavigator'
 
@@ -36,7 +36,7 @@ const Main = () => {
       })}
     >
       <Tab.Screen name="Home" component={HomeNavigator} />
-      <Tab.Screen name="Subscription" component={SubscriptionScreen} />
+      <Tab.Screen name="Subscription" component={SubscriptionNavigator} />
       <Tab.Screen name="My Profile" component={ProfileNavigator} />
     </Tab.Navigator>
   )
