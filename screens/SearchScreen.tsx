@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, ScrollView } from 'react-native'
+import { StyleSheet, ScrollView, Text } from 'react-native'
 import TitleText from '../components/TitleText'
 import SearchBar from '../components/SearchBar'
 import Colors from '../constants/color'
@@ -7,7 +7,7 @@ import Colors from '../constants/color'
 const SearchScreen = () => {
   return (
     <ScrollView style={styles.container}>
-      <TitleText>Search</TitleText>
+      <Text style={styles.title}>Search</Text>
       <SearchBar />
     </ScrollView>
   )
@@ -18,6 +18,11 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.layoutColor,
     overflow: 'visible',
   },
+  title:{
+    marginLeft:10,
+    fontSize:36,
+    fontWeight:'bold'
+  }
 })
 
 export default SearchScreen
