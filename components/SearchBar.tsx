@@ -24,8 +24,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: Colors.primaryBackgroundColor,
-    paddingLeft: 8,
-    paddingRight: 8,
+    marginTop:10,
+    marginHorizontal: 10,
+    paddingHorizontal:10,
     borderRadius: 10
   },
   icon: {
