@@ -5,11 +5,14 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
+  TouchableHighlightBase,
+  Pressable,
 } from 'react-native'
 import MapView from 'react-native-maps';
 import Colors from '../../constants/color'
 import DurationBadge from '../UI/DurationBadge'
 import React, { useEffect, useState } from 'react'
+import ReadMore from 'react-native-read-more-text'
 import axios from 'axios';
 const BillboardDetail = ({ items }: any) => {
     // const [latitude, setLatitude] = useState('')
@@ -47,7 +50,6 @@ const BillboardDetail = ({ items }: any) => {
     // useEffect(() => 
     //   setLatitude(await getLatitude()),
     //   setLongtitude(await getLongtitude()),'')
-
   return (
     <View>
       <View>
@@ -63,10 +65,16 @@ const BillboardDetail = ({ items }: any) => {
         <Text style={styles.cardPrice}>{items.price}</Text>
       </View>
       <Text style={styles.cardDescription}>Description</Text>
-      <Text>{items.description}</Text>
-      <View style={styles.container}>
-        <Text style={styles.sectionHeadingSeeMore}>Read more</Text>
-      </View>
+      <ReadMore numberOfLines={2} 
+                renderTruncatedFooter={_renderTruncatedFooter}
+                renderRevealedFooter={_renderRevealedFooter}
+                >
+                {items.description}</ReadMore>
+      {/* <View style={styles.container}>
+        <Pressable>
+          <Text style={styles.sectionHeadingSeeMore}>Read more</Text>
+        </Pressable>
+      </View> */}
       <View style={styles.profileContainer}>
         <View style={{flex:1, flexDirection:'row', alignItems:'center'}}>
         <Image
@@ -93,6 +101,26 @@ const BillboardDetail = ({ items }: any) => {
   )
 }
 export default BillboardDetail
+
+const _renderTruncatedFooter = (handlePress) => {
+  return (
+    <View style={styles.descriptionButton}>
+    <Text style={styles.descriptionButtonText} onPress={handlePress}>
+      Read more
+    </Text>
+    </View>
+  );
+}
+
+const _renderRevealedFooter = (handlePress) => {
+  return (
+    <View style={styles.descriptionButton}>
+    <Text style={styles.descriptionButtonText} onPress={handlePress}>
+      Close
+    </Text>
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
   image: {
@@ -129,13 +157,22 @@ const styles = StyleSheet.create({
      borderColor: Colors.primaryColor,
      borderWidth:1,
      borderRadius:4,
-      
     }
      ,
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  descriptionButton: {
+    flex:1, 
+    justifyContent:'center', 
+    alignItems:'center'
+  },
+  descriptionButtonText:{
+    color: Colors.primaryColor, 
+    marginTop: 10, 
+    fontSize:14
   },
   profileContainer: {
     flexDirection: 'row',
@@ -172,3 +209,7 @@ const styles = StyleSheet.create({
     borderRadius:9999,
   }
 })
+function press(): void {
+  throw new Error('Function not implemented.');
+}
+
