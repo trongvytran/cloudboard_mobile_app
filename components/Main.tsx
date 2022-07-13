@@ -33,6 +33,8 @@ const Main = () => {
           return <Ionicons name={iconName} size={size} color={color} />
         },
         tabBarActiveTintColor: Colors.primaryColor,
+        tabBarStyle: {
+          marginBottom:5}
       })}
     >
       <Tab.Screen name="Home" component={HomeNavigator} />
