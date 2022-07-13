@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
   icon: {
     color: Colors.primaryColor,
     paddingRight: 40,
+    marginTop:10
   },
 })
 
