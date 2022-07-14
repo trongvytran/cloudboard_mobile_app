@@ -21,7 +21,9 @@ const HomeNavigator = () => {
         options={{headerTitle: (props) => <LogoTitle {...props} />,
                   headerStyle: {
                     shadowColor:'transparent',
-                }}}
+                    height:90
+                }
+                }}
       />
       <HomeStack.Screen name="Search" component={SearchScreen} 
                         options={{headerLeft: () => (<View>

@@ -21,12 +21,10 @@ const SubscriptionScreen = () => {
   return (
     
     <ScrollView style={styles.container}>
-      <SafeAreaView>
       <ContainerView>
         {/* <Subscription items = {items} /> */}
         <Subscription data={data.subscriptions}/>
       </ContainerView>
-      </SafeAreaView>
     </ScrollView>
    
   )

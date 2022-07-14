@@ -5,12 +5,51 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
+  TouchableHighlightBase,
+  Pressable,
 } from 'react-native'
 import MapView from 'react-native-maps';
 import Colors from '../../constants/color'
 import DurationBadge from '../UI/DurationBadge'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import ReadMore from 'react-native-read-more-text'
+import axios from 'axios';
 const BillboardDetail = ({ items }: any) => {
+    // const [latitude, setLatitude] = useState('')
+    // const [longtitude, setLongtitude] = useState('')
+    // const getLongtitude = async () => {
+    //           try {
+    //             const res = await fetch(
+    //               'http://localhost:3000/api/billboards'
+    //             );
+    //             const json = await res.json();
+    //             return json.long;
+    //           } catch (error) {
+    //             console.error(error);
+    //           }
+      
+              
+
+    // const getLatitude = async () => {
+    //   try {
+    //     const res = await fetch(
+    //       'http://localhost:3000/api/billboards'
+    //     );
+    //     const json = await res.json();
+    //     return json.lat;
+    //   } catch (error) {
+    //     console.error(error);
+    //   }
+    // }
+
+    // let region = {
+    //   latitude: latitude,
+    //   longitude: longtitude
+    // }
+
+    // useEffect(() => 
+    //   setLatitude(await getLatitude()),
+    //   setLongtitude(await getLongtitude()),'')
   return (
     <View>
       <View>
@@ -26,18 +65,31 @@ const BillboardDetail = ({ items }: any) => {
         <Text style={styles.cardPrice}>{items.price}</Text>
       </View>
       <Text style={styles.cardDescription}>Description</Text>
-      <Text>{items.description}</Text>
-      <View style={styles.container}>
-        <Text style={styles.sectionHeadingSeeMore}>Read more</Text>
-      </View>
+      <ReadMore numberOfLines={2} 
+                renderTruncatedFooter={_renderTruncatedFooter}
+                renderRevealedFooter={_renderRevealedFooter}
+                >
+                {items.description}</ReadMore>
+      {/* <View style={styles.container}>
+        <Pressable>
+          <Text style={styles.sectionHeadingSeeMore}>Read more</Text>
+        </Pressable>
+      </View> */}
       <View style={styles.profileContainer}>
+        <View style={{flex:1, flexDirection:'row', alignItems:'center'}}>
         <Image
           style={styles.profileAvatar}
           source={{ uri: items.user.imageUrl }}
         />
         <View>
           <Text style={styles.profileTitle}>{items.user.name}</Text>
+        </View>
         </View> 
+        <View style={styles.contactButton}>
+          <TouchableOpacity>
+            <Text style={{color: Colors.primaryColor}}>CONTACT</Text>
+          </TouchableOpacity>
+        </View>
       </View>
       <View>
         <Text style={styles.mapTitle}>Location</Text>
@@ -49,6 +101,26 @@ const BillboardDetail = ({ items }: any) => {
   )
 }
 export default BillboardDetail
+
+const _renderTruncatedFooter = (handlePress) => {
+  return (
+    <View style={styles.descriptionButton}>
+    <Text style={styles.descriptionButtonText} onPress={handlePress}>
+      Read more
+    </Text>
+    </View>
+  );
+}
+
+const _renderRevealedFooter = (handlePress) => {
+  return (
+    <View style={styles.descriptionButton}>
+    <Text style={styles.descriptionButtonText} onPress={handlePress}>
+      Close
+    </Text>
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
   image: {
@@ -79,10 +151,28 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     color: Colors.primaryColor,
   },
+  contactButton:{ 
+     paddingVertical:4, 
+     paddingHorizontal:12, 
+     borderColor: Colors.primaryColor,
+     borderWidth:1,
+     borderRadius:4,
+    }
+     ,
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  descriptionButton: {
+    flex:1, 
+    justifyContent:'center', 
+    alignItems:'center'
+  },
+  descriptionButtonText:{
+    color: Colors.primaryColor, 
+    marginTop: 10, 
+    fontSize:14
   },
   profileContainer: {
     flexDirection: 'row',
@@ -119,3 +209,7 @@ const styles = StyleSheet.create({
     borderRadius:9999,
   }
 })
+function press(): void {
+  throw new Error('Function not implemented.');
+}
+

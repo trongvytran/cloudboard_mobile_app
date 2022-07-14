@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginRight: 200,
+    marginVertical:20
   },
   logo: {
     height: 40,

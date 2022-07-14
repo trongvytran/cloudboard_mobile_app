@@ -19,11 +19,12 @@ const SubscriptionNavigator = () => {
         component={SubscriptionScreen}
         options={{headerTitle: 'Your Subscription', 
                     headerTitleAlign: 'left',
-                    headerTitleStyle:{ fontSize: 24,
+                    headerTitleStyle:{ fontSize: 36,
                                         fontWeight: 'bold',
                                         },
                                     headerStyle:{
-                                        shadowColor:'transparent'
+                                        shadowColor:'transparent',
+                                        height:90
                                     }}}
       />
     </SubscriptionStack.Navigator>
