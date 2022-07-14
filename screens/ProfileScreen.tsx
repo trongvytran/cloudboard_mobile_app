@@ -8,14 +8,16 @@ import FacebookView from '../components/Views/Auth/FacebookView'
 import ProfileCard from '../components/Profile/ProfileCard'
 import ProfileItem from '../components/Profile/ProfileItem'
 import LogoutButton from '../components/Profile/LogoutButton'
-import React from 'react'
-
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 const ProfileScreen = ({ navigation }: any) => {
   const DATA = [
     { id: 1, title: 'My billboards', subtitle: 'Already have 5 billboards' },
     { id: 2, title: 'Payment methods', subtitle: 'Visa **89' },
     { id: 3, title: 'Settings', subtitle: 'Notifications, password' },
   ]
+  const [data, setData] = useState([])
+
   const { userLoginInfo } = useSelector((state: any) => state.userLoginInfo)
   const validateUser = userLoginInfo ? (
     <View>
@@ -36,7 +38,7 @@ const ProfileScreen = ({ navigation }: any) => {
         )}
         keyExtractor={(item) => item.id}
       />
-       <LogoutButton/>
+       {/* <LogoutButton/> */}
     </View>
   ) : (
     <View>
