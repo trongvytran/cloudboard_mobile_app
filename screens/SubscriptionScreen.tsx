@@ -1,18 +1,29 @@
 import { Text, StyleSheet, ScrollView, SafeAreaView } from 'react-native'
-import React from 'react'
+import React, { useLayoutEffect, useEffect, useState } from 'react'
 import ContainerView from '../components/Views/ContainerView'
 import Subscription from '../components/Home/Subscription'
 import Colors from '../constants/color'
-
+import axios from 'axios'
+import { useSelector } from 'react-redux'
 // const SubscriptionScreen = ({route}) => {
 //   const items = route.params.item;
+// `http://localhost:3000/api/users/1`
+// `http://localhost:3000/api/users/email/${userLoginInfo.email}`
 const SubscriptionScreen = () => {
+  const [data, setData] = useState([])
+  const { userLoginInfo } = useSelector((state: any) => state.userLoginInfo)
+  useEffect(() => {
+    axios
+      .get('http://localhost:3000/api/users/1')
+      .then((res) => setData(res.data))
+  }, [])
+
   return (
     
     <ScrollView style={styles.container}>
       <ContainerView>
         {/* <Subscription items = {items} /> */}
-        <Subscription/>
+        <Subscription data={data.subscriptions}/>
       </ContainerView>
     </ScrollView>
    
