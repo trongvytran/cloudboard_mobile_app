@@ -2,14 +2,11 @@ import React from "react"
 import { Text, View, StyleSheet, Pressable } from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import Colors from '../../constants/color'
-import * as Facebook from 'expo-facebook';
+import { logOutAsync } from "expo-facebook";
 
-const Logout = () =>{
-  Facebook.logOutAsync()
-}
 
 const LogoutButton = () => {
-    <Pressable onPress={Logout} style={styles.container}>
+    <Pressable onPress={() => logOutAsync()} style={styles.container}>
       <View style={styles.title}>
        Sign Out
       </View>
