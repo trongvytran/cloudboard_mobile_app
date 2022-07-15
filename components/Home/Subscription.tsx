@@ -13,6 +13,7 @@ import {
 import CardListItem from './CardListItem';
   
   const Subscription = ({data}: any) => {
+    if(data !== undefined){
     if ( data.length == 0) {
       return (  
         <View>
@@ -26,8 +27,14 @@ import CardListItem from './CardListItem';
      </View>
       )
     }
-      
-
+  }
+  else{
+    return (  
+      <View>
+      <Text style={{fontWeight:'100', flex:1, justifyContent:'center', alignContent:'center', margin:90}}>You have no subscription yet</Text>
+     </View>
+    )
+  }
   }
   export default Subscription
   

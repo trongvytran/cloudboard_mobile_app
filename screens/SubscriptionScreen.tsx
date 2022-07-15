@@ -12,12 +12,17 @@ import { useSelector } from 'react-redux'
 const SubscriptionScreen = () => {
   const [data, setData] = useState([])
   const { userLoginInfo } = useSelector((state: any) => state.userLoginInfo)
-  useEffect(() => {
-    axios
-      .get('http://localhost:3000/api/users/1')
-      .then((res) => setData(res.data))
-  }, [])
 
+    useEffect(() => {
+      if(userLoginInfo!==null){    
+      axios
+        .get(`http://localhost:3000/api/users/email/${userLoginInfo.email}`)
+        .then((res) => setData(res.data))
+      }
+    }, [])
+  
+
+  console.log(userLoginInfo)
   return (
     
     <ScrollView style={styles.container}>
