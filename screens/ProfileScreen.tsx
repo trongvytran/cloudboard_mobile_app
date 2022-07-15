@@ -1,4 +1,4 @@
-import { View, FlatList, Text } from 'react-native'
+import { View, FlatList, Text, Pressable, StyleSheet } from 'react-native'
 import { useSelector } from 'react-redux'
 import LayoutView from '../components/Views/LayoutView'
 import TitleText from '../components/TitleText'
@@ -7,8 +7,10 @@ import GoogleView from '../components/Views/Auth/GoogleView'
 import FacebookView from '../components/Views/Auth/FacebookView'
 import ProfileCard from '../components/Profile/ProfileCard'
 import ProfileItem from '../components/Profile/ProfileItem'
-import LogoutButton from '../components/Profile/LogoutButton'
+import Colors from '../constants/color'
 import React from 'react'
+// import Ionicons from '@expo/vector-icons/Ionicons'
+import { initializeAsync, logOutAsync } from 'expo-facebook'
 
 const ProfileScreen = ({ navigation }: any) => {
   const DATA = [
@@ -36,7 +38,11 @@ const ProfileScreen = ({ navigation }: any) => {
         )}
         keyExtractor={(item) => item.id}
       />
-       <LogoutButton/>
+       <Pressable onPress={() => {initializeAsync({'appId':'403771287819141', 'appName':'billboard-capstone-project'}),logOutAsync()}} style={styles.container}>
+      <Text style={styles.title}>
+       Sign Out
+      </Text>
+    </Pressable>
     </View>
   ) : (
     <View>
@@ -55,3 +61,26 @@ const ProfileScreen = ({ navigation }: any) => {
 }
 
 export default ProfileScreen
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop:20,
+    justifyContent:'center',
+    backgroundColor: 'red',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderColor: Colors.borderColor,
+    paddingVertical:17,
+    paddingHorizontal:10,
+    borderRadius:10,
+    alignItems: 'center'
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 5,
+    color: 'white'
+  },
+  icon: {
+    color: 'white',
+  },
+})
