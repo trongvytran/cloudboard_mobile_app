@@ -8,7 +8,8 @@ import FacebookView from '../components/Views/Auth/FacebookView'
 import ProfileCard from '../components/Profile/ProfileCard'
 import ProfileItem from '../components/Profile/ProfileItem'
 import Colors from '../constants/color'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 // import Ionicons from '@expo/vector-icons/Ionicons'
 import { initializeAsync, logOutAsync } from 'expo-facebook'
 
@@ -18,6 +19,8 @@ const ProfileScreen = ({ navigation }: any) => {
     { id: 2, title: 'Payment methods', subtitle: 'Visa **89' },
     { id: 3, title: 'Settings', subtitle: 'Notifications, password' },
   ]
+  const [data, setData] = useState([])
+
   const { userLoginInfo } = useSelector((state: any) => state.userLoginInfo)
   const validateUser = userLoginInfo ? (
     <View>
