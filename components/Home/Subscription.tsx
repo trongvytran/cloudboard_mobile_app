@@ -31,7 +31,7 @@ import CardListItem from './CardListItem';
   else{
     return (  
       <View>
-      <Text style={{fontWeight:'100', flex:1, justifyContent:'center', alignContent:'center', margin:90}}>You have no subscription yet</Text>
+      <Text style={{fontWeight:'100', flex:1, justifyContent:'center', alignContent:'center', margin:90}}>Log in to view subscription</Text>
      </View>
     )
   }

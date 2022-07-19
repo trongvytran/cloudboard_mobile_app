@@ -2,16 +2,27 @@ import React from "react"
 import { Text, View, StyleSheet, Pressable } from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import Colors from '../../constants/color'
-import { logOutAsync } from "expo-facebook";
-
+import * as Facebook from 'expo-facebook';
+import { useDispatch, useSelector } from 'react-redux'
+import { clearUserLoginInfo } from '../../features/auth/userLoginInfo'
+import { clearUserToken } from '../../features/auth/userToken'
 
 const LogoutButton = () => {
-    <Pressable onPress={() => logOutAsync()} style={styles.container}>
+  const dispatch = useDispatch()
+  const Logout = () => {
+    dispatch(clearUserLoginInfo())
+    dispatch(clearUserToken())
+  }
+  return (
+    <Pressable onPress={Logout} style={styles.container}>
       <View style={styles.title}>
-       Sign Out
+        <Text>
+        Sign Out
+        </Text>
       </View>
       <Ionicons style={styles.icon} name="ios-exit-outline" size={20} />
     </Pressable>
+  )
 }
 
 export default LogoutButton

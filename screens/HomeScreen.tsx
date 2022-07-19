@@ -8,8 +8,9 @@ import RecommendationList from '../components/Home/RecommendationList'
 import TopBillboardList from '../components/Home/TopBillboardList'
 import SectionHeadingView from '../components/Home/SectionHeadingView'
 import axios from 'axios'
-
+import { useDispatch, useSelector } from 'react-redux'
 const HomeScreen = ({ navigation }: any) => {
+  const { userTokenInfo } = useSelector((state: any) => state.userToken)
   const [data, setData] = useState([])
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -25,7 +26,7 @@ const HomeScreen = ({ navigation }: any) => {
   }, [navigation])
   useEffect(() => {
     axios
-      .get('http://192.168.1.7:3000/api/billboards')
+      .get('http://localhost:3000/api/billboards')
       .then((res) => setData(res.data))
   }, [])
   return (
