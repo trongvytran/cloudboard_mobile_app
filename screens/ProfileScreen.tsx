@@ -1,5 +1,6 @@
-import { View, FlatList, Text, Button } from 'react-native'
+
 import { useDispatch, useSelector } from 'react-redux'
+import { View, FlatList, Text, Pressable, StyleSheet, Button  } from 'react-native'
 import LayoutView from '../components/Views/LayoutView'
 import TitleText from '../components/TitleText'
 import ContainerView from '../components/Views/ContainerView'
@@ -7,9 +8,13 @@ import GoogleView from '../components/Views/Auth/GoogleView'
 import FacebookView from '../components/Views/Auth/FacebookView'
 import ProfileCard from '../components/Profile/ProfileCard'
 import ProfileItem from '../components/Profile/ProfileItem'
-import LogoutButton from '../components/Profile/LogoutButton'
+import Colors from '../constants/color'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { clearUserLoginInfo } from '../features/auth/userLoginInfo'
+import { clearUserToken } from '../features/auth/userToken'
+
+
 
 const ProfileScreen = ({ navigation }: any) => {
   const DATA = [
@@ -17,7 +22,8 @@ const ProfileScreen = ({ navigation }: any) => {
     { id: 2, title: 'Payment methods', subtitle: 'Visa **89' },
     { id: 3, title: 'Settings', subtitle: 'Notifications, password' },
   ]
-  const [data, setData] = useState([])
+  const dispatch = useDispatch()
+
   const { userToken } = useSelector((state: any) => state.userToken)
   const { userLoginInfo } = useSelector((state: any) => state.userLoginInfo)
   console.log(userToken)
@@ -40,8 +46,14 @@ const ProfileScreen = ({ navigation }: any) => {
         )}
         keyExtractor={(item) => item.id}
       />
-       <LogoutButton/>
-
+       <Pressable onPress={() => {
+         dispatch(clearUserLoginInfo())
+         dispatch(clearUserToken())
+       }} style={styles.container}>
+      <Text style={styles.title}>
+       Sign Out
+      </Text>
+    </Pressable>
     </View>
   ) : (
     <View>
@@ -60,3 +72,26 @@ const ProfileScreen = ({ navigation }: any) => {
 }
 
 export default ProfileScreen
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop:20,
+    justifyContent:'center',
+    backgroundColor: 'red',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderColor: Colors.borderColor,
+    paddingVertical:17,
+    paddingHorizontal:10,
+    borderRadius:10,
+    alignItems: 'center'
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 5,
+    color: 'white'
+  },
+  icon: {
+    color: 'white',
+  },
+})
