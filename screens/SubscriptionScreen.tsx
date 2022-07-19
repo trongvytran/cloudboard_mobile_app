@@ -22,7 +22,6 @@ const SubscriptionScreen = () => {
     }, [])
   
 
-  console.log(userLoginInfo)
   return (
     
     <ScrollView style={styles.container}>

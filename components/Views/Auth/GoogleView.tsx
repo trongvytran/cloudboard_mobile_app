@@ -4,6 +4,7 @@ import Ionicons from '@expo/vector-icons/Ionicons'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { addUserLoginInfo } from '../../../features/auth/userLoginInfo'
+import { addUserToken } from '../../../features/auth/userToken'
 import React from 'react'
 import axios from 'axios'
 
@@ -31,6 +32,11 @@ const GoogleView = () => {
             imageUrl: res.data.picture,
           })
           .then((res) => dispatch(addUserLoginInfo(res.data)))
+        axios
+          .post('http://localhost:3000/api/auth/login2', {          
+            email: res.data.email,          
+          })
+          .then((res) => dispatch(addUserToken(res.data)))  
       })
     }
   }, [response])

@@ -1,5 +1,5 @@
-import { View, FlatList, Text } from 'react-native'
-import { useSelector } from 'react-redux'
+import { View, FlatList, Text, Button } from 'react-native'
+import { useDispatch, useSelector } from 'react-redux'
 import LayoutView from '../components/Views/LayoutView'
 import TitleText from '../components/TitleText'
 import ContainerView from '../components/Views/ContainerView'
@@ -10,6 +10,7 @@ import ProfileItem from '../components/Profile/ProfileItem'
 import LogoutButton from '../components/Profile/LogoutButton'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+
 const ProfileScreen = ({ navigation }: any) => {
   const DATA = [
     { id: 1, title: 'My billboards', subtitle: 'Already have 5 billboards' },
@@ -17,8 +18,9 @@ const ProfileScreen = ({ navigation }: any) => {
     { id: 3, title: 'Settings', subtitle: 'Notifications, password' },
   ]
   const [data, setData] = useState([])
-
+  const { userToken } = useSelector((state: any) => state.userToken)
   const { userLoginInfo } = useSelector((state: any) => state.userLoginInfo)
+  console.log(userToken)
   const validateUser = userLoginInfo ? (
     <View>
       <ProfileCard
@@ -38,7 +40,8 @@ const ProfileScreen = ({ navigation }: any) => {
         )}
         keyExtractor={(item) => item.id}
       />
-       {/* <LogoutButton/> */}
+       <LogoutButton/>
+
     </View>
   ) : (
     <View>
