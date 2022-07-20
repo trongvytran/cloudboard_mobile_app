@@ -1,5 +1,5 @@
-import { View, FlatList, Text } from 'react-native'
-import { useSelector } from 'react-redux'
+import { View, FlatList, Text, Pressable, StyleSheet } from 'react-native'
+import { useDispatch, useSelector } from 'react-redux'
 import LayoutView from '../components/Views/LayoutView'
 import TitleText from '../components/TitleText'
 import ContainerView from '../components/Views/ContainerView'
@@ -7,9 +7,14 @@ import GoogleView from '../components/Views/Auth/GoogleView'
 import FacebookView from '../components/Views/Auth/FacebookView'
 import ProfileCard from '../components/Profile/ProfileCard'
 import ProfileItem from '../components/Profile/ProfileItem'
-import LogoutButton from '../components/Profile/LogoutButton'
+import Colors from '../constants/color'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+// import Ionicons from '@expo/vector-icons/Ionicons'
+import { initializeAsync, logOutAsync } from 'expo-facebook'
+import App from '../App'
+import { clearUserLoginInfo } from '../features/auth/userLoginInfo'
+
 const ProfileScreen = ({ navigation }: any) => {
   const DATA = [
     { id: 1, title: 'My billboards', subtitle: 'Already have 5 billboards' },
@@ -18,7 +23,19 @@ const ProfileScreen = ({ navigation }: any) => {
   ]
   const [data, setData] = useState([])
 
+  const logOut = async () => {
+    try {
+      await initializeAsync({'appId':'403771287819141', 'appName':'billboard-capstone-project'})
+        await logOutAsync()
+      dispatch(clearUserLoginInfo())
+    }
+    catch(error){
+      console.error(error)
+    }
+  }
+
   const { userLoginInfo } = useSelector((state: any) => state.userLoginInfo)
+  const dispatch = useDispatch()
   const validateUser = userLoginInfo ? (
     <View>
       <ProfileCard
@@ -38,7 +55,12 @@ const ProfileScreen = ({ navigation }: any) => {
         )}
         keyExtractor={(item) => item.id}
       />
-       {/* <LogoutButton/> */}
+       <Pressable onPress={() => logOut()} 
+                                  style={styles.container}>
+      <Text style={styles.title}>
+       Sign Out
+      </Text>
+    </Pressable>
     </View>
   ) : (
     <View>
@@ -57,3 +79,26 @@ const ProfileScreen = ({ navigation }: any) => {
 }
 
 export default ProfileScreen
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop:20,
+    justifyContent:'center',
+    backgroundColor: 'red',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderColor: Colors.borderColor,
+    paddingVertical:17,
+    paddingHorizontal:10,
+    borderRadius:10,
+    alignItems: 'center'
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 5,
+    color: 'white'
+  },
+  icon: {
+    color: 'white',
+  },
+})
