@@ -1,5 +1,6 @@
-import { View, FlatList, Text, Pressable, StyleSheet } from 'react-native'
+
 import { useDispatch, useSelector } from 'react-redux'
+import { View, FlatList, Text, Pressable, StyleSheet, Button  } from 'react-native'
 import LayoutView from '../components/Views/LayoutView'
 import TitleText from '../components/TitleText'
 import ContainerView from '../components/Views/ContainerView'
@@ -10,10 +11,10 @@ import ProfileItem from '../components/Profile/ProfileItem'
 import Colors from '../constants/color'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-// import Ionicons from '@expo/vector-icons/Ionicons'
-import { initializeAsync, logOutAsync } from 'expo-facebook'
-import App from '../App'
 import { clearUserLoginInfo } from '../features/auth/userLoginInfo'
+import { clearUserToken } from '../features/auth/userToken'
+
+
 
 const ProfileScreen = ({ navigation }: any) => {
   const DATA = [
@@ -21,21 +22,11 @@ const ProfileScreen = ({ navigation }: any) => {
     { id: 2, title: 'Payment methods', subtitle: 'Visa **89' },
     { id: 3, title: 'Settings', subtitle: 'Notifications, password' },
   ]
-  const [data, setData] = useState([])
-
-  const logOut = async () => {
-    try {
-      await initializeAsync({'appId':'403771287819141', 'appName':'billboard-capstone-project'})
-        await logOutAsync()
-      dispatch(clearUserLoginInfo())
-    }
-    catch(error){
-      console.error(error)
-    }
-  }
-
-  const { userLoginInfo } = useSelector((state: any) => state.userLoginInfo)
   const dispatch = useDispatch()
+
+  const { userToken } = useSelector((state: any) => state.userToken)
+  const { userLoginInfo } = useSelector((state: any) => state.userLoginInfo)
+  console.log(userToken)
   const validateUser = userLoginInfo ? (
     <View>
       <ProfileCard
@@ -55,8 +46,10 @@ const ProfileScreen = ({ navigation }: any) => {
         )}
         keyExtractor={(item) => item.id}
       />
-       <Pressable onPress={() => logOut()} 
-                                  style={styles.container}>
+       <Pressable onPress={() => {
+         dispatch(clearUserLoginInfo())
+         dispatch(clearUserToken())
+       }} style={styles.container}>
       <Text style={styles.title}>
        Sign Out
       </Text>
