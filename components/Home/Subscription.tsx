@@ -13,7 +13,8 @@ import {
 import CardListItem from './CardListItem';
   
   const Subscription = ({data}: any) => {
-    if(data !== undefined){
+
+    if(data != undefined){
     if ( data.length == 0) {
       return (  
         <View>
