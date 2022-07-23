@@ -1,6 +1,6 @@
 
 import { useDispatch, useSelector } from 'react-redux'
-import { View, FlatList, Text, Pressable, StyleSheet, Button  } from 'react-native'
+import { View, FlatList, Text, Pressable, StyleSheet, Button, Share } from 'react-native'
 import LayoutView from '../components/Views/LayoutView'
 import TitleText from '../components/TitleText'
 import ContainerView from '../components/Views/ContainerView'
@@ -13,8 +13,6 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { clearUserLoginInfo } from '../features/auth/userLoginInfo'
 import { clearUserToken } from '../features/auth/userToken'
-
-
 
 const ProfileScreen = ({ navigation }: any) => {
   const DATA = [

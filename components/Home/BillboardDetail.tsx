@@ -5,6 +5,7 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
+  Share
 } from 'react-native'
 import MapView from 'react-native-maps';
 import Colors from '../../constants/color'
@@ -12,8 +13,10 @@ import DurationBadge from '../UI/DurationBadge'
 import React, { useEffect, useState } from 'react'
 import ReadMore from 'react-native-read-more-text'
 import axios from 'axios';
+import { useRoute } from '@react-navigation/native';
 
 const BillboardDetail = ({ items }: any) => {
+  
     // const [latitude, setLatitude] = useState('')
     // const [longtitude, setLongtitude] = useState('')
     // const getLongtitude = async () => {
@@ -93,7 +96,7 @@ const BillboardDetail = ({ items }: any) => {
       <View>
         <Text style={styles.mapTitle}>Location</Text>
       <View>
-      <MapView style={styles.map} />
+      <MapView style={styles.map}/>
     </View>
     </View>
     </View>
