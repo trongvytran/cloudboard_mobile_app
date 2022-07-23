@@ -15,6 +15,7 @@ import ReadMore from 'react-native-read-more-text'
 import axios from 'axios';
 import { useRoute } from '@react-navigation/native';
 
+import LikeButton from '../UI/LikeButton'
 const BillboardDetail = ({ items }: any) => {
   
     // const [latitude, setLatitude] = useState('')
@@ -96,7 +97,8 @@ const BillboardDetail = ({ items }: any) => {
       <View>
         <Text style={styles.mapTitle}>Location</Text>
       <View>
-      <MapView style={styles.map}/>
+      <MapView style={styles.map} />
+      <LikeButton value={items} />
     </View>
     </View>
     </View>
