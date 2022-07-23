@@ -6,8 +6,9 @@ import SearchScreen from '../screens/SearchScreen'
 import BillboardDetailScreen from '../screens/BillboardDetailScreen'
 import { TouchableOpacity, View, StyleSheet, Animated, Text} from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import Colors from '../constants/color'
+import onShare from '../screens/BillboardDetailScreen'
 
 const HomeStack = createStackNavigator()
 
@@ -36,7 +37,7 @@ const HomeNavigator = () => {
                         }}/>
       <HomeStack.Screen 
       name="BillboardDetailScreen" 
-      component={BillboardDetailScreen} 
+      component={BillboardDetailScreen}
       options={{headerTransparent:true, 
                 headerTitle: '',
                 headerLeft: () => (<TouchableOpacity style={styles.button} onPress={() => navigation.navigate('HomeScreen')}>
@@ -44,7 +45,7 @@ const HomeNavigator = () => {
                 </TouchableOpacity>),
                 headerRight: () => (
                   <View style={{flex:1, flexDirection:'row', alignContent:'center', alignItems:'center', marginRight: 15}}>
-                  <TouchableOpacity style={styles.share}>
+                  <TouchableOpacity style={styles.share} onPress={() => onShare()}>
                     <Ionicons name="share-outline" size={24} color="white" />
                   </TouchableOpacity>
                   <TouchableOpacity style={styles.like}>
