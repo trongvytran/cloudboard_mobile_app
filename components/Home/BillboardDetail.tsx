@@ -5,8 +5,6 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
-  TouchableHighlightBase,
-  Pressable,
 } from 'react-native'
 import MapView from 'react-native-maps';
 import Colors from '../../constants/color'
@@ -14,6 +12,7 @@ import DurationBadge from '../UI/DurationBadge'
 import React, { useEffect, useState } from 'react'
 import ReadMore from 'react-native-read-more-text'
 import axios from 'axios';
+import LikeButton from '../UI/LikeButton'
 const BillboardDetail = ({ items }: any) => {
     // const [latitude, setLatitude] = useState('')
     // const [longtitude, setLongtitude] = useState('')
@@ -95,6 +94,7 @@ const BillboardDetail = ({ items }: any) => {
         <Text style={styles.mapTitle}>Location</Text>
       <View>
       <MapView style={styles.map} />
+      <LikeButton value={items} />
     </View>
     </View>
     </View>
@@ -209,7 +209,4 @@ const styles = StyleSheet.create({
     borderRadius:9999,
   }
 })
-function press(): void {
-  throw new Error('Function not implemented.');
-}
 

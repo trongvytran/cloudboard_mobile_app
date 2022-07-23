@@ -2,8 +2,9 @@ import { Pressable, Text, StyleSheet } from 'react-native'
 import * as Facebook from 'expo-auth-session/providers/facebook'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addUserLoginInfo } from '../../../features/auth/userLoginInfo'
+import { addUserToken } from '../../../features/auth/userToken'
 import React from 'react'
 import axios from 'axios'
 
@@ -20,13 +21,19 @@ const FacebookView = () => {
       )
       .then((res) => {
         axios
-          .post('http://192.168.1.7:3000/api/auth/login', {
+          .post('http://localhost:3000/api/auth/login', {
             name: res.data.name,
             email: res.data.email,
             imageUrl: res.data.picture.data.url,
           })
           .then((res) => dispatch(addUserLoginInfo(res.data)))
+        axios
+          .post('http://localhost:3000/api/auth/login2', {          
+            email: res.data.email,          
+          })
+          .then((res) => dispatch(addUserToken(res.data)))
       })
+
     }
   }, [response])
   return (

@@ -14,15 +14,14 @@ const SubscriptionScreen = () => {
   const { userLoginInfo } = useSelector((state: any) => state.userLoginInfo)
 
     useEffect(() => {
-      if(userLoginInfo!==null){    
+      if(userLoginInfo!=null){    
       axios
         .get(`http://localhost:3000/api/users/email/${userLoginInfo.email}`)
         .then((res) => setData(res.data))
       }
     }, [])
-  
 
-  console.log(userLoginInfo)
+
   return (
     
     <ScrollView style={styles.container}>
