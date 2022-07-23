@@ -14,7 +14,7 @@ import {
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import Colors from '../constants/color'
-import onShare from '../screens/BillboardDetailScreen'
+import ShareExample from '../features/share'
 
 const HomeStack = createStackNavigator()
 
@@ -77,8 +77,8 @@ const HomeNavigator = () => {
                 marginRight: 15,
               }}
             >
-              <TouchableOpacity style={styles.share} onPress={() => onShare()}>
-                <Ionicons name="share-outline" size={24} color="white" />
+              <TouchableOpacity style={styles.share}>
+                <Ionicons name="share-outline" size={24} color="white" onPress={() => ShareExample()} />
               </TouchableOpacity>
               <TouchableOpacity style={styles.like}>
                 <Ionicons name="heart-outline" size={24} color="white" />
