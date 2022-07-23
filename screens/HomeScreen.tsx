@@ -25,11 +25,10 @@ const HomeScreen = ({ navigation }: any) => {
   }, [navigation])
   useEffect(() => {
     axios
-      .get('http://192.168.1.7:3000/api/billboards')
+      .get('http://localhost:3000/api/billboards')
       .then((res) => setData(res.data))
   }, [])
   return (
-    
     <ScrollView style={styles.container}>
       <ContainerView>
         <View>
@@ -39,7 +38,7 @@ const HomeScreen = ({ navigation }: any) => {
           </View>
         </View>
         <SectionHeadingView name="Recommendations" />
-        <RecommendationList  data={data} />
+        <RecommendationList data={data} />
         <SectionHeadingView name="Top Billboards" />
         <TopBillboardList data={data} />
       </ContainerView>
@@ -58,7 +57,7 @@ const styles = StyleSheet.create({
   icon: {
     color: Colors.primaryColor,
     paddingRight: 40,
-    marginTop:10
+    marginTop: 10,
   },
 })
 
