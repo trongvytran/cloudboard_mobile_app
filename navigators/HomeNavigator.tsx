@@ -9,6 +9,7 @@ import Ionicons from '@expo/vector-icons/Ionicons'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import Colors from '../constants/color'
 import onShare from '../screens/BillboardDetailScreen'
+import ProfileScreen from '../screens/ProfileScreen'
 
 const HomeStack = createStackNavigator()
 
@@ -53,6 +54,10 @@ const HomeNavigator = () => {
                   </TouchableOpacity>
                   </View>   
                 )}} />
+      <HomeStack.Screen
+        name="Profile"
+        component={ProfileScreen}
+      />          
     </HomeStack.Navigator>
   )
 }

@@ -26,7 +26,7 @@ const HomeScreen = ({ navigation }: any) => {
   }, [navigation])
   useEffect(() => {
     axios
-      .get('http://localhost:3000/api/billboards')
+      .get('http://192.168.1.8:3000/api/billboards')
       .then((res) => setData(res.data))
   }, [])
   return (
