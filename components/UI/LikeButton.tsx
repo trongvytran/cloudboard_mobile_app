@@ -32,7 +32,7 @@ const LikeButton = (data: any) => {
     array.push(useremail)
     setLikeNumber(array.length)
     axios
-      .patch(`http://192.168.1.8:3000/api/billboards/${postid}`, {
+      .patch(`http://localhost:3000/api/billboards/${postid}`, {
         like: array
       })
   }
@@ -44,7 +44,7 @@ const LikeButton = (data: any) => {
       }
       setLikeNumber(array.length)
       axios
-        .patch(`http://192.168.1.8:3000/api/billboards/${postid}`, {
+        .patch(`http://localhost:3000/api/billboards/${postid}`, {
           like: array
         })
     }

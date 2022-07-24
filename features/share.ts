@@ -1,12 +1,13 @@
+import React from 'react';
+import { Share, View, Button } from 'react-native';
 
-import { Share } from "react-native";
-const onShare = async () => {
-
+  const onShare = async () => {
     try {
       const result = await Share.share({
-        title: items.address,
-        message: items.description,
-        // url:,
+        title: 'Billboard Title',
+        message: 'Billboard Description',
+        url: 'https://google.com.vn/',
+        
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -20,6 +21,6 @@ const onShare = async () => {
     } catch (error) {
       alert(error.message);
     }
-  };
+  }
 
-  export default onShare
+export default onShare;
