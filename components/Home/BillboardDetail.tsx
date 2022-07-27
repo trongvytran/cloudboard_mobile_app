@@ -10,13 +10,36 @@ import {
 import MapView, { Marker } from 'react-native-maps'
 import Colors from '../../constants/color'
 import DurationBadge from '../UI/DurationBadge'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import ReadMore from 'react-native-read-more-text'
 import axios from 'axios'
-import { useRoute } from '@react-navigation/native'
-
+import { useNavigation, useRoute } from '@react-navigation/native'
+import Ionicons from '@expo/vector-icons/Ionicons'
 import LikeButton from '../UI/LikeButton'
+import ShareButton from '../UI/ShareButton'
+
 const BillboardDetail = ({ items }: any) => {
+  const navigation = useNavigation()
+  useLayoutEffect(() => {
+      navigation.setOptions({
+        headerRight: () => (
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignContent: 'center',
+              alignItems: 'center',
+              marginRight: 15,
+            }}
+          >
+              <ShareButton value={items} />
+              <LikeButton value={items} />
+          </View>
+        ),
+      })
+    }, [navigation]
+  )
+
   const [latitude, setLatitude] = useState(0)
   const [longitude, setLongitude] = useState(0)
 
@@ -69,11 +92,6 @@ const BillboardDetail = ({ items }: any) => {
       >
         {items.description}
       </ReadMore>
-      {/* <View style={styles.container}>
-        <Pressable>
-          <Text style={styles.sectionHeadingSeeMore}>Read more</Text>
-        </Pressable>
-      </View> */}
       <View style={styles.profileContainer}>
         <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
           <Image
@@ -104,7 +122,6 @@ const BillboardDetail = ({ items }: any) => {
           >
             <Marker coordinate={{ latitude: latitude, longitude: longitude }} />
           </MapView>
-          {/* <LikeButton value={items} /> */}
         </View>
       </View>
     </View>
@@ -218,4 +235,5 @@ const styles = StyleSheet.create({
     color: 'black',
     borderRadius: 9999,
   },
+  
 })
