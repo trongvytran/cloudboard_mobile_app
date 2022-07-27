@@ -14,7 +14,7 @@ import {
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import Colors from '../constants/color'
-import ShareExample from '../features/share'
+// import ShareExample from '../features/share'
 import ProfileScreen from '../screens/ProfileScreen'
 const HomeStack = createStackNavigator()
 
@@ -66,25 +66,7 @@ const HomeNavigator = () => {
             >
               <Ionicons name="arrow-back-outline" size={24} color="white" />
             </TouchableOpacity>
-          ),
-          headerRight: () => (
-            <View
-              style={{
-                flex: 1,
-                flexDirection: 'row',
-                alignContent: 'center',
-                alignItems: 'center',
-                marginRight: 15,
-              }}
-            >
-              <TouchableOpacity style={styles.share}>
-                <Ionicons name="share-outline" size={24} color="white" onPress={() => ShareExample()} />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.like}>
-                <Ionicons name="heart-outline" size={24} color="white" />
-              </TouchableOpacity>
-            </View>
-          ),
+          )
         }}
       />
       <HomeStack.Screen
@@ -104,20 +86,5 @@ const styles = StyleSheet.create({
     opacity: 0.6,
     padding: 10,
     borderRadius: 9999,
-  },
-  share: {
-    marginLeft: 15,
-    backgroundColor: 'black',
-    opacity: 0.6,
-    padding: 10,
-    borderRadius: 9999,
-    marginRight: 5,
-  },
-  like: {
-    backgroundColor: 'black',
-    opacity: 0.6,
-    padding: 10,
-    borderRadius: 9999,
-    marginLeft: 5,
-  },
+  }
 })
