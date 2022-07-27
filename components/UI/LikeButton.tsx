@@ -1,24 +1,19 @@
-import React, { useState, useEffect } from 'react'
-import { Alert } from 'react-native'
+import React, { useState, useEffect } from "react";
+import { Pressable, View, Text, Alert } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useSelector } from 'react-redux'
 import axios from 'axios'
-import Ionicons from '@expo/vector-icons/Ionicons'
 import { useNavigation } from '@react-navigation/native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
-
 const LikeButton = (data: any) => {
-
   const [liked, setLiked] = useState(false);
   const [likeNumber, setLikeNumber] = useState(0);
   const [array, setArray] = useState([]);
   const [id, setId] = useState(0);
-  const [view, setView] = useState(0);
   const { userLoginInfo } = useSelector((state: any) => state.userLoginInfo)
   const navigation = useNavigation()
-  let expensePressHandler = () => {
+  function expensePressHandler() {
     navigation.navigate('HomeScreen')
   }
-
   useEffect(() => {
     setArray(data.value.like)
     setId(data.value.id)
@@ -31,64 +26,87 @@ const LikeButton = (data: any) => {
       }
     }
   })
-  const likePost = async (useremail, postid) => {
+
+  function likepost(useremail, postid) {
     setLiked((isLiked) => !isLiked)
     array.push(useremail)
     setLikeNumber(array.length)
-    await axios.patch(`http://192.168.1.13:3000/api/billboards/${postid}`, {
-      like: array,
-    })
+    axios
+      .patch(`http://192.168.1.6:3000/api/billboards/${postid}`, {
+        like: array
+      })
   }
-
-  const unlikePost = async (useremail, postid) => {
+  function removelike(useremail, postid) {
     setLiked((isLiked) => !isLiked)
     for (var i = 0; i < array.length; i++) {
       if (array[i] === useremail) {
-        array.splice(i, 1)
+        array.splice(i, 1);
       }
       setLikeNumber(array.length)
-      await axios.patch(`http://192.168.1.13:3000/api/billboards/${postid}`, {
-        like: array,
-      })
+      axios
+        .patch(`http://192.168.1.6:3000/api/billboards/${postid}`, {
+          like: array
+        })
     }
   }
   if (userLoginInfo != null && array !== undefined) {
+
     if (liked === true) {
       return (
-        <TouchableOpacity
-          className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-900/60"
-          onPress={() => unlikePost(userLoginInfo.email, id)}
-        >
-          <Ionicons name="heart" size={24} color="red" />
-        </TouchableOpacity>
-      )
+        <View>
+          <Pressable onPress={
+            () => removelike(userLoginInfo.email, id)
+          }>
+            <MaterialCommunityIcons
+              name={"heart"}
+              size={32}
+              color={"red"}
+            />
+          </Pressable>
+          <Text>{likeNumber}</Text>
+        </View>
+      );
     }
     return (
-      <TouchableOpacity
-        className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-900/60"
-        onPress={() => likePost(userLoginInfo.email, id)}
-      >
-        <Ionicons name="heart-outline" size={24} color="white" />
-      </TouchableOpacity>
-    )
+      <View>
+        <Pressable onPress={() => likepost(userLoginInfo.email, id)}>
+          <MaterialCommunityIcons
+            name={"heart-outline"}
+            size={32}
+            color={"black"}
+          />
+        </Pressable>
+        <Text>{likeNumber}</Text>
+      </View>
+    );
   }
   return (
-    <TouchableOpacity
-      className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-900/60"
-      onPress={() =>
-        Alert.alert('Login to like the billboard ?', alertMessage, [
-          { text: 'Cancel' },
-          {
-            text: 'OK',
-            onPress: () => {
-              navigation.navigate('Profile')
-            },
-          },
-        ])
-      }
-    >
-      <Ionicons name="heart-outline" size={24} color="white" />
-    </TouchableOpacity>
+    <View>
+    <Pressable  onPress={() => Alert.alert(
+                  'Login to like the billboard ?',
+                  alertMessage,
+                  [
+                    {text: 'Cancel'},
+                    {text: 'OK', onPress: () => {
+                      navigation.navigate('Profile')
+                    }},
+                  ]
+                )} >
+      <MaterialCommunityIcons
+        name={"heart-outline"}
+        size={32}
+        color={"black"}
+      />
+    </Pressable>
+    <Text>{likeNumber}</Text>
+  </View>
   )
-}
+};
 export default LikeButton
+
+
+
+function alertMessage(arg0: string, alertMessage: any, arg2: { text: string; onPress: () => void; }[]): void {
+  throw new Error("Function not implemented.");
+}
+
