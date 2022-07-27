@@ -16,7 +16,7 @@ const SubscriptionScreen = () => {
     useEffect(() => {
       if(userLoginInfo!=null){    
       axios
-        .get(`http://localhost:3000/api/users/email/${userLoginInfo.email}`)
+        .get(`http://192.168.1.6:3000/api/users/email/${userLoginInfo.email}`)
         .then((res) => setData(res.data))
       }
     }, [])
