@@ -75,7 +75,7 @@ const Carousel = ({ data }: any) => {
       </View>
     )
   }
-  console.log('Error Occured!')
+  
   return null
 }
 

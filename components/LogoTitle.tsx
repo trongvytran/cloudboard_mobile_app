@@ -18,11 +18,12 @@ export default LogoTitle
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginRight: 200,
-    marginVertical:20
   },
   logo: {
-    height: 40,
-    maxWidth: 240,
+    maxHeight: 501/13,
+    maxWidth: 3174/13,
+    // marginVertical:10,
+    marginLeft:5,
+    marginTop:5
   },
 })
