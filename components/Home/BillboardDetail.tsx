@@ -45,7 +45,7 @@ const BillboardDetail = ({ items }: any) => {
 
   const getLongitude = async () => {
     try {
-      const res = await fetch(`http://localhost:3000/api/billboards/${items.id}`)
+      const res = await fetch(`http://192.168.1.13:3000/api/billboards/${items.id}`)
       const json = await res.json()
       return json.long
     } catch (error) {
@@ -55,7 +55,7 @@ const BillboardDetail = ({ items }: any) => {
 
   const getLatitude = async () => {
     try {
-      const res = await fetch(`http://localhost:3000/api/billboards/${items.id}`)
+      const res = await fetch(`http://192.168.1.13:3000/api/billboards/${items.id}`)
       const json = await res.json()
       return json.lat
     } catch (error) {

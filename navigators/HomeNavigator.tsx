@@ -4,6 +4,7 @@ import LogoTitle from '../components/LogoTitle'
 import HomeScreen from '../screens/HomeScreen'
 import SearchScreen from '../screens/SearchScreen'
 import BillboardDetailScreen from '../screens/BillboardDetailScreen'
+import SeeMoreBillboardListScreen from '../screens/SeeMoreBillboardListScreen'
 import {
   TouchableOpacity,
   View,
@@ -25,13 +26,10 @@ const HomeNavigator = () => {
       <HomeStack.Screen
         name="HomeScreen"
         component={HomeScreen}
-        options={{
-          headerTitle: (props) => <LogoTitle {...props} />,
-          headerStyle: {
-            shadowColor: 'transparent',
-            height: 90,
-          },
-        }}
+        // options={{
+        //   headerTitle: (props) => <LogoTitle {...props} />,
+          
+        // }}
       />
       <HomeStack.Screen
         name="Search"
@@ -53,6 +51,11 @@ const HomeNavigator = () => {
           headerStyle: { shadowColor: 'transparent' },
         }}
       />
+      <HomeStack.Screen 
+      name="SeeMoreBillboardListScreen"
+      component={SeeMoreBillboardListScreen}/>
+
+      
       <HomeStack.Screen
         name="BillboardDetailScreen"
         component={BillboardDetailScreen}
