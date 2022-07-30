@@ -16,17 +16,17 @@ const SeeMoreBillboardListScreen = ({ navigation }) => {
       headerStyle: {
         shadowColor: 'transparent', 
       },
-      headerLeft: () => {<View>
+      headerLeft: () => (<View>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons
             name="arrow-back-outline"
             size={32}
-            style={{ marginLeft: 10 }}
+            style={{ marginLeft: 5 }}
             color={Colors.primaryColor}
           ></Ionicons>
         </TouchableOpacity>
-      </View>}
-    })
+      </View>)
+      })
   }
   )
 
