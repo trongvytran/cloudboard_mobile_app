@@ -8,45 +8,30 @@ import axios from 'axios'
 import { FlatList } from 'react-native-gesture-handler'
 import SearchBillboardDataListItem from '../components/Search/SearchBillboardDataListItem'
 
-
 const SearchScreen = () => {
-  const [search, setSearch] = useState('')
-  const [resultData, setResultData] = useState([]);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([])
+  const [result, setResult] = useState([])
 
   useEffect(() => {
-    fetch('https://192.168.1.13:3000/api/billboards')
-         .then((res) => res.json())
-         .then((resJson) => {
-           setResultData(resJson)
-           setData(resJson)
-         })
-         .catch((error) => {
-           console.error(error);
-         });
- }, []
- )
+    fetch('http://192.168.1.13:3000/api/billboards')
+    .then(async (res) => setData(await res.json()))
+    
+  }, [])
 
-  const searchDataInit = (text) => {
-    // Check if searching is blank
-    if (text) {
-      const newData = data.filter(
-        (item) => {
-          const itemData = item.name
-            ? item.name.toUpperCase()
-            : ''.toUpperCase()
-          const textData = text.toUpperCase()
-          return itemData.indexOf(textData) > -1
-      });
-      setResultData(newData)
-      setSearch(text)
-    } else {
-      // blank case
-      setResultData(data)
-      setSearch(text)
-    }
+  const searchInit = (text: any) => {
+    if (text){
+    const filterData = data.filter((item) => {
+    const dataItem = item.name? item.name.toLowerCase(): ''.toLowerCase();
+    const searchedText = text.toLowerCase();
+      
+     return dataItem.indexOf(searchedText) > -1;
+        })
+        setResult(filterData)}
+        else{
+          return setResult()
+        }
+
   }
-
   return (
     <View>
       <View style={styles.container}>
@@ -57,14 +42,13 @@ const SearchScreen = () => {
         placeholderTextColor="rgba(60, 60, 67, 0.6)"
         clearButtonMode="while-editing"
         style={styles.searchInput}
-        value={search}
-        onChangeText={(text) => searchDataInit(text)}
+        onChangeText={(text) => searchInit(text)}
         placeholder="Search"
       />
     </View>
       </View>
       <ScrollView style={styles.container}>
-      {resultData.map((item) => <SearchBillboardDataListItem key={item.id} item={item}/>)}
+      {result.map((item) => <SearchBillboardDataListItem key={item.id} item={item} />)}
     </ScrollView>
     </View>
   )
@@ -107,3 +91,5 @@ const styles = StyleSheet.create({
 })
 
 export default SearchScreen
+
+
