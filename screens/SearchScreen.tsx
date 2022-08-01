@@ -27,8 +27,8 @@ const SearchScreen = () => {
      return dataItem.indexOf(searchedText) > -1;
         })
         setResult(filterData)}
-        else{
-          return setResult()
+        else {
+         return <Text>Nothing is found!</Text>
         }
 
   }
@@ -48,7 +48,7 @@ const SearchScreen = () => {
     </View>
       </View>
       <ScrollView style={styles.container}>
-      {result.map((item) => <SearchBillboardDataListItem key={item.id} item={item} />)}
+      {result.map((item) => (item? <SearchBillboardDataListItem key={item.id} item={item}/>:<Text>Nothing is found!</Text>))}
     </ScrollView>
     </View>
   )
