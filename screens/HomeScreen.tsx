@@ -9,11 +9,21 @@ import TopBillboardList from '../components/Home/TopBillboardList'
 import SectionHeadingView from '../components/Home/SectionHeadingView'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
+import LogoTitle from '../components/LogoTitle'
+
 const HomeScreen = ({ navigation }: any) => {
   const { userTokenInfo } = useSelector((state: any) => state.userToken)
   const [data, setData] = useState([])
   useLayoutEffect(() => {
     navigation.setOptions({
+      headerLeft: (props) => <LogoTitle {...props} />,
+      headerTitle: '',
+      headerRightStyle: () => ({
+        flex:1,
+      }),
+      headerStyle: {
+        shadowColor: 'transparent', 
+      },
       headerRight: () => (
         <Ionicons
           style={styles.icon}
@@ -22,11 +32,12 @@ const HomeScreen = ({ navigation }: any) => {
           onPress={() => navigation.navigate('Search')}
         />
       ),
+      
     })
   }, [navigation])
   useEffect(() => {
     axios
-      .get('http://192.168.1.6:3000/api/billboards')
+      .get('http://192.168.1.12:3000/api/billboards')
       .then((res) => setData(res.data))
   }, [])
   return (
@@ -57,8 +68,8 @@ const styles = StyleSheet.create({
   },
   icon: {
     color: Colors.primaryColor,
-    paddingRight: 40,
-    marginTop: 10,
+    paddingRight: 5,
+    // marginTop: 10,
   },
 })
 

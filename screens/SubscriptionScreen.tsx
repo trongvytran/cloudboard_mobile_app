@@ -7,8 +7,8 @@ import axios from 'axios'
 import { useSelector } from 'react-redux'
 // const SubscriptionScreen = ({route}) => {
 //   const items = route.params.item;
-// `http://localhost:3000/api/users/1`
-// `http://localhost:3000/api/users/email/${userLoginInfo.email}`
+// `http://192.168.1.13:3000/api/users/1`
+// `http://192.168.1.13:3000/api/users/email/${userLoginInfo.email}`
 const SubscriptionScreen = () => {
   const [data, setData] = useState([])
   const { userLoginInfo } = useSelector((state: any) => state.userLoginInfo)
@@ -16,7 +16,7 @@ const SubscriptionScreen = () => {
     useEffect(() => {
       if(userLoginInfo!=null){    
       axios
-        .get(`http://192.168.1.6:3000/api/users/email/${userLoginInfo.email}`)
+        .get(`http://192.168.1.12:3000/api/users/email/${userLoginInfo.email}`)
         .then((res) => setData(res.data))
       }
     }, [])

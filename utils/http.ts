@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const BACKEND_URL =
-    'http://192.168.1.8:3000/api';
+    'http://192.168.1.13:3000/api';
 
 export async function createBillboards(billboardData) {
     const response = await axios.post(BACKEND_URL + '/billboards', billboardData);
