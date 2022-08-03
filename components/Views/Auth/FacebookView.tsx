@@ -21,14 +21,14 @@ const FacebookView = () => {
       )
       .then((res) => {
         axios
-          .post('http://192.168.1.13:3000/api/auth/login', {
+          .post('http://192.168.1.12:3000/api/auth/login', {
             name: res.data.name,
             email: res.data.email,
             imageUrl: res.data.picture.data.url,
           })
           .then((res) => dispatch(addUserLoginInfo(res.data)))
         axios
-          .post('http://192.168.1.13:3000/api/auth/login2', {          
+          .post('http://192.168.1.12:3000/api/auth/login2', {          
             email: res.data.email,          
           })
           .then((res) => dispatch(addUserToken(res.data)))

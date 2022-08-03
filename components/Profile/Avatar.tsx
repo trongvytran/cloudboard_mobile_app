@@ -8,20 +8,25 @@ import {
 } from 'react-native'
 import * as ImagePicker from 'expo-image-picker'
 import { AntDesign } from '@expo/vector-icons'
+import { useDispatch, useSelector } from 'react-redux'
 export default function Avatar() {
+  const dispatch = useDispatch()
+  const { userLoginInfo } = useSelector((state: any) => state.userLoginInfo)
   const [image, setImage] = useState(null)
   const checkForCameraRollPermission = async () => {
     const { status } = await ImagePicker.getMediaLibraryPermissionsAsync()
-    if (status !== 'granted') {
-      alert(
-        "Please grant camera roll permissions inside your system's settings"
-      )
-    } else {
-      console.log('Media Permissions are granted')
-    }
+    console.log(status)
+    // if (status !== 'granted') {
+    //   alert(
+    //     "Please grant camera roll permissions inside your system's settings"
+    //   )
+    // } else {
+    //   console.log('Media Permissions are granted')
+    // }
   }
   useEffect(() => {
     checkForCameraRollPermission()
+    setImage(userLoginInfo.imageUrl)
   }, [])
   const addImage = async () => {
     let _image = await ImagePicker.launchImageLibraryAsync({
@@ -30,8 +35,8 @@ export default function Avatar() {
       aspect: [4, 3],
       quality: 1,
     })
-    console.log(JSON.stringify(_image))
-
+    console.log(JSON.stringify(_image.uri))
+    
     if (!_image.cancelled) {
       setImage(_image.uri)
     }

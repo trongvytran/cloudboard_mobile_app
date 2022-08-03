@@ -5,10 +5,10 @@ import Button from '../UI/Button'
 import Avatar from './Avatar'
 import React from 'react';
 
-function ProfileForm(onSubmit, defaultValues) {
+function ProfileForm({onSubmit, defaultValues}) {
   const [inputs, setInputs] = useState({
-    fullName: {
-      value: defaultValues ? defaultValues.fullName : '',
+    name: {
+      value: defaultValues ? defaultValues.name : '',
       isValid: true,
     },
     date: {
@@ -39,24 +39,24 @@ function ProfileForm(onSubmit, defaultValues) {
   }
   function submitHandler() {
     const userData = {
-      fullName: inputs.fullName.value,
+      name: inputs.name.value,
       date: inputs.date.value,
       phoneNumber: +inputs.phoneNumber.value,
       email: inputs.email.value,
       password: inputs.password.value,
     };
 
-    const fullNameIsValid = userData.fullName.length > 0;
+    const nameIsValid = userData.name.length > 0;
     const dateIsValid = userData.date.toString() !== 'Invalid Date';
-    const phoneNumberIsValid = !isNaN(userData.phoneNumber) && userData.phoneNumber > 0 && userData.phoneNumber < 11;
+    const phoneNumberIsValid = !isNaN(userData.phoneNumber) 
     const emailIsValid = userData.email.length > 0;
     const passwordIsValid = userData.password.length > 0;
 
-    if (!fullNameIsValid || !dateIsValid || !phoneNumberIsValid || !emailIsValid || !passwordIsValid) {
+    if (!nameIsValid || !dateIsValid || !phoneNumberIsValid || !emailIsValid || !passwordIsValid) {
       // Alert.alert('Invalid input', 'Please check your input values');
       setInputs((curInputs) => {
         return {
-          fullName: { value: curInputs.fullName.value, isValid: fullNameIsValid },
+          name: { value: curInputs.name.value, isValid: nameIsValid },
           date: { value: curInputs.date.value, isValid: dateIsValid },
           phoneNumber: { value: curInputs.phoneNumber.value, isValid: phoneNumberIsValid },
           email: { value: curInputs.email.value, isValid: emailIsValid },
@@ -65,10 +65,11 @@ function ProfileForm(onSubmit, defaultValues) {
       });
       return;
     }
+    console.log(userData)
     onSubmit(userData);
   }
   const formIsInvalid =
-    !inputs.fullName.isValid ||
+    !inputs.name.isValid ||
     !inputs.date.isValid ||
     !inputs.phoneNumber.isValid ||
     !inputs.email.isValid ||
@@ -82,10 +83,10 @@ function ProfileForm(onSubmit, defaultValues) {
       </View>
       <Input
         label="Full Name"
-        invalid={!inputs.fullName.isValid}
+        invalid={!inputs.name.isValid}
         textInputConfig={{
-          onChangeText: inputChangedHandler.bind(this,'fullName'),
-          value: inputs.fullName.value,
+          onChangeText: inputChangedHandler.bind(this,'name'),
+          value: inputs.name.value,
         }} />
       <Input
         label="Date of Birth"

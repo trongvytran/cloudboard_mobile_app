@@ -7,10 +7,12 @@ import { useNavigation } from '@react-navigation/native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const LikeButton = (data: any) => {
-  const [liked, setLiked] = useState(false)
-  const [likeNumber, setLikeNumber] = useState(0)
-  const [array, setArray] = useState([])
-  const [id, setId] = useState(0)
+
+  const [liked, setLiked] = useState(false);
+  const [likeNumber, setLikeNumber] = useState(0);
+  const [array, setArray] = useState([]);
+  const [id, setId] = useState(0);
+  const [view, setView] = useState(0);
   const { userLoginInfo } = useSelector((state: any) => state.userLoginInfo)
   const navigation = useNavigation()
   let expensePressHandler = () => {
@@ -29,7 +31,6 @@ const LikeButton = (data: any) => {
       }
     }
   })
-
   const likePost = async (useremail, postid) => {
     setLiked((isLiked) => !isLiked)
     array.push(useremail)
