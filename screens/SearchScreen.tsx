@@ -13,7 +13,7 @@ const SearchScreen = () => {
   const [result, setResult] = useState([])
 
   useEffect(() => {
-    fetch('http://192.168.1.13:3000/api/billboards')
+    fetch('http://192.168.1.12:3000/api/billboards')
     .then(async (res) => setData(await res.json()))
     
   }, [])

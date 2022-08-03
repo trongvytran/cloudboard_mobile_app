@@ -39,7 +39,7 @@ const BillboardDetail = ({ items }: any) => {
       })
     }, [navigation]
   )
-
+  const [view, setView] = useState(0);
   const [latitude, setLatitude] = useState(0)
   const [longitude, setLongitude] = useState(0)
 
@@ -63,7 +63,7 @@ const BillboardDetail = ({ items }: any) => {
     }
   }
 
-  useEffect(() => {
+  useEffect(() => {    
     getLatitude().then((data) => {
       setLatitude(data)
     })
@@ -72,7 +72,7 @@ const BillboardDetail = ({ items }: any) => {
 
   return (
     <View>
-      <View>
+      <View >
         <Image style={styles.image} source={{ uri: items.imageUrl }} />
       </View>
       <View style={styles.cardBody}>
@@ -99,7 +99,7 @@ const BillboardDetail = ({ items }: any) => {
             source={{ uri: items.user.imageUrl }}
           />
           <View>
-            <Text style={styles.profileTitle}>{items.user.name}</Text>
+            <Text  style={styles.profileTitle}>{items.user.name}</Text>
           </View>
         </View>
         <View style={styles.contactButton}>
