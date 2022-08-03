@@ -41,7 +41,7 @@ const HomeScreen = ({ navigation }: any) => {
         <SectionHeadingView name="Recommendations" />
         <RecommendationList data={data} />
         <SectionHeadingView name="Top Billboards" />
-        <TopBillboardList data={data} />
+        <TopBillboardList data={[...data].sort((a, b) => b.view - a.view) && [...data].sort((a, b) => b.like.length - a.like.length)} />
       </ContainerView>
     </ScrollView>
   )

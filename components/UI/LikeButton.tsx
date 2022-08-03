@@ -12,6 +12,7 @@ const LikeButton = (data: any) => {
   const [likeNumber, setLikeNumber] = useState(0);
   const [array, setArray] = useState([]);
   const [id, setId] = useState(0);
+  const [view, setView] = useState(0);
   const { userLoginInfo } = useSelector((state: any) => state.userLoginInfo)
   const navigation = useNavigation()
   let expensePressHandler = () => {
@@ -30,7 +31,6 @@ const LikeButton = (data: any) => {
       }
     }
   })
-
   const likePost = async (useremail, postid) => {
     setLiked((isLiked) => !isLiked)
     array.push(useremail)

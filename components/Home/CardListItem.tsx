@@ -2,10 +2,13 @@ import React, {useEffect,useState} from 'react'
 import {
   Pressable,
   View,
+  StyleSheet,
   Text,
   Image,
+  Dimensions,
 } from 'react-native'
 import axios from 'axios'
+import Colors from '../../constants/color'
 import DurationBadge from '../UI/DurationBadge'
 import { useNavigation } from '@react-navigation/native'
 const CardListItem = ({ item }: any) => {
@@ -26,25 +29,49 @@ const CardListItem = ({ item }: any) => {
   })
   return (
     <Pressable onPress={expensePressHandler}>
-      <View className="my-4 bg-white rounded-lg shadow w-72">
-        <Image
-          className="rounded-t-lg aspect-[4/3] w-full"
-          source={{ uri: item.imageUrl }}
-        />
-        <View className="p-5">
-          <View className="flex flex-row items-center justify-between mb-2">
-            <Text className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-              {item.name}
-            </Text>
-            <DurationBadge value={item.duration} />
+      <View style={styles.card}>
+        <Image style={styles.image} source={{ uri: item.imageUrl }} />
+        <View style={styles.cardBody}>
+          <View>
+            <Text style={styles.cardName}>{item.name}</Text>
+            <Text style={styles.cardAddress}>{item.address}</Text>
           </View>
-          <Text className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-            {item.address}
-          </Text>
-          <Text className="font-medium text-amber-500">{item.price}</Text>
+          <DurationBadge value={item.duration} />
         </View>
+        <Text style={styles.cardPrice}>{item.price}</Text>
       </View>
     </Pressable>
   )
 }
 export default CardListItem
+
+const styles = StyleSheet.create({
+  card: {
+    marginVertical: 16,
+  },
+  image: {
+    width: Dimensions.get('window').width / 1.5,
+    aspectRatio: 4 / 3,
+    borderRadius: 8,
+  },
+  cardBody: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingTop: 10,
+  },
+  cardName: {
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  cardAddress: {
+    color: 'grey',
+    fontSize: 12,
+    marginTop: 4,
+  },
+  cardPrice: {
+    color: Colors.primaryColor,
+    fontWeight: '600',
+    fontSize: 12,
+    marginTop: 10,
+  },
+})
