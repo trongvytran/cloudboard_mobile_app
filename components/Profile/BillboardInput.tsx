@@ -18,9 +18,7 @@ const BillboardInput = () => {
             <Text>Title:</Text>   
             {/* // Billboard Name */}
             <TextInput 
-            style={styles.input}
-            onFocus={() => setBorderRadius(0.5)}
-            onBlur={() => setBorderRadius(0.25)} />   
+            className=''/>   
             </View>
             {/* // Billboard Address */}
             <View>

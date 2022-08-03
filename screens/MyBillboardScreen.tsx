@@ -8,9 +8,7 @@ const MyBillboardScreen = () => {
   return (
     <ScrollView style={styles.container}>
       <ContainerView>
-        <BillboardInput>
-          
-        </BillboardInput>
+        <BillboardInput/>
       </ContainerView>
     </ScrollView>
   )

@@ -2,6 +2,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import Main from './components/Main'
 import { Provider } from 'react-redux'
 import rootReducer from './reducers'
+import { NativeWindStyleSheet } from "nativewind";
 import { configureStore } from '@reduxjs/toolkit'
 import 'react-native-gesture-handler'
 import {
@@ -27,5 +28,9 @@ const App = () => {
     </QueryClientProvider>
   )
 }
+
+NativeWindStyleSheet.setOutput({
+  default: "native",
+});
 
 export default App
