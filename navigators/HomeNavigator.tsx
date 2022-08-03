@@ -1,21 +1,13 @@
 import { createStackNavigator } from '@react-navigation/stack'
 import React from 'react'
-import LogoTitle from '../components/LogoTitle'
 import HomeScreen from '../screens/HomeScreen'
 import SearchScreen from '../screens/SearchScreen'
 import BillboardDetailScreen from '../screens/BillboardDetailScreen'
 import SeeMoreBillboardListScreen from '../screens/SeeMoreBillboardListScreen'
-import {
-  TouchableOpacity,
-  View,
-  StyleSheet,
-  Animated,
-  Text,
-} from 'react-native'
+import { TouchableOpacity, View } from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons'
-import { useNavigation, useRoute } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'
 import Colors from '../constants/color'
-// import ShareExample from '../features/share'
 import ProfileScreen from '../screens/ProfileScreen'
 const HomeStack = createStackNavigator()
 
@@ -23,14 +15,7 @@ const HomeNavigator = () => {
   const navigation = useNavigation()
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen
-        name="HomeScreen"
-        component={HomeScreen}
-        // options={{
-        //   headerTitle: (props) => <LogoTitle {...props} />,
-          
-        // }}
-      />
+      <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
       <HomeStack.Screen
         name="Search"
         component={SearchScreen}
@@ -51,43 +36,22 @@ const HomeNavigator = () => {
           headerStyle: { shadowColor: 'transparent' },
         }}
       />
-      <HomeStack.Screen 
-      name="SeeMoreBillboardListScreen"
-      component={SeeMoreBillboardListScreen}/>
-
-      
+      <HomeStack.Screen
+        name="SeeMoreBillboardListScreen"
+        component={SeeMoreBillboardListScreen}
+      />
       <HomeStack.Screen
         name="BillboardDetailScreen"
         component={BillboardDetailScreen}
         options={{
           headerTransparent: true,
           headerTitle: '',
-          headerLeft: () => (
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate('HomeScreen')}
-            >
-              <Ionicons name="arrow-back-outline" size={24} color="white" />
-            </TouchableOpacity>
-          )
         }}
       />
-      <HomeStack.Screen
-        name="Profile"
-        component={ProfileScreen}
-      />   
+      <HomeStack.Screen name="Profile" component={ProfileScreen} />
     </HomeStack.Navigator>
   )
 }
 
 export default HomeNavigator
 
-const styles = StyleSheet.create({
-  button: {
-    marginLeft: 15,
-    backgroundColor: 'black',
-    opacity: 0.6,
-    padding: 10,
-    borderRadius: 9999,
-  }
-})
