@@ -34,7 +34,8 @@ const Main = () => {
         },
         tabBarActiveTintColor: Colors.primaryColor,
         tabBarStyle: {
-          marginBottom:5}
+          marginBottom: 5,
+        },
       })}
     >
       <Tab.Screen name="Home" component={HomeNavigator} />

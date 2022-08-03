@@ -1,30 +1,14 @@
-import { StyleSheet, ScrollView, Share, Text, TouchableOpacity, View } from 'react-native'
-import React, { useEffect, useLayoutEffect } from 'react'
-import ContainerView from '../components/Views/ContainerView'
-import Colors from '../constants/color'
+import { ScrollView } from 'react-native'
+import React from 'react'
 import BillboardDetail from '../components/Home/BillboardDetail'
-import { useDispatch, useSelector } from 'react-redux'
-import { addBillboardShareInfo } from '../features/shareBillboardInfo'
-import Ionicons from '@expo/vector-icons/Ionicons'
-import { useNavigation } from '@react-navigation/native'
 
 const BillboardDetailScreen = ({ route }) => {
-  const items = route.params.item
+  const item = route.params.item
 
   return (
-    <ScrollView style={styles.container}>
-      <ContainerView>
-        <BillboardDetail items={items} />
-      </ContainerView>
+    <ScrollView className="bg-white">
+      <BillboardDetail item={item} />
     </ScrollView>
   )
 }
 export default BillboardDetailScreen
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: Colors.layoutColor,
-  },
-})
-
-

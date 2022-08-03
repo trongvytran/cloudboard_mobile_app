@@ -8,7 +8,6 @@ const SeeMoreBillboardList = ({ data }: any) => {
       data={data}
       keyExtractor={(item) => item.id}
       pagingEnabled
-      scrollEnabled
       snapToAlignment="center"
       scrollEventThrottle={16}
       decelerationRate={'fast'}
