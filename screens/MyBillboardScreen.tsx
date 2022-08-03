@@ -2,12 +2,15 @@ import { ScrollView, StyleSheet, Text } from 'react-native'
 import React from 'react'
 import ContainerView from '../components/Views/ContainerView'
 import Colors from '../constants/color'
+import BillboardInput from '../components/Profile/BillboardInput'
 
 const MyBillboardScreen = () => {
   return (
     <ScrollView style={styles.container}>
       <ContainerView>
-        <Text>MyBillboardScreen</Text>
+        <BillboardInput>
+          
+        </BillboardInput>
       </ContainerView>
     </ScrollView>
   )

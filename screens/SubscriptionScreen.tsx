@@ -5,6 +5,8 @@ import Subscription from '../components/Home/Subscription'
 import Colors from '../constants/color'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
+import TitleText from '../components/TitleText'
+import LayoutView from '../components/Views/LayoutView'
 // const SubscriptionScreen = ({route}) => {
 //   const items = route.params.item;
 // `http://192.168.1.13:3000/api/users/1`
@@ -13,31 +15,22 @@ const SubscriptionScreen = () => {
   const [data, setData] = useState([])
   const { userLoginInfo } = useSelector((state: any) => state.userLoginInfo)
 
-    useEffect(() => {
-      if(userLoginInfo!=null){    
+  useEffect(() => {
+    if (userLoginInfo != null) {
       axios
         .get(`http://192.168.1.12:3000/api/users/email/${userLoginInfo.email}`)
         .then((res) => setData(res.data))
-      }
-    }, [])
-
+    }
+  }, [])
 
   return (
-    
-    <ScrollView style={styles.container}>
+    <LayoutView>
       <ContainerView>
-        {/* <Subscription items = {items} /> */}
-        <Subscription data={data.subscriptions}/>
+        <TitleText>Subscriptions</TitleText>
+        <Subscription data={data.subscriptions} />
       </ContainerView>
-    </ScrollView>
-   
+    </LayoutView>
   )
 }
 
 export default SubscriptionScreen
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: Colors.layoutColor,
-  },
-})

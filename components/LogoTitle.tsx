@@ -3,27 +3,19 @@ import React from 'react'
 
 const LogoTitle = (_props: any) => {
   return (
-    <View style={styles.container}>
-      <Image
-        style={styles.logo}
-        source={require('../assets/img/cloudboard.png')}
-        resizeMode="contain"
-      />
-    </View>
+    <Image
+      style={styles.logo}
+      className="ml-3"
+      source={require('../assets/img/cloudboard.png')}
+    />
   )
 }
 
 export default LogoTitle
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   logo: {
-    maxHeight: 501/13,
-    maxWidth: 3174/13,
-    // marginVertical:10,
-    marginLeft:5,
-    marginTop:5
+    maxHeight: 501 / 13,
+    maxWidth: 3170 / 13,
   },
 })

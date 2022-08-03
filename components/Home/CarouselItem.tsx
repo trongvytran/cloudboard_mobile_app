@@ -4,41 +4,18 @@ import Colors from '../../constants/color'
 
 const CarouselItem = ({ item }: any) => {
   return (
-    <View style={styles.container}>
-      <Image style={styles.image} source={{ uri: item.imageUrl }} />
-      <View style={styles.body}>
-        <Text style={styles.name}>{item.name}</Text>
-        <Text style={styles.description}>{item.description}</Text>
+    <View
+      style={{ width: Dimensions.get('window').width - 32 }}
+      className="relative my-4 shadow"
+    >
+      <Image className="aspect-[8/5] w-full rounded-lg" source={{ uri: item.imageUrl }} />
+      <View className="absolute inset-0 rounded-lg bg-gray-900/50"></View>
+      <View className="absolute bottom-0 p-5">
+        <Text className="mb-2 text-2xl font-bold tracking-tight text-white">{item.name}</Text>
+        <Text className="text-sm font-normal text-white">{item.description}</Text>
       </View>
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    marginVertical: 16
-  },
-  body: {
-    position: 'absolute',
-    bottom: 10,
-    margin: 10,
-    left: 5,
-  },
-  image: {
-    width: Dimensions.get('window').width - 16,
-    aspectRatio: 8 / 5,
-    borderRadius: 10,
-  },
-  name: {
-    color: Colors.layoutColor,
-    fontSize: 22,
-    marginBottom: 5,
-    fontWeight: 'bold',
-  },
-  description: {
-    color: Colors.layoutColor,
-    fontSize: 12,
-  },
-})
 
 export default CarouselItem
