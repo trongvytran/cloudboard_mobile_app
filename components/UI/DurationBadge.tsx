@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text } from 'react-native'
 import Colors from '../../constants/color'
 
 interface DurationBadgeValue {
@@ -53,19 +53,13 @@ const DurationBadge = ({ value }: DurationBadgeValue) => {
   }, [value])
 
   return (
-    <View style={{ ...styles.badge, backgroundColor: badgeColor.backgroundColor }}>
-      <Text style={{ fontSize: 12, color: badgeColor.textColor }}>{value}</Text>
+    <View
+      className="px-2.5 py-0.5 rounded font-medium text-sm"
+      style={{ backgroundColor: badgeColor.backgroundColor }}
+    >
+      <Text style={{ color: badgeColor.textColor }}>{value}</Text>
     </View>
   )
 }
 
 export default DurationBadge
-
-const styles = StyleSheet.create({
-  badge: {
-    paddingHorizontal: 6,
-    paddingVertical: 4,
-    alignSelf: 'flex-start',
-    borderRadius: 2
-  },
-})
