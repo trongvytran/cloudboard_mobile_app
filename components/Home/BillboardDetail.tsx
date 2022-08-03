@@ -77,7 +77,8 @@ const BillboardDetail = ({ items }: any) => {
       </View>
       <View style={styles.cardBody}>
         <View>
-          <Text style={styles.cardName}>{items.address}</Text>
+          <Text style={styles.cardName}>{items.name}</Text>
+          <Text style={styles.cardAddress}>{items.address}</Text>
         </View>
         <DurationBadge value={items.duration} />
       </View>
@@ -162,8 +163,13 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   cardName: {
-    fontSize: 14,
+    fontSize: 20,
     fontWeight: 'bold',
+  },
+  cardAddress: {
+    fontSize: 16,
+    fontStyle:'italic',
+    marginTop: 5
   },
   cardPrice: {
     color: Colors.primaryColor,
