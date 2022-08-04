@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, FlatList } from 'react-native'
+import { View, FlatList, Pressable } from 'react-native'
 import CarouselItem from '../Home/CarouselItem'
 
 const Carousel = ({ data }: any) => {
