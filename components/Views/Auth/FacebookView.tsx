@@ -21,14 +21,14 @@ const FacebookView = () => {
       )
       .then((res) => {
         axios
-          .post('http://192.168.1.6:3000/api/auth/login', {
+          .post('http://localhost:3000/api/auth/login', {
             name: res.data.name,
             email: res.data.email,
             imageUrl: res.data.picture.data.url,
           })
           .then((res) => dispatch(addUserLoginInfo(res.data)))
         axios
-          .post('http://192.168.1.6:3000/api/auth/login2', {          
+          .post('http://localhost:3000/api/auth/login2', {          
             email: res.data.email,          
           })
           .then((res) => dispatch(addUserToken(res.data)))
@@ -39,13 +39,13 @@ const FacebookView = () => {
   return (
     <Pressable
       disabled={!request}
-      style={styles.button}
+      className="bg-[#3b5998] my-1 rounded-lg px-5 py-2.5 shadow flex justify-center items-center"
       onPress={() => {
         promptAsync({ useProxy: true, showInRecents: true })
       }}
     >
       <Ionicons style={styles.icon} name="logo-facebook" size={25} />
-      <Text style={styles.text}>Sign in with Facebook</Text>
+      <Text className="text-lg font-semibold text-center text-white">Sign in with Facebook</Text>
     </Pressable>
   )
 }
@@ -53,25 +53,6 @@ const FacebookView = () => {
 export default FacebookView
 
 const styles = StyleSheet.create({
-  button: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 8,
-    elevation: 3,
-    backgroundColor: '#1778F2',
-    marginTop: 4,
-    marginBottom: 4,
-  },
-  text: {
-    fontSize: 16,
-    lineHeight: 21,
-    fontWeight: 'bold',
-    letterSpacing: 0.25,
-    color: 'white',
-  },
   icon: {
     color: 'white',
     position: 'absolute',

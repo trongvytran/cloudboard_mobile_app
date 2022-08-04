@@ -1,6 +1,5 @@
-
 import { useDispatch, useSelector } from 'react-redux'
-import { View, FlatList, Text, Pressable, StyleSheet, Button, Share } from 'react-native'
+import { View, FlatList, Text, Pressable, Alert } from 'react-native'
 import LayoutView from '../components/Views/LayoutView'
 import TitleText from '../components/TitleText'
 import ContainerView from '../components/Views/ContainerView'
@@ -8,9 +7,7 @@ import GoogleView from '../components/Views/Auth/GoogleView'
 import FacebookView from '../components/Views/Auth/FacebookView'
 import ProfileCard from '../components/Profile/ProfileCard'
 import ProfileItem from '../components/Profile/ProfileItem'
-import Colors from '../constants/color'
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import React from 'react'
 import { clearUserLoginInfo } from '../features/auth/userLoginInfo'
 import { clearUserToken } from '../features/auth/userToken'
 
@@ -21,6 +18,22 @@ const ProfileScreen = ({ navigation }: any) => {
     { id: 3, title: 'Settings', subtitle: 'Notifications, password' },
   ]
   const dispatch = useDispatch()
+
+  const handleSignOut = () => {
+    Alert.alert('Are you sure you want to log out?', '', [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'Sign Out',
+        onPress: () => {
+          dispatch(clearUserLoginInfo())
+          dispatch(clearUserToken())
+        },
+      },
+    ])
+  }
 
   const { userToken } = useSelector((state: any) => state.userToken)
   const { userLoginInfo } = useSelector((state: any) => state.userLoginInfo)
@@ -43,14 +56,12 @@ const ProfileScreen = ({ navigation }: any) => {
         )}
         keyExtractor={(item) => item.id}
       />
-       <Pressable onPress={() => {
-         dispatch(clearUserLoginInfo())
-         dispatch(clearUserToken())
-       }} style={styles.container}>
-      <Text style={styles.title}>
-       Sign Out
-      </Text>
-    </Pressable>
+      <Pressable
+        onPress={handleSignOut}
+        className="bg-red-500 mt-6 rounded-lg px-5 py-2.5 shadow flex justify-center items-center"
+      >
+        <Text className="font-semibold text-center text-white">Sign Out</Text>
+      </Pressable>
     </View>
   ) : (
     <View>
@@ -69,26 +80,3 @@ const ProfileScreen = ({ navigation }: any) => {
 }
 
 export default ProfileScreen
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop:20,
-    justifyContent:'center',
-    backgroundColor: 'red',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderColor: Colors.borderColor,
-    paddingVertical:17,
-    paddingHorizontal:10,
-    borderRadius:10,
-    alignItems: 'center'
-  },
-  title: {
-    fontSize: 16,
-    fontWeight: '600',
-    marginBottom: 5,
-    color: 'white'
-  },
-  icon: {
-    color: 'white',
-  },
-})
