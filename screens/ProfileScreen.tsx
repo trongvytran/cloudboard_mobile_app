@@ -35,7 +35,6 @@ const ProfileScreen = ({ navigation }: any) => {
     ])
   }
 
-  const { userToken } = useSelector((state: any) => state.userToken)
   const { userLoginInfo } = useSelector((state: any) => state.userLoginInfo)
   const validateUser = userLoginInfo ? (
     <View>

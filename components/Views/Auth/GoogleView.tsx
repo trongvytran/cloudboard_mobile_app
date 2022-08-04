@@ -3,10 +3,11 @@ import * as Google from 'expo-auth-session/providers/google'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { addUserLoginInfo } from '../../../features/auth/userLoginInfo'
-import { addUserToken } from '../../../features/auth/userToken'
 import React from 'react'
 import axios from 'axios'
+import { addUserLoginInfo } from '../../../features/auth/userLoginInfo'
+import { addUserToken } from '../../../features/auth/userToken'
+import BaseUrl from '../../../constants/baseUrl'
 
 const GoogleView = () => {
   const dispatch = useDispatch()
@@ -23,7 +24,7 @@ const GoogleView = () => {
   useEffect(() => {
     if (response?.type === 'success') {
       axios
-        .post('http://localhost:3000/api/auth/google/login', {
+        .post(`${BaseUrl}/api/auth/google/login`, {
           accessToken: response.params.access_token,
         })
         .then((res) => {
