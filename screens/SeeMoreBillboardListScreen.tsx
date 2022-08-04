@@ -1,16 +1,11 @@
 import {
   StyleSheet,
   ScrollView,
-  SafeAreaView,
-  Share,
-  Text,
   TouchableOpacity,
   View,
 } from 'react-native'
 import React, { useEffect, useLayoutEffect, useState } from 'react'
-import ContainerView from '../components/Views/ContainerView'
 import Colors from '../constants/color'
-import SeeMoreBillboardList from '../components/Home/SeeMoreBillboardList'
 import SeeMoreBillboardListItem from '../components/Home/SeeMoreBillboardListItem'
 import axios from 'axios'
 import Ionicons from '@expo/vector-icons/Ionicons'

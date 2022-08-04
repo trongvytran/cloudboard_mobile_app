@@ -2,11 +2,12 @@ import { Pressable, Text, StyleSheet } from 'react-native'
 import * as Facebook from 'expo-auth-session/providers/facebook'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { addUserLoginInfo } from '../../../features/auth/userLoginInfo'
-import { addUserToken } from '../../../features/auth/userToken'
+import { useDispatch } from 'react-redux'
 import React from 'react'
 import axios from 'axios'
+import { addUserLoginInfo } from '../../../features/auth/userLoginInfo'
+import { addUserToken } from '../../../features/auth/userToken'
+import BaseUrl from '../../../constants/baseUrl'
 
 const FacebookView = () => {
   const dispatch = useDispatch()
@@ -16,10 +17,14 @@ const FacebookView = () => {
 
   useEffect(() => {
     if (response?.type === 'success') {
-      axios('http://localhost:3000/api/auth/facebook/login').then((res) => {
-        dispatch(addUserLoginInfo(res.data.user))
-        dispatch(addUserToken(res.data.token))
-      })
+      axios
+        .post(`${BaseUrl}/api/auth/facebook/login`, {
+          accessToken: response.params.access_token,
+        })
+        .then((res) => {
+          dispatch(addUserLoginInfo(res.data.user))
+          dispatch(addUserToken(res.data.token))
+        })
     }
   }, [response])
   return (
