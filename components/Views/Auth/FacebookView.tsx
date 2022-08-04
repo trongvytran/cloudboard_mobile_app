@@ -16,24 +16,10 @@ const FacebookView = () => {
 
   useEffect(() => {
     if (response?.type === 'success') {
-      axios(
-        `https://graph.facebook.com/me?access_token=${response.params.access_token}&fields=id,name,email,picture`
-      )
-      .then((res) => {
-        axios
-          .post('http://localhost:3000/api/auth/login', {
-            name: res.data.name,
-            email: res.data.email,
-            imageUrl: res.data.picture.data.url,
-          })
-          .then((res) => dispatch(addUserLoginInfo(res.data)))
-        axios
-          .post('http://localhost:3000/api/auth/login2', {          
-            email: res.data.email,          
-          })
-          .then((res) => dispatch(addUserToken(res.data)))
+      axios('http://localhost:3000/api/auth/facebook/login').then((res) => {
+        dispatch(addUserLoginInfo(res.data.user))
+        dispatch(addUserToken(res.data.token))
       })
-
     }
   }, [response])
   return (
@@ -45,7 +31,9 @@ const FacebookView = () => {
       }}
     >
       <Ionicons style={styles.icon} name="logo-facebook" size={25} />
-      <Text className="text-lg font-semibold text-center text-white">Sign in with Facebook</Text>
+      <Text className="text-lg font-semibold text-center text-white">
+        Sign in with Facebook
+      </Text>
     </Pressable>
   )
 }
