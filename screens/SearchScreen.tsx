@@ -3,13 +3,14 @@ import { StyleSheet, ScrollView, Text, View, TextInput } from 'react-native'
 import Colors from '../constants/color'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import SearchBillboardDataListItem from '../components/Search/SearchBillboardDataListItem'
+import baseUrl from "../constants/baseUrl";
 
 const SearchScreen = () => {
   const [data, setData] = useState([])
   const [result, setResult] = useState([])
 
   useEffect(() => {
-    fetch('http://192.168.1.13:3000/api/billboards').then(async (res) =>
+    fetch(`${baseUrl}/api/billboards`).then(async (res) =>
       setData(await res.json())
     )
   }, [])
