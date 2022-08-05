@@ -1,14 +1,16 @@
 import { useNavigation } from '@react-navigation/native'
-import React, { Pressable } from 'react-native'
-import { View, StyleSheet, Text, Image, Dimensions } from 'react-native'
+import React from 'react'
+import { View, StyleSheet, Text, Image, Dimensions, Pressable } from 'react-native'
 import Colors from '../../constants/color'
 
 const CarouselItem = ({ item }: any) => {
   const navigation = useNavigation()
   const expensePressHandler= async () => {
+    // @ts-ignore
     navigation.navigate('BillboardDetailScreen', {
       item,
     })}
+  // @ts-ignore
   return (
     <Pressable
       style={{ width: Dimensions.get('window').width - 32 }}
