@@ -9,6 +9,7 @@ import Colors from '../constants/color'
 import SeeMoreBillboardListItem from '../components/Home/SeeMoreBillboardListItem'
 import axios from 'axios'
 import Ionicons from '@expo/vector-icons/Ionicons'
+import baseUrl from "../constants/baseUrl";
 
 const SeeMoreBillboardListScreen = ({ navigation }) => {
   const [data, setData] = useState([])
@@ -36,7 +37,7 @@ const SeeMoreBillboardListScreen = ({ navigation }) => {
 
   useEffect(() => {
     axios
-      .get('http://192.168.1.13:3000/api/billboards')
+      .get(`${baseUrl}/api/billboards`)
       .then((res) => setData(res.data))
   }, [])
 

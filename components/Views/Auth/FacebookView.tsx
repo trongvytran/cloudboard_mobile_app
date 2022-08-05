@@ -8,6 +8,7 @@ import axios from 'axios'
 import { addUserLoginInfo } from '../../../features/auth/userLoginInfo'
 import { addUserToken } from '../../../features/auth/userToken'
 import BaseUrl from '../../../constants/baseUrl'
+import {makeRedirectUri} from "expo-auth-session";
 
 const FacebookView = () => {
   const dispatch = useDispatch()
@@ -15,17 +16,17 @@ const FacebookView = () => {
     expoClientId: '403771287819141',
     iosClientId:'403771287819141',
     androidClientId: '403771287819141',
-    clientId:'403771287819141'
+    webClientId:'403771287819141'
   })
 
 
   useEffect(() => {
-    
     if (response?.type === 'success') {
+
       axios
         .post(`${BaseUrl}/api/auth/facebook/login`, {
           accessToken: response.params.access_token,
-  
+
         })
         .then((res) => {
           dispatch(addUserLoginInfo(res.data.user))
