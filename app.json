@@ -6,6 +6,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "facebookScheme": "fb403771287819141",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "cover",
@@ -32,7 +33,7 @@
         "NSCameraUsageDescription": "Allow $(PRODUCT_NAME) to access your camera",
         "NSMicrophoneUsageDescription": "Allow $(PRODUCT_NAME) to access your microphone"
       },
-      "bundleIdentifier": "cloudboard.com"
+      "bundleIdentifier": "com.hoanganleba.billboard-capstone-project-mobile-app"
     },
     "android": {
       "adaptiveIcon": {
@@ -44,7 +45,8 @@
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE",
         "android.permission.RECORD_AUDIO"
-      ]
+      ],
+      "package": "host.exp.exponent"
     },
     "web": {
       "favicon": "./assets/favicon.png"
