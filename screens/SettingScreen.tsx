@@ -1,10 +1,9 @@
-import React, { useLayoutEffect, useEffect, useState } from 'react'
+import React, {  } from 'react'
 import ContainerView from '../components/Views/ContainerView'
 import ProfileForm from '../components/Profile/ProfileForm'
 import { ScrollView, StyleSheet } from 'react-native'
 import Colors from '../constants/color'
-import axios from 'axios'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 const SettingScreen = () => {
   const { userLoginInfo } = useSelector((state: any) => state.userLoginInfo)
 

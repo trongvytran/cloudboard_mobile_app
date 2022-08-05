@@ -1,7 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import React from 'react'
-import { View, StyleSheet, Text, Image, Dimensions, Pressable } from 'react-native'
-import Colors from '../../constants/color'
+import { View, Text, Image, Dimensions, Pressable } from 'react-native'
 
 const CarouselItem = ({ item }: any) => {
   const navigation = useNavigation()
