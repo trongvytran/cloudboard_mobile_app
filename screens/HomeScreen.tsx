@@ -18,6 +18,7 @@ const HomeScreen = ({ navigation }: any) => {
       headerStyle: {
         shadowColor: 'transparent',
       },
+
       headerTitle: '',
       headerRight: () => (
         <Ionicons
