@@ -8,7 +8,7 @@ import axios from 'axios'
 import { addUserLoginInfo } from '../../../features/auth/userLoginInfo'
 import { addUserToken } from '../../../features/auth/userToken'
 import BaseUrl from '../../../constants/baseUrl'
-import {makeRedirectUri} from "expo-auth-session";
+
 
 const FacebookView = () => {
   const dispatch = useDispatch()
@@ -34,16 +34,18 @@ const FacebookView = () => {
         })
     }
   }, [response])
+
   return (
     <Pressable
       disabled={!request}
+        // @ts-ignore
       className="bg-[#3b5998] my-1 rounded-lg px-5 py-2.5 shadow flex justify-center items-center"
       onPress={() => {
-        promptAsync({ useProxy: true, showInRecents: true})
+        promptAsync({useProxy: true, showInRecents: true})
       }}
-      // onPress={() => console.log(redirect)}
     >
       <Ionicons style={styles.icon} name="logo-facebook" size={25} />
+      {/*@ts-ignore*/}
       <Text className="text-lg font-semibold text-center text-white">
         Sign in with Facebook
       </Text>
