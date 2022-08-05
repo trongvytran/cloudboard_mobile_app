@@ -1,87 +1,76 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, ScrollView, Text, View, TextInput } from 'react-native'
+import {
+  StyleSheet,
+  View,
+  TextInput,
+  TouchableOpacity,
+  SafeAreaView,
+  Dimensions,
+} from 'react-native'
 import Colors from '../constants/color'
 import Ionicons from '@expo/vector-icons/Ionicons'
-import SearchBillboardDataListItem from '../components/Search/SearchBillboardDataListItem'
-import baseUrl from "../constants/baseUrl";
+import { useNavigation } from '@react-navigation/native'
+import SearchBillboardDataList from '../components/Search/SearchBillboardDataList'
+import axios from 'axios'
+import BaseUrl from '../constants/baseUrl'
+import DelayInput from "react-native-debounce-input";
 
 const SearchScreen = () => {
+  const navigation = useNavigation()
+  const windowWidth = Dimensions.get('window').width - 70
   const [data, setData] = useState([])
-  const [result, setResult] = useState([])
 
   useEffect(() => {
-    fetch(`${baseUrl}/api/billboards`).then(async (res) =>
-      setData(await res.json())
-    )
+    axios.get(`${BaseUrl}/api/billboards`).then((res) => {
+      setData(res.data)
+    })
   }, [])
 
-  const searchInit = (text: any) => {
-    if (text) {
-      const filterData = data.filter((item) => {
-        const dataItem = item.name ? item.name.toLowerCase() : ''.toLowerCase()
-        const searchedText = text.toLowerCase()
-
-        return dataItem.indexOf(searchedText) > -1
+  const searchData = (searchValue: string) => {
+    if (searchValue === '') {
+      axios.get(`${BaseUrl}/api/billboards`).then((res) => {
+        setData(res.data)
       })
-      setResult(filterData)
     } else {
-      return <Text>Nothing is found!</Text>
+      axios
+        .get(`${BaseUrl}/api/billboards?search=${searchValue}`)
+        .then((res) => {
+          setData(res.data)
+        })
     }
   }
+
   return (
-    <View>
-      <View style={styles.container}>
-        <Text style={styles.title}>Search</Text>
-        <View style={styles.searchBarContainer}>
+    <SafeAreaView className="flex-1 bg-white">
+      <View className="flex flex-row items-center mb-2">
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Ionicons
+            name="ios-arrow-back-outline"
+            size={30}
+            color="rgb(17,24,39)"
+            style={{ marginLeft: 10, marginRight: 10 }}
+          ></Ionicons>
+        </TouchableOpacity>
+        <View
+          style={{ width: windowWidth }}
+          className="flex flex-row items-center px-2 my-2 bg-gray-100 rounded-lg"
+        >
           <Ionicons style={styles.searchIcon} name="ios-search" size={20} />
-          <TextInput
+          <DelayInput
             placeholderTextColor="rgba(60, 60, 67, 0.6)"
             clearButtonMode="while-editing"
             style={styles.searchInput}
-            onChangeText={(text) => searchInit(text)}
             placeholder="Search"
+            onChangeText={(text: any) => searchData(text)}
           />
         </View>
       </View>
-      <ScrollView style={styles.container}>
-        {result.map((item) =>
-          item ? (
-            <SearchBillboardDataListItem key={item.id} item={item} />
-          ) : (
-            <Text>Nothing is found!</Text>
-          )
-        )}
-      </ScrollView>
-    </View>
+      <SearchBillboardDataList data={data} />
+    </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: Colors.layoutColor,
-    overflow: 'visible',
-    paddingBottom: 10,
-  },
-  searchResults: {
-    height: '100%',
-    backgroundColor: Colors.layoutColor,
-    overflow: 'visible',
-  },
-
-  title: {
-    marginLeft: 10,
-    fontSize: 36,
-    fontWeight: 'bold',
-  },
-  searchBarContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: Colors.primaryBackgroundColor,
-    marginTop: 10,
-    marginHorizontal: 10,
-    paddingHorizontal: 10,
-    borderRadius: 10,
-  },
   searchIcon: {
     color: Colors.textColor,
   },
