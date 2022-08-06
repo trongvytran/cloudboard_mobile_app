@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useLayoutEffect } from 'react'
 import { Alert } from 'react-native'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
@@ -16,6 +16,7 @@ const LikeButton = (data: any) => {
   const [view, setView] = useState(0);
   const { userLoginInfo } = useSelector((state: any) => state.userLoginInfo)
   const navigation = useNavigation()
+  const alertMessage = ''
   let expensePressHandler = () => {
     navigation.navigate('HomeScreen')
   }
@@ -82,7 +83,12 @@ const LikeButton = (data: any) => {
           {
             text: 'OK',
             onPress: () => {
-              navigation.navigate('Profile')
+              navigation.navigate('ProfileScreen').
+              useLayoutEffect(() => 
+              {navigation.setOptions({
+                headerTitle: 'dsadas',
+            
+              })})
             },
           },
         ])
