@@ -5,6 +5,7 @@ import ProfileNavigator from '../navigators/ProfileNavigator'
 import SubscriptionNavigator from '../navigators/SubscriptionNavigator'
 import React from 'react'
 import HomeNavigator from '../navigators/HomeNavigator'
+import { useSelector } from 'react-redux'
 
 const Tab = createBottomTabNavigator()
 
@@ -23,6 +24,7 @@ const iconOptions = (options: any) => {
 }
 
 const Main = () => {
+  const { userToken } = useSelector((state: any) => state.userToken)
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -39,7 +41,9 @@ const Main = () => {
       })}
     >
       <Tab.Screen name="Home" component={HomeNavigator} />
-      <Tab.Screen name="Subscription" component={SubscriptionNavigator} />
+      {userToken ? (
+        <Tab.Screen name="Subscription" component={SubscriptionNavigator} />
+      ) : undefined}
       <Tab.Screen name="My Profile" component={ProfileNavigator} />
     </Tab.Navigator>
   )

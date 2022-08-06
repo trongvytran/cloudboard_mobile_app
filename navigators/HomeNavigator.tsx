@@ -12,29 +12,13 @@ import ProfileScreen from '../screens/ProfileScreen'
 const HomeStack = createStackNavigator()
 
 const HomeNavigator = () => {
-  const navigation = useNavigation()
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
       <HomeStack.Screen
         name="Search"
         component={SearchScreen}
-        options={{
-          headerLeft: () => (
-            <View>
-              <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Ionicons
-                  name="arrow-back-outline"
-                  size={32}
-                  style={{ marginLeft: 10 }}
-                  color={Colors.primaryColor}
-                ></Ionicons>
-              </TouchableOpacity>
-            </View>
-          ),
-          headerTitle: '',
-          headerStyle: { shadowColor: 'transparent' },
-        }}
+        options={{ headerShown: false }}
       />
       <HomeStack.Screen
         name="SeeMoreBillboardListScreen"

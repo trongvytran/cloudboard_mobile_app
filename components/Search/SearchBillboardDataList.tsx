@@ -1,9 +1,15 @@
-const searchBillboardDataList = ({ data }: any) => {
-    return(
-      <FlatList data={resultData} render={<searchDataList items={items} />}>
-        
-      </FlatList>
-    )
-  }
+import React, { useEffect } from 'react'
+import { FlatList } from 'react-native'
+import SearchBillboardDataListItem from './SearchBillboardDataListItem'
 
-export default searchBillboardDataList
+const SearchBillboardDataList = ({ data }: any) => {
+  return (
+    <FlatList
+      data={data}
+      keyExtractor={(item) => item.id}
+      renderItem={({ item }) => <SearchBillboardDataListItem item={item} />}
+    />
+  )
+}
+
+export default SearchBillboardDataList
