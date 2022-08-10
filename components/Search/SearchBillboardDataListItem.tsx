@@ -19,23 +19,6 @@ const SearchBillboardDataListItem = ({item}: any) => {
         })
     }
     return (
-        // <Pressable onPress={expensePressHandler}>
-        //     <View className={`border-b pl-3 pt-4 justify-center flex`}>
-        //         <View style={styles.cardBody}>
-        //             <View style={``}>
-        //                 <Image className={`w-10/12`} source={{uri: item.imageUrl}}/>
-        //             </View>
-        //             <View>
-        //                 <View>
-        //                     <Text style={styles.cardName}>{item.name}</Text>
-        //                     <Text style={styles.cardAddress}>{item.address}</Text>
-        //                 </View>
-        //                 <Text style={styles.cardPrice}>{item.price}</Text>
-        //             </View>
-        //
-        //         </View>
-        //     </View>
-        // </Pressable>
         <Pressable onPress={expensePressHandler}>
             <View className={`flex flex-row border-b px-4 pt-3.5 pb-3.5`}>
                 <View className={`flex`}>
