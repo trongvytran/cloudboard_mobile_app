@@ -9,7 +9,7 @@ import { addUserLoginInfo } from '../../../features/auth/userLoginInfo'
 import { addUserToken } from '../../../features/auth/userToken'
 import BaseUrl from '../../../constants/baseUrl'
 
-const GoogleView = () => {
+const GoogleView: React.FC = () => {
   const dispatch = useDispatch()
   const [request, response, promptAsync] = Google.useAuthRequest({
     expoClientId:

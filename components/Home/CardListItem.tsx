@@ -1,27 +1,24 @@
-import React, {useEffect,useState} from 'react'
-import {
-  Pressable,
-  View,
-  Text,
-  Image,
-} from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { Pressable, View, Text, Image } from 'react-native'
 import axios from 'axios'
 import DurationBadge from '../UI/DurationBadge'
 import { useNavigation } from '@react-navigation/native'
 const CardListItem = ({ item }: any) => {
-  const [view, setView] = useState(0);
+  const [view, setView] = useState(0)
   const navigation = useNavigation()
-  const expensePressHandler= async () => {
-    navigation.navigate('BillboardDetailScreen', {
-      item,
-    })
+  const expensePressHandler = async () => {
+    navigation.navigate(
+      'BillboardDetailScreen' as never,
+      {
+        item,
+      } as never
+    )
     const viewed = view + 1
-    await axios
-    .patch(`http://192.168.1.12:3000/api/billboards/${item.id}`, {
-      view:viewed
+    await axios.patch(`http://192.168.1.12:3000/api/billboards/${item.id}`, {
+      view: viewed,
     })
   }
-  useEffect(() => {    
+  useEffect(() => {
     setView(item.view)
   })
   return (

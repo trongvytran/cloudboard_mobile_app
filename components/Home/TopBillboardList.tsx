@@ -1,7 +1,8 @@
 import React from 'react'
 import { FlatList, View } from 'react-native'
 import CardListItem from './CardListItem'
-const TopBillboardList = ({ data }: any) => {
+
+const TopBillboardList: React.FC = ({ data }: any) => {
   return (
     <View className="px-4">
       <FlatList

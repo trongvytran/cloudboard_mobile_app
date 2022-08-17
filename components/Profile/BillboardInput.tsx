@@ -1,5 +1,5 @@
 import { View, Text, TextInput, ScrollView, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { styled } from 'nativewind'
 
 const BillboardInput = () => {
