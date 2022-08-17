@@ -1,18 +1,10 @@
 import {
   View,
-  StyleSheet,
   Text,
-  Image,
-  Dimensions,
-  TouchableOpacity,
-  FlatList,
 } from 'react-native'
-import MapView from 'react-native-maps'
-import Colors from '../../constants/color'
 import React from 'react'
-import CardListItem from './CardListItem'
 
-const Subscription = ({ data }: any) => {
+const Subscription: React.FC = ({ data }: any) => {
   if (data != undefined) {
     if (data.length == 0) {
       return (

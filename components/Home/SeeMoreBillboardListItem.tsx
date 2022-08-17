@@ -10,42 +10,31 @@ import {
 import Colors from '../../constants/color'
 import DurationBadge from '../UI/DurationBadge'
 import { useNavigation } from '@react-navigation/native'
-const SeeMoreBillboardListItem = ({ item }: any) => {
+
+const SeeMoreBillboardListItem: React.FC = ({ item }: any) => {
   const navigation = useNavigation()
   const expensePressHandler = () => {
-    navigation.navigate('BillboardDetailScreen', {
-      item,
-    })
+    navigation.navigate(
+      'BillboardDetailScreen' as never,
+      {
+        item,
+      } as never
+    )
   }
   return (
-    // <Pressable onPress={expensePressHandler}>
-    //   <View style={styles.card}>
-    //     <Image style={styles.image} source={{ uri: item.imageUrl }} />
-    //     <View style={styles.cardBody}>
-    //       <View>
-    //         <Text style={styles.cardName}>{item.name}</Text>
-    //         <Text style={styles.cardAddress}>{item.address}</Text>
-    //       </View>
-    //       <DurationBadge value={item.duration} />
-    //     </View>
-    //     <Text style={styles.cardPrice}>{item.price}</Text>
-    //   </View>
-    // </Pressable>
-
     <Pressable onPress={expensePressHandler}>
       <View style={styles.card}>
         <View style={styles.cardBody}>
-        <Image style={styles.image} source={{ uri: item.imageUrl }} />
-          <View style={{paddingLeft:10}}>
-          <View>
-            <Text style={styles.cardName}>{item.name}</Text>
-            <Text style={styles.cardAddress}>{item.address}</Text>
-          </View>
+          <Image style={styles.image} source={{ uri: item.imageUrl }} />
+          <View style={{ paddingLeft: 10 }}>
+            <View>
+              <Text style={styles.cardName}>{item.name}</Text>
+              <Text style={styles.cardAddress}>{item.address}</Text>
+            </View>
             <Text style={styles.cardPrice}>{item.price}</Text>
           </View>
           <DurationBadge value={item.duration} />
         </View>
-        
       </View>
     </Pressable>
   )
@@ -57,19 +46,18 @@ const styles = StyleSheet.create({
     margin: 10,
     borderBottomWidth: 0.25,
     borderColor: 'grey',
-    flex:1,
-    flexDirection: 'column'
+    flex: 1,
+    flexDirection: 'column',
   },
   image: {
     width: Dimensions.get('window').width / 3,
     aspectRatio: 4 / 3,
     borderRadius: 8,
-    marginBottom:20
+    marginBottom: 20,
   },
   cardBody: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    
   },
   cardName: {
     fontSize: 14,

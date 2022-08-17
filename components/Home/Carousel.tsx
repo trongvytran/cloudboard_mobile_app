@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import { View, FlatList, Pressable } from 'react-native'
+import { View, FlatList } from 'react-native'
 import CarouselItem from '../Home/CarouselItem'
+import React from 'react'
 
-const Carousel = ({ data }: any) => {
+const Carousel: React.FC = ({ data }: any) => {
   return (
     <View className="px-4">
       <FlatList
