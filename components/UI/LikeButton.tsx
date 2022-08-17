@@ -18,12 +18,12 @@ const LikeButton = (data: any) => {
   const navigation = useNavigation()
   const alertMessage = ''
   let expensePressHandler = () => {
-    navigation.navigate('HomeScreen')
+    navigation.navigate('HomeScreen' as never)
   }
 
   useEffect(() => {
-    setArray(data.value.like)
-    setId(data.value.id)
+    setArray(data.like)
+    setId(data.id)
     setLikeNumber(array.length)
     if (userLoginInfo != null) {
       for (var i = 0; i < array.length; i++) {

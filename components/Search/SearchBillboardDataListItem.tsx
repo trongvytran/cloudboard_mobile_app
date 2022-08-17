@@ -1,5 +1,5 @@
-import { useNavigation } from '@react-navigation/native'
 import React from 'react'
+import { useNavigation } from '@react-navigation/native'
 import { Pressable, View, StyleSheet, Text, Image } from 'react-native'
 
 import Colors from '../../constants/color'
@@ -17,17 +17,17 @@ const SearchBillboardDataListItem = ({ item }: any) => {
   }
   return (
     <Pressable onPress={expensePressHandler}>
-      <View className={`flex flex-row border-b px-4 pt-3.5 pb-3.5`}>
-        <View className={`flex`}>
+      <View className="flex flex-row border-b px-4 pt-3.5 pb-3.5">
+        <View className="flex">
           <Image style={styles.image} source={{ uri: item.imageUrl }}></Image>
         </View>
-        <View className={`flex mt-4 ml-4`}>
+        <View className="flex mt-4 ml-4">
           <View>
             <Text style={styles.cardName}>{item.name}</Text>
             <Text style={styles.cardAddress}>{item.address}</Text>
             <Text style={styles.cardPrice}>{item.price}</Text>
           </View>
-          <View className={`pt-2 w-1/2 text-center`}>
+          <View className="w-1/2 pt-2 text-center">
             <DurationBadge value={item.duration} />
           </View>
         </View>

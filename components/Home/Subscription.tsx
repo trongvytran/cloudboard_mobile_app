@@ -4,7 +4,7 @@ import {
 } from 'react-native'
 import React from 'react'
 
-const Subscription: React.FC = ({ data }: any) => {
+const Subscription = ({ data }: any) => {
   if (data != undefined) {
     if (data.length == 0) {
       return (
