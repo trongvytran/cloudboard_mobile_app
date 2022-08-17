@@ -1,8 +1,8 @@
+import React from 'react'
 import { View, FlatList } from 'react-native'
 import CarouselItem from '../Home/CarouselItem'
-import React from 'react'
 
-const Carousel: React.FC = ({ data }: any) => {
+const Carousel = ({ data }: any) => {
   return (
     <View className="px-4">
       <FlatList

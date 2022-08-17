@@ -1,6 +1,6 @@
-import { useNavigation } from '@react-navigation/native'
+import {useNavigation} from '@react-navigation/native'
 import React from 'react'
-import { View, Text, Image, Dimensions, Pressable } from 'react-native'
+import {View, Text, Image, Dimensions, Pressable} from 'react-native'
 
 const CarouselItem = ({ item }: any) => {
   const navigation = useNavigation()
