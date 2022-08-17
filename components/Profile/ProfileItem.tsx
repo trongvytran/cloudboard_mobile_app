@@ -1,5 +1,5 @@
-import { Text, View, StyleSheet, Pressable } from 'react-native'
 import React from 'react'
+import { Text, View, StyleSheet, Pressable } from 'react-native'
 import Colors from '../../constants/color'
 import Ionicons from '@expo/vector-icons/Ionicons'
 

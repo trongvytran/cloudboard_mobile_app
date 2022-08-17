@@ -7,9 +7,7 @@ interface SectionHeadingProps {
   name: string
 }
 
-const SectionHeading: React.FC<SectionHeadingProps> = ({
-  name,
-}: SectionHeadingProps) => {
+const SectionHeading = ({ name }: SectionHeadingProps) => {
   const navigation = useNavigation()
   return (
     <View className="flex flex-row items-center justify-between mx-4 mt-6">

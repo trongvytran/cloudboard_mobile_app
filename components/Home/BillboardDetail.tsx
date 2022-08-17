@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native'
+import { View, Text, Image, TouchableOpacity, Alert } from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import MapView, { Marker } from 'react-native-maps'
 import DurationBadge from '../UI/DurationBadge'
@@ -7,9 +7,12 @@ import ReadMore from 'react-native-read-more-text'
 import { useNavigation } from '@react-navigation/native'
 import LikeButton from '../UI/LikeButton'
 import ShareButton from '../UI/ShareButton'
+import { useSelector } from 'react-redux'
 
-const BillboardDetail: React.FC = ({ item }: any) => {
+const BillboardDetail = ({ item }: any) => {
   const navigation = useNavigation()
+  const { userLoginInfo } = useSelector((state: any) => state.userLoginInfo)
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
@@ -23,11 +26,32 @@ const BillboardDetail: React.FC = ({ item }: any) => {
       headerRight: () => (
         <View className="flex flex-row items-center mt-4 mr-4">
           <ShareButton value={item} />
-          <LikeButton value={item} />
+          {/* <LikeButton value={item} /> */}
         </View>
       ),
     })
   }, [navigation])
+
+  const handleContact = () => {
+    if (!userLoginInfo) {
+      Alert.alert(
+        'Warning',
+        'You need to login to display contact information. Continue?',
+        [
+          {
+            text: 'Cancel',
+            style: 'cancel',
+          },
+          {
+            text: 'OK',
+            onPress: () => {
+              navigation.navigate('Profile' as never)
+            },
+          },
+        ]
+      )
+    }
+  }
 
   return (
     <>
@@ -57,7 +81,10 @@ const BillboardDetail: React.FC = ({ item }: any) => {
             />
             <Text className="ml-3 font-medium">{item.user.name}</Text>
           </View>
-          <TouchableOpacity className="px-3 py-2 font-medium border-2 rounded-lg border-amber-500">
+          <TouchableOpacity
+            onPress={handleContact}
+            className="px-3 py-2 font-medium border-2 rounded-lg border-amber-500"
+          >
             <Text className="font-medium text-amber-500">Contact</Text>
           </TouchableOpacity>
         </View>

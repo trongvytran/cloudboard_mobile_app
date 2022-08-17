@@ -1,9 +1,8 @@
+import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native'
-import { useState } from 'react';
 import Input from './Input'
 import Button from '../UI/Button'
 import Avatar from './Avatar'
-import React from 'react';
 
 function ProfileForm({onSubmit, defaultValues}) {
   const [inputs, setInputs] = useState({
