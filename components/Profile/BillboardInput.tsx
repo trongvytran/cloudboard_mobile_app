@@ -19,6 +19,7 @@ import baseUrl from "../../constants/baseUrl";
 import {useSelector} from "react-redux";
 
 const BillboardInput = () => {
+    const [open, setOpen] = useState(false);
     const [lat, setLat] = useState('')
     const [long, setLong] = useState('')
     const [title, setTitle] = useState('')
@@ -31,6 +32,7 @@ const BillboardInput = () => {
     const [description, setDescription] = useState('')
     const [duration, setDuration] = useState('')
     const [input, setInput] = useState(null)
+    const [district, setDistrict] = useState('')
     // const [district, setDistrict] = useState('')
     // const [city, setCity] = useState('')
     const [image, setImage] = useState(null)
@@ -47,6 +49,32 @@ const BillboardInput = () => {
             }
         }
     }, [])
+
+    const districtData = [
+        {label: '1', value: '1'},
+        {label: '3', value: '3'},
+        {label: '4', value: '4'},
+        {label: '5', value: '5'},
+        {label: '6', value: '6'},
+        {label: '7', value: '7'},
+        {label: '8', value: '8'},
+        {label: '1', value: '10'},
+        {label: '1', value: '11'},
+        {label: '12', value: '12'},
+        {label: 'Tan Binh', value: 'Tan Binh'},
+        {label: 'Tan Phu', value: 'Tan Phu'},
+        {label: 'Binh Tan', value: 'Binh Tan'},
+        {label: 'Binh Chanh', value: 'Binh Chanh'},
+        {label: 'Hoc Mon', value: 'Hoc Mon'},
+        {label: 'Cu Chi', value: 'Cu Chi'},
+        {label: 'Can Gio', value: 'Can Gio'},
+        {label: 'Phu Nhuan', value: 'Phu Nhuan'},
+        {label: 'Go Vap', value: 'Go Vap'},
+        {label: 'Nha Be', value: 'Nha Be'},
+        {label: 'Thu Duc city', value: 'Thu Duc city'},
+    ]
+
+    const districtsData = {}
 
     const {userLoginInfo} = useSelector((state: any) => state.userLoginInfo)
 
@@ -75,6 +103,9 @@ const BillboardInput = () => {
                 "height": height,
                 "width": width,
                 "address": address,
+                "district": {id: 1},
+                "ward": {id: 1},
+                "city": {id: 1},
                 "price": price,
                 "duration": duration,
                 "imageUrl": "https://dautubanthan.net/wp-content/uploads/2022/06/Demo-la%CC%80-gi%CC%80-Ti%CC%80m-hie%CC%82%CC%89u-y%CC%81-nghi%CC%83a-tha%CC%A3%CC%82t-su%CC%9B%CC%A3-cu%CC%89a-tu%CC%9B%CC%80-demo.jpg",
@@ -156,8 +187,8 @@ const BillboardInput = () => {
                 </View>
 
                 <View className={`flex flex-1 flex-row justify-between items-center`}>
-                    <View className={`flex flex-1 mr-2.5`}>
-                        <StyledText style={styles.heading}>Starting Price:</StyledText>
+                    <View className={`flex flex-1`}>
+                        <StyledText style={styles.heading}>Price:</StyledText>
                         <TextInput
                             className={`max-h-11 p-2.5 my-2.5 bg-white rounded w-full border`}
                             keyboardType="numeric"
@@ -165,13 +196,13 @@ const BillboardInput = () => {
                         />
                     </View>
                     {/* // Billboard Price Range (high) */}
-                    <View className={`flex flex-1`}>
+                    {/* <View className={`flex flex-1`}>
                         <StyledText style={styles.heading}>Highest Price:</StyledText>
                         <TextInput
                             className={`max-h-11 p-2.5 my-2.5 bg-white rounded w-full border`}
                             keyboardType="numeric"
                         />
-                    </View>
+                    </View> */}
                 </View>
                 {/* // Billboard Description */}
                 <View>
@@ -191,37 +222,45 @@ const BillboardInput = () => {
                     />
                 </View>
                 <View className={`flex flex-1 flex-row justify-between items-center`}>
-                    <View className={`flex flex-1 mr-2.5`}>
-                        <StyledText style={styles.heading}>District:</StyledText>
-                        {/* // Billboard's District */}
-                        <StyledTextInput
+                    {/* <View className={`flex flex-1 mr-2.5`}>
+                        <StyledText style={styles.heading}>District:</StyledText> */}
+                    {/* // Billboard's District */}
+                    {/* <StyledTextInput
                             className={`max-h-11 p-2.5 my-2.5 bg-white rounded w-full border`}
                         />
-                    </View>
+                    </View> */}
                     {/* // Billboard's City */}
-                    <View className={`flex flex-1`}>
+                    {/* <View className={`flex flex-1`}>
                         <StyledText style={styles.heading}>Ward:</StyledText>
                         <StyledTextInput
                             className={`max-h-11 p-2.5 my-2.5 bg-white rounded w-full border`}
                         />
-                    </View>
+                    </View> */}
+                    {/*<RNPickerSelect*/}
+                    {/*    onValueChange={(value) => console.log(value)}*/}
+                    {/*    style={{}}*/}
+                    {/*    items={[*/}
+                    {/*        {label: 'Football', value: 'football'},*/}
+                    {/*        {label: 'Baseball', value: 'baseball'},*/}
+                    {/*        {label: 'Hockey', value: 'hockey'},*/}
+                    {/*    ]}>*/}
                 </View>
                 {/* // Random */}
-                <StyledTouchableOpacity
-                    className={`w-full rounded-md bg-red-600 py-3 px-4 mt-2`}
+                <TouchableOpacity
+                    className={`w-full rounded-md bg-red-600 py-3 px-4 mt-2 mb-14`}
                     onPress={() => postData()}
                 >
                     <StyledText className={`text-white font-bold text-center`}>
                         SUBMIT
                     </StyledText>
-                </StyledTouchableOpacity>
-                <View>
+                </TouchableOpacity>
+                {/* <View>
                     <StyledText style={styles.heading}>City:</StyledText>
                     <StyledTextInput
                         className={`max-h-11 p-2.5 my-2.5 bg-white rounded w-full border`}
                     />
-                </View>
-                <View>
+                </View> */}
+                {/* <View>
                     <StyledText style={styles.heading}>Image</StyledText>
                     <View className={`flex flex-row justify-between`}>
                         <View className={`flex`}>
@@ -248,9 +287,11 @@ const BillboardInput = () => {
                             )}
                         </View>
                     </View>
-                </View>
+                </View> */}
             </View>
+
         </ScrollView>
+
     )
 }
 export default BillboardInput
@@ -259,4 +300,5 @@ const styles = StyleSheet.create({
     heading: {
         fontWeight: 'bold',
     },
+
 })
