@@ -5,7 +5,6 @@ import DurationBadge from '../UI/DurationBadge'
 import React, {useLayoutEffect} from 'react'
 import ReadMore from 'react-native-read-more-text'
 import {useNavigation} from '@react-navigation/native'
-import LikeButton from '../UI/LikeButton'
 import ShareButton from '../UI/ShareButton'
 import {useSelector} from 'react-redux'
 
@@ -50,7 +49,7 @@ const BillboardDetail = ({item}: any) => {
                     },
                 ]
             )
-        }
+        } else navigation.navigate('ContactScreen' as never)
     }
 
     return (
@@ -63,9 +62,9 @@ const BillboardDetail = ({item}: any) => {
                     </Text>
                     <DurationBadge value={item.duration}/>
                 </View>
-                <Text className="mb-3 text-gray-700">{item.address}</Text>
+                <Text className="mb-2 text-gray-700">{item.address}</Text>
                 <Text className="text-lg font-medium text-amber-500">{item.price}</Text>
-                <Text className="mt-6 mb-2 text-lg font-bold">Description</Text>
+                <Text className="my-2 text-lg font-bold">Description</Text>
                 <ReadMore
                     numberOfLines={2}
                     renderTruncatedFooter={_renderTruncatedFooter}
@@ -83,9 +82,9 @@ const BillboardDetail = ({item}: any) => {
                     </View>
                     <TouchableOpacity
                         onPress={handleContact}
-                        className="px-3 py-2 font-medium border-2 rounded-lg border-amber-500"
+                        className="px-4 py-2 font-medium border-2 rounded-lg border-amber-500"
                     >
-                        <Text className="font-medium text-amber-500">Contact</Text>
+                        <Text className="font-medium text-amber-500">CONTACT</Text>
                     </TouchableOpacity>
                 </View>
                 <View className="w-full aspect-[4/3] rounded-lg shadow">
