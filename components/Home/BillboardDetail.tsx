@@ -72,7 +72,7 @@ const BillboardDetail = ({item}: any) => {
                 >
                     {item.description}
                 </ReadMore>
-                <View className="flex flex-row items-center justify-between my-6">
+                <View className="flex flex-row items-center justify-between mt-2 mb-6">
                     <View className="flex flex-row items-center">
                         <Image
                             className="w-10 h-10 rounded-full"

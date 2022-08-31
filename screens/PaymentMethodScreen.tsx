@@ -1,7 +1,6 @@
 import {StyleSheet, Text, ScrollView, View, TouchableOpacity} from 'react-native'
-import {CardField, CardForm, useStripe} from '@stripe/stripe-react-native';
+import {CardField, useStripe} from '@stripe/stripe-react-native';
 import React, {useState} from 'react'
-import ContainerView from '../components/Views/ContainerView'
 import Colors from '../constants/color'
 
 const PaymentMethodScreen = () => {

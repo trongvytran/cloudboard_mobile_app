@@ -8,6 +8,7 @@ import {
     View,
     Image,
     StyleSheet,
+    Alert,
 } from 'react-native'
 import React, {useEffect, useState} from 'react'
 import {styled} from 'nativewind'
@@ -42,12 +43,12 @@ const BillboardInput = () => {
 
     // @ts-ignore
     useEffect(async () => {
-        if (Platform.OS !== 'web') {
-            const {status} = await ImagePicker.requestMediaLibraryPermissionsAsync()
-            if (status !== 'granted') {
-                alert('Permission Denied!')
-            }
-        }
+        // if (Platform.OS !== 'web') {
+        //     const {status} = await ImagePicker.requestMediaLibraryPermissionsAsync()
+        //     if (status !== 'granted') {
+        //         alert('Permission Denied!')
+        //     }
+        // }
     }, [])
 
     const districtData = [
@@ -114,6 +115,7 @@ const BillboardInput = () => {
                 "user": userLoginInfo
             }
         )
+        Alert.alert('Billboard Uploaded Successfully!')
     }
     return (
         <ScrollView>
@@ -167,7 +169,7 @@ const BillboardInput = () => {
                 {/* // Billboard Price Range (low) */}
                 <View className={`flex flex-1 flex-row justify-between items-center`}>
                     <View className={`flex flex-1 mr-2.5`}>
-                        <StyledText style={styles.heading}>Width (cm):</StyledText>
+                        <StyledText style={styles.heading}>Width (m):</StyledText>
                         <TextInput
                             className={`max-h-11 p-2.5 my-2.5 bg-white rounded w-full border`}
                             keyboardType="numeric"
@@ -177,7 +179,7 @@ const BillboardInput = () => {
                     </View>
                     {/* // Billboard Price Range (high) */}
                     <View className={`flex flex-1`}>
-                        <StyledText style={styles.heading}>Height (cm):</StyledText>
+                        <StyledText style={styles.heading}>Height (m):</StyledText>
                         <TextInput
                             className={`max-h-11 p-2.5 my-2.5 bg-white rounded w-full border`}
                             keyboardType="numeric"
