@@ -9,7 +9,6 @@ import ProfileCard from '../components/Profile/ProfileCard'
 import ProfileItem from '../components/Profile/ProfileItem'
 import React from 'react'
 import {clearUserLoginInfo} from '../features/auth/userLoginInfo'
-import {clearUserToken} from '../features/auth/userToken'
 
 const ProfileScreen = ({navigation}: any) => {
     const DATA = [
@@ -29,7 +28,6 @@ const ProfileScreen = ({navigation}: any) => {
                 text: 'Sign Out',
                 onPress: () => {
                     dispatch(clearUserLoginInfo())
-                    dispatch(clearUserToken())
                 },
             },
         ])
