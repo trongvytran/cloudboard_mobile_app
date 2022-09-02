@@ -2,16 +2,16 @@ import React from 'react'
 import {View, Linking, Text, TouchableOpacity} from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-const makeACall = (telephone: string) => {
-    Linking.openURL(`tel:${telephone}`)
-        .then(res => console.log('Calling...'))
-}
-
-const sendAnEmail = (email: string) => {
-    Linking.openURL(`mailto:${email}`)
-        .then(res => console.log('Opening...'))
-}
 const Contact = () => {
+    const makeACall = (telephone: string) => {
+        Linking.openURL(`tel:${telephone}`)
+            .then(res => console.log('Calling...'))
+    }
+
+    const sendAnEmail = (email: string) => {
+        Linking.openURL(`mailto:${email}`)
+            .then(res => console.log('Opening...'))
+    }
     return (
         <View>
             <View>

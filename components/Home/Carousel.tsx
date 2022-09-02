@@ -1,25 +1,27 @@
-import React, {useState, useEffect} from 'react'
-import {View, FlatList, Pressable} from 'react-native'
+import React from 'react'
+import {View, FlatList, VirtualizedList} from 'react-native'
 import CarouselItem from '../Home/CarouselItem'
+import SeeMoreBillboardListItem from "./SeeMoreBillboardListItem";
 
 const Carousel = ({data}: any) => {
+    const getItem = (data, index) => (data[index])
+
     return (
-        <View className="px-4">
-            <FlatList
-                data={data}
-                keyExtractor={(item) => item.id}
-                horizontal
-                scrollEnabled
-                snapToAlignment="center"
-                scrollEventThrottle={1}
-                decelerationRate={'fast'}
-                showsHorizontalScrollIndicator={false}
-                ItemSeparatorComponent={() => <View className="w-4"/>}
-                renderItem={({item: item}) => {
-                    return <CarouselItem item={item}/>
-                }}
-            />
-        </View>
+        <VirtualizedList
+            data={data}
+            className={'px-4'}
+            getItemCount={(data) => data.length}
+            getItem={getItem}
+            horizontal
+            scrollEnabled
+            snapToAlignment={'center'}
+            keyExtractor={(item) => item.id}
+            decelerationRate={'fast'}
+            showsHorizontalScrollIndicator={false}
+            //@ts-ignore
+            ItemSeparatorComponent={() => <View className="w-5"/>}
+            renderItem={({item}) => <CarouselItem item={item}/>}
+        />
     )
 }
 
