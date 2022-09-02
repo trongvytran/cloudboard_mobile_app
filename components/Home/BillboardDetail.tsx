@@ -1,4 +1,4 @@
-import {View, Text, Image, TouchableOpacity, Alert} from 'react-native'
+import {View, Text, Image, TouchableOpacity, Alert, ScrollView} from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import MapView, {Marker} from 'react-native-maps'
 import DurationBadge from '../UI/DurationBadge'
@@ -7,6 +7,9 @@ import ReadMore from 'react-native-read-more-text'
 import {useNavigation} from '@react-navigation/native'
 import ShareButton from '../UI/ShareButton'
 import {useSelector} from 'react-redux'
+import Colors from "../../constants/color";
+import baseUrl from "../../constants/baseUrl";
+import axios from "axios";
 
 const BillboardDetail = ({item}: any) => {
     const navigation = useNavigation()
@@ -28,9 +31,13 @@ const BillboardDetail = ({item}: any) => {
                     {/* <LikeButton value={item} /> */}
                 </View>
             ),
+
         })
     }, [navigation])
 
+    const subscribeBillboard = async () => {
+
+    }
     const handleContact = () => {
         if (!userLoginInfo) {
             Alert.alert(
@@ -52,8 +59,33 @@ const BillboardDetail = ({item}: any) => {
         } else navigation.navigate('ContactScreen' as never)
     }
 
+    const handleSubscribe = async () => {
+        if (!userLoginInfo) {
+            Alert.alert(
+                'Warning',
+                'You need to login to subscribe. Continue?',
+                [
+                    {
+                        text: 'Cancel',
+                        style: 'cancel',
+                    },
+                    {
+                        text: 'OK',
+                        onPress: () => {
+                            navigation.navigate('ProfileScreen' as never)
+                        },
+                    },
+                ]
+            )
+        } else await axios.post(`${baseUrl}/api/subscriptions`,
+            {
+                "name": "basic",
+                "status": "active"
+            })
+    }
+
     return (
-        <>
+        <ScrollView>
             <Image className="w-full aspect-[4/3]" source={{uri: item.imageUrl}}/>
             <View className="p-4">
                 <View className="flex flex-row items-center justify-between mb-2">
@@ -72,6 +104,12 @@ const BillboardDetail = ({item}: any) => {
                 >
                     {item.description}
                 </ReadMore>
+                <TouchableOpacity
+                    className={'py-4 flex justify-center items-center bg-cloudboard-orange w-full rounded-lg mb-2'}
+                    onPress={() => handleSubscribe()}
+                >
+                    <Text className={'text-white font-bold'}>SUBSCRIBE</Text>
+                </TouchableOpacity>
                 <View className="flex flex-row items-center justify-between mt-2 mb-6">
                     <View className="flex flex-row items-center">
                         <Image
@@ -101,7 +139,7 @@ const BillboardDetail = ({item}: any) => {
                     </MapView>
                 </View>
             </View>
-        </>
+        </ScrollView>
     )
 }
 

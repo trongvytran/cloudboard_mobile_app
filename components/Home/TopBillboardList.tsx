@@ -1,24 +1,33 @@
 import React from 'react'
-import { FlatList, View } from 'react-native'
+import {FlatList, View, VirtualizedList} from 'react-native'
 import CardListItem from './CardListItem'
 
-const TopBillboardList = ({ data }: any) => {
-  return (
-    <View className="px-4">
-      <FlatList
-        data={data}
-        keyExtractor={(item) => item.id}
-        horizontal
-        scrollEnabled
-        snapToAlignment="center"
-        scrollEventThrottle={16}
-        decelerationRate={'fast'}
-        showsHorizontalScrollIndicator={false}
-        ItemSeparatorComponent={() => <View className="w-6" />}
-        renderItem={({ item }) => <CardListItem item={item} />}
-      />
-    </View>
-  )
+const TopBillboardList = ({data}: any) => {
+    const getItemCount = (data) => data.length
+
+    const getItem = (data, index) => (data[index]);
+
+    // @ts-ignore
+    return (
+        <View>
+            <VirtualizedList
+                data={data}
+                decelerationRate={'fast'}
+                getItemCount={getItemCount}
+                getItem={getItem}
+                className={'px-4'}
+                horizontal
+                // @ts-ignore
+                ItemSeparatorComponent={() => <View className="w-5"/>}
+                keyExtractor={(item) => item.id}
+                renderItem={({item}) => <CardListItem item={item}/>}
+                scrollEnabled
+                snapToAlignment="center"
+                scrollEventThrottle={16}
+                showsHorizontalScrollIndicator={false}
+            />
+        </View>
+    )
 }
 
 export default TopBillboardList
