@@ -32,7 +32,7 @@ const FacebookView: React.FC = () => {
     return (
         <Pressable
             disabled={!request}
-            className="bg-[#3b5998] my-1 rounded-lg px-5 py-2.5 shadow flex justify-center items-center"
+            className="bg-[#3b5998] my-1 rounded-lg px-5 py-3.5 shadow flex justify-center items-center"
             onPress={() => {
                 promptAsync({useProxy: true, showInRecents: true})
             }}

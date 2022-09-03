@@ -16,6 +16,7 @@ const RecommendationList = ({data}: any) => {
                 // @ts-ignore
                 ItemSeparatorComponent={() => <View className="w-5"/>}
                 keyExtractor={(item) => item.id}
+                maxToRenderPerBatch={5}
                 renderItem={({item}) => <CardListItem item={item}/>}
                 scrollEnabled
                 snapToAlignment="center"

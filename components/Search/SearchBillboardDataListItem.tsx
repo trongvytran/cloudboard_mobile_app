@@ -17,7 +17,7 @@ const SearchBillboardDataListItem = ({item}: any) => {
     }
     return (
         <Pressable onPress={expensePressHandler}>
-            <View className="flex flex-col border-b px-4 pt-3.5 pb-3.5">
+            <View className="flex flex-col px-4 py-3.5" style={{borderBottomWidth: 0.5, borderColor: '#D8D8D8'}}>
                 <View className={"flex flex-row"}>
                     <View>
                         <Image style={styles.image} source={{uri: item.imageUrl}}></Image>

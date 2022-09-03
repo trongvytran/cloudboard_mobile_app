@@ -34,14 +34,11 @@ const SearchScreen = () => {
     }
 
     useEffect(() => {
-        const controller = new AbortController();
+        const controller = new AbortController()
         axios.get(`${BaseUrl}/api/billboards`).then((res) => {
             setData(res.data)
-
         })
-        return () => {
-            controller.abort();
-        }
+        controller.abort()
     }, [])
 
     return (

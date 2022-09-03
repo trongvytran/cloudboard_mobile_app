@@ -4,25 +4,37 @@ import {
     ScrollView,
     Text,
     View,
-    Pressable,
+    Pressable, TouchableOpacity,
 } from 'react-native'
 import React, {useLayoutEffect, useState} from 'react'
 import ContainerView from '../components/Views/ContainerView'
 import BillboardInput from '../components/Profile/BillboardInput'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import {useNavigation} from '@react-navigation/native'
+import Colors from "../constants/color";
 
 const MyBillboardScreen = () => {
     const navigation = useNavigation()
     const [modalVisible, setModalVisible] = useState(false)
     useLayoutEffect(() => {
         navigation.setOptions({
+            headerTitle: 'My Billboards',
+            headerLeft: () => (
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <Ionicons
+                        name="ios-arrow-back-outline"
+                        size={30}
+                        color={Colors.primaryColor}
+                        style={{marginLeft: 10, marginRight: 10}}
+                    />
+                </TouchableOpacity>
+            ),
             headerRight: () => (
                 <Pressable
                     className="mr-2"
                     onPress={() => setModalVisible(!modalVisible)}
                 >
-                    <Ionicons name="ios-add" size={30}/>
+                    <Ionicons name="ios-add" size={30} color={Colors.primaryColor}/>
                 </Pressable>
             ),
         })

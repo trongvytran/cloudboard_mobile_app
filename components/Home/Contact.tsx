@@ -1,8 +1,24 @@
-import React from 'react'
+import React, {useLayoutEffect} from 'react'
 import {View, Linking, Text, TouchableOpacity} from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import {useNavigation} from "@react-navigation/native";
+import Colors from "../../constants/color";
 
 const Contact = () => {
+    const navigation = useNavigation()
+    useLayoutEffect(() => {
+            navigation.setOptions({
+                headerLeft: () =>
+                    <TouchableOpacity
+                        className="ml-3"
+                        onPress={() => navigation.goBack()}
+                    >
+                        <Ionicons name="arrow-back-outline" size={30} color={Colors.primaryColor}/>
+                    </TouchableOpacity>
+
+            })
+        }
+    )
     const makeACall = (telephone: string) => {
         Linking.openURL(`tel:${telephone}`)
             .then(res => console.log('Calling...'))

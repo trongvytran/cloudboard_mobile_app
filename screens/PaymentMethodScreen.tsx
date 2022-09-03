@@ -1,9 +1,27 @@
 import {StyleSheet, Text, ScrollView, View, TouchableOpacity} from 'react-native'
 import {CardField, useStripe} from '@stripe/stripe-react-native';
-import React, {useState} from 'react'
+import React, {useLayoutEffect, useState} from 'react'
 import Colors from '../constants/color'
+import {useNavigation} from "@react-navigation/native";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const PaymentMethodScreen = () => {
+    const navigation = useNavigation()
+    useLayoutEffect(() =>
+        navigation.setOptions({
+            headerTitle: 'Payment Information',
+            headerLeft: () => (
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <Ionicons
+                        name="ios-arrow-back-outline"
+                        size={30}
+                        color={Colors.primaryColor}
+                        style={{marginLeft: 10, marginRight: 10}}
+                    />
+                </TouchableOpacity>
+            ),
+        })
+    )
     const [cardDetails, setCardDetails] = useState('')
     const secretKey = 'sk_test_51LcObsCml2Mz1p9rLENL5bDoJVbiHxmoxLLVFLqrJQp4kvzw6qZfvdIjLPYwf6PE0U8u70WTEAZ993qvf0bcMtCr00WaaKVaiA'
     const {confirmPayment} = useStripe()

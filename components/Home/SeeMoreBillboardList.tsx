@@ -9,14 +9,16 @@ const SeeMoreBillboardList = ({data}: any) => {
     return (
         <VirtualizedList
             data={data}
+            decelerationRate={'fast'}
             getItemCount={(data) => data.length}
             getItem={getItem}
             keyExtractor={(item) => item.id}
+            maxToRenderPerBatch={5}
+            renderItem={({item}) => <SeeMoreBillboardListItem item={item}/>}
             snapToAlignment="center"
             scrollEventThrottle={16}
-            decelerationRate={'fast'}
             showsVerticalScrollIndicator={false}
-            renderItem={({item}) => <SeeMoreBillboardListItem item={item}/>}
+
         />
     )
 }

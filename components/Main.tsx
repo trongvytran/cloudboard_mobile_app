@@ -13,7 +13,7 @@ const iconOptions = (options: any) => {
     let iconName
     if (options.route.name === 'Home') {
         iconName = options.focused ? 'ios-home' : 'ios-home-outline'
-    } else if (options.route.name === 'Subscription') {
+    } else if (options.route.name === 'Subscriptions') {
         iconName = options.focused ? 'ios-heart' : 'ios-heart-outline'
     } else if (options.route.name === 'My Profile') {
         iconName = options.focused
@@ -42,7 +42,7 @@ const Main = () => {
         >
             <Tab.Screen name="Home" component={HomeNavigator}/>
             {userLoginInfo ? (
-                <Tab.Screen name="Subscription" component={SubscriptionNavigator}/>
+                <Tab.Screen name="Subscriptions" component={SubscriptionNavigator}/>
             ) : undefined}
             <Tab.Screen name="My Profile" component={ProfileNavigator}/>
         </Tab.Navigator>
