@@ -23,7 +23,7 @@ const SeeMoreBillboardListItem = ({item}: any) => {
     }
     return (
         <Pressable onPress={expensePressHandler}>
-            <View className={`flex flex-row border-b px-4 pt-3.5 pb-3.5`}>
+            <View className={`flex flex-row px-4 p-3.5`} style={{borderBottomWidth: 0.5, borderColor: '#D8D8D8'}}>
                 <View className={`flex pt-3`}>
                     <Image style={styles.image} source={{uri: item.imageUrl}}></Image>
                 </View>

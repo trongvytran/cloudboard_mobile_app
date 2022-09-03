@@ -34,7 +34,7 @@ const GoogleView: React.FC = () => {
 
     return (
         <Pressable
-            className="bg-[#4285F4] my-1 rounded-lg px-5 py-2.5 shadow flex justify-center items-center"
+            className="bg-[#4285F4] my-1 rounded-lg px-5 py-3.5 shadow flex justify-center items-center"
             disabled={!request}
             onPress={() => {
                 promptAsync({useProxy: true, showInRecents: true})

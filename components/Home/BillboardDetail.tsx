@@ -51,7 +51,7 @@ const BillboardDetail = ({item}: any) => {
                     {
                         text: 'OK',
                         onPress: () => {
-                            navigation.navigate('ProfileScreen' as never)
+                            navigation.navigate('My Profile' as never, {screen: 'ProfileScreen'} as never)
                         },
                     },
                 ]
@@ -72,7 +72,7 @@ const BillboardDetail = ({item}: any) => {
                     {
                         text: 'OK',
                         onPress: () => {
-                            navigation.navigate('ProfileScreen' as never)
+                            navigation.navigate('My Profile' as never, {screen: 'ProfileScreen'} as never)
                         },
                     },
                 ]
