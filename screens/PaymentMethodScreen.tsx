@@ -1,10 +1,11 @@
-import {StyleSheet, Text, ScrollView, View, TouchableOpacity, Linking} from 'react-native'
+import {StyleSheet, Text, ScrollView, View, TouchableOpacity, Linking, Alert} from 'react-native'
 import {CardField, useStripe} from '@stripe/stripe-react-native';
-import React, {useLayoutEffect, useState} from 'react'
+import React, {useEffect, useLayoutEffect, useState} from 'react'
 import Colors from '../constants/color'
 import {useNavigation} from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import axios from 'axios';
+import baseUrl from "../constants/baseUrl";
 
 const PaymentMethodScreen = () => {
     const navigation = useNavigation()
@@ -27,41 +28,50 @@ const PaymentMethodScreen = () => {
     const stripe = useStripe();
     const getPaymentMethodId = async () => {
         const stripeResponse = await stripe?.createPaymentMethod({
-           type: 'Card',
+            type: 'Card',
         });
-        const { error, paymentMethod } = stripeResponse;
+        const {error, paymentMethod} = stripeResponse;
         if (error || !paymentMethod) {
-            return;
+            return console.error('Error occurred!');
         }
-        return paymentMethod.id;
+        return paymentMethod.id
     }
 
-    const postcredit = async () => {
+    const postCreditCard = async () => {
         const paymentMethodId = await getPaymentMethodId();
         if (!paymentMethodId) {
-            return;
+            return Alert.alert('Unable to process payment method.');
         }
         const stripeCustomerId = 'cus_MLom7df9sRBBTG'
-        axios.post(`http://192.168.1.9:3000/api/transactions/credit-cards`, {
+        await axios.post(`${baseUrl}/api/transactions/credit-cards`, {
             paymentMethodId,
             stripeCustomerId
         })
     }
+
+    const getPaymentMethods = async () => {
+        await axios.get(`${baseUrl}/api/transactions/credit-cards`).then(res =>
+            res.data
+        )
+    }
     const manage = async () => {
         const stripeCustomerId = 'cus_MLom7df9sRBBTG'
-        axios.post(`http://192.168.1.9:3000/api/transactions/portal`, {
-            stripeCustomerId
-        }
-      
+        await axios.post(`${baseUrl}/api/transactions/portal`, {
+                stripeCustomerId
+            }
         )
-        .then((res) => {
-            Linking.openURL(res.data.url).catch(err => console.error("Couldn't load page", err));  
-        })
-           
+            .then((res) => {
+                Linking.openURL(res.data.url).catch(err => console.error("Couldn't load page", err));
+            })
+
     }
+
     const [cardDetails, setCardDetails] = useState(null)
-    const secretKey = 'sk_test_51LcObsCml2Mz1p9rLENL5bDoJVbiHxmoxLLVFLqrJQp4kvzw6qZfvdIjLPYwf6PE0U8u70WTEAZ993qvf0bcMtCr00WaaKVaiA'
-    const {confirmPayment} = useStripe()
+
+    useEffect(() => {
+        getPaymentMethods().then(r => console.log(r))
+    })
+
     return (
         <ScrollView style={styles.container}>
             <Text className={`mx-4 mt-3 text-lg font-bold`}>Add new methods</Text>
@@ -85,25 +95,23 @@ const PaymentMethodScreen = () => {
                     }}
                     onCardChange={
                         setCardDetails
-                      }
-                    onFocus={(focusedField) => {
-                        console.log('focusField', focusedField);
-                    }}
+                    }
                 />
             </View>
-            <View className={'px-4 mt-0.5'}>
-                <TouchableOpacity className={'px-1.5 py-2.5 bg-red-600 rounded-lg'}
-                                  onPress={postcredit}>
+            <View className={'flex flex-row justify-center mx-5 mt-0.5'}>
+                <TouchableOpacity className={'px-2 py-3.5 w-1/2 mr-2 bg-blue-600 rounded-lg'}
+                                  onPress={() => manage()}>
+                    <Text className={'text-white align-middle text-center font-bold text-lg'}>MANAGE</Text>
+                </TouchableOpacity>
+                <TouchableOpacity className={'px-2 py-3.5 w-1/2 bg-red-600 rounded-lg'}
+                                  onPress={() => postCreditCard()}>
                     <Text className={'text-white align-middle text-center font-bold text-lg'}>SUBMIT</Text>
                 </TouchableOpacity>
             </View>
-                <TouchableOpacity className={'px-1.5 py-2.5 bg-red-600 rounded-lg'}
-                                  onPress={manage}>
-                    <Text className={'text-white align-middle text-center font-bold text-lg'}>Manage</Text>
-                </TouchableOpacity>
             <View>
                 <Text className={`mx-4 mt-3 text-lg font-bold`}>Existing methods</Text>
                 <Text className={'mx-auto text-gray-400 my-10'}>Work In Progress..</Text>
+                {/*<Text className={'mx-auto text-gray-400 my-10'}>{card}</Text>*/}
             </View>
         </ScrollView>
     )

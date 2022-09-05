@@ -1,9 +1,13 @@
 import React from 'react'
-import {FlatList, View, VirtualizedList} from 'react-native'
+import {Dimensions, FlatList, View, VirtualizedList} from 'react-native'
 import CardListItem from './CardListItem'
 
 const RecommendationList = ({data}: any) => {
     const getItem = (data, index) => (data[index])
+    const {width, height} = Dimensions.get('window')
+    // const item_size = width * 8 / 5
+    // const spacing = 20
+    // const fullsize = item_size + spacing
     return (
         <View>
             <VirtualizedList
@@ -14,12 +18,13 @@ const RecommendationList = ({data}: any) => {
                 getItem={getItem}
                 horizontal
                 // @ts-ignore
-                ItemSeparatorComponent={() => <View className="w-5"/>}
+                ItemSeparatorComponent={() => <View className="mx-2.5"/>}
                 keyExtractor={(item) => item.id}
                 maxToRenderPerBatch={5}
                 renderItem={({item}) => <CardListItem item={item}/>}
                 scrollEnabled
                 snapToAlignment="center"
+                // snapToInterval={fullsize}
                 scrollEventThrottle={16}
                 showsHorizontalScrollIndicator={false}
             />

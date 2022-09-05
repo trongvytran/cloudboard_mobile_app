@@ -8,8 +8,9 @@ import {
     View,
     Image,
     StyleSheet,
-    Alert,
+    Alert, VirtualizedList,
 } from 'react-native'
+import RNPickerSelect from 'react-native-picker-select';
 import React, {useEffect, useState} from 'react'
 import {styled} from 'nativewind'
 import {LinearGradient} from 'expo-linear-gradient'
@@ -18,6 +19,7 @@ import Colors from '../../constants/color'
 import axios from "axios";
 import baseUrl from "../../constants/baseUrl";
 import {useSelector} from "react-redux";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const BillboardInput = () => {
     const [open, setOpen] = useState(false);
@@ -94,6 +96,18 @@ const BillboardInput = () => {
     const AnimatedLinearGradient =
         Animated.createAnimatedComponent(LinearGradient)
 
+    // const getPeriods = async () => {
+    //     await axios.get(`${baseUrl}/api/billboards`).then(res => res.data.)
+    // }
+
+    const contractPeriods = [{label: '3 months', value: '3 months'}, {
+        label: '6 months',
+        value: '6 months'
+    }, {label: '12 months', value: '12 months'}, {label: '24 months', value: '24 months'}, {
+        label: '36 months',
+        value: '36 months'
+    }]
+
     const postData = async () => {
         await axios.post(`${baseUrl}/api/billboards`,
             {
@@ -118,7 +132,7 @@ const BillboardInput = () => {
         Alert.alert('Billboard Uploaded Successfully!')
     }
     return (
-        <ScrollView>
+        <View className={'px-4'}>
             <AnimatedLinearGradient
                 style={{padding: 40, marginBottom: 16, borderRadius: 8}}
                 colors={[Colors.primaryColor, 'rgba(255, 138, 0, 1)']}
@@ -136,7 +150,7 @@ const BillboardInput = () => {
                 <View className={`flex flex-1 flex-row justify-between items-center`}>
                     <View className={`flex flex-1 mr-2.5`}>
                         <StyledText style={styles.heading}>Latitude:</StyledText>
-                        <TextInput className={`max-h-11 p-2.5 my-2.5 bg-white rounded w-full border`}
+                        <TextInput className={`max-h-11 p-2.5 my-2.5 bg-white rounded  border`}
                                    onChangeText={value => setLat(value)}/>
 
                     </View>
@@ -144,7 +158,7 @@ const BillboardInput = () => {
                     <View className={`flex flex-1`}>
                         <StyledText style={styles.heading}>Longitude:</StyledText>
                         <TextInput
-                            className={`max-h-11 p-2.5 my-2.5 bg-white rounded w-full border`}
+                            className={`max-h-11 p-2.5 my-2.5 bg-white rounded border`}
                             keyboardType="numeric"
                             onChangeText={value => setLong(value)}
                         />
@@ -152,36 +166,33 @@ const BillboardInput = () => {
                 </View>
                 <View>
                     <StyledText style={styles.heading}>Title:</StyledText>
-                    {/* // Billboard Name */}
                     <TextInput
-                        className={`max-h-11 p-2.5 my-2.5 bg-white rounded w-full border`}
+                        className={`max-h-11 p-2.5 my-2.5 bg-white rounded border`}
                         onChangeText={value => setTitle(value)}
                     />
                 </View>
-                {/* // Billboard Address */}
                 <View>
                     <StyledText style={styles.heading}>Address:</StyledText>
                     <TextInput
-                        className={`max-h-11 p-2.5 my-2.5 bg-white rounded w-full border`}
+                        className={`max-h-11 p-2.5 my-2.5 bg-white rounded border`}
                         onChangeText={value => setAddress(value)}
                     />
                 </View>
-                {/* // Billboard Price Range (low) */}
                 <View className={`flex flex-1 flex-row justify-between items-center`}>
                     <View className={`flex flex-1 mr-2.5`}>
                         <StyledText style={styles.heading}>Width (m):</StyledText>
                         <TextInput
-                            className={`max-h-11 p-2.5 my-2.5 bg-white rounded w-full border`}
+                            className={`max-h-11 p-2.5 my-2.5 bg-white rounded border`}
                             keyboardType="numeric"
                             onChangeText={value => setWidth(value)}
 
                         />
                     </View>
-                    {/* // Billboard Price Range (high) */}
+
                     <View className={`flex flex-1`}>
                         <StyledText style={styles.heading}>Height (m):</StyledText>
                         <TextInput
-                            className={`max-h-11 p-2.5 my-2.5 bg-white rounded w-full border`}
+                            className={`max-h-11 p-2.5 my-2.5 bg-white rounded border`}
                             keyboardType="numeric"
                             onChangeText={value => setHeight(value)}
                         />
@@ -192,7 +203,7 @@ const BillboardInput = () => {
                     <View className={`flex flex-1`}>
                         <StyledText style={styles.heading}>Price:</StyledText>
                         <TextInput
-                            className={`max-h-11 p-2.5 my-2.5 bg-white rounded w-full border`}
+                            className={`max-h-11 p-2.5 my-2.5 bg-white rounded border`}
                             keyboardType="numeric"
                             onChangeText={value => setPrice(value)}
                         />
@@ -206,22 +217,38 @@ const BillboardInput = () => {
                         />
                     </View> */}
                 </View>
-                {/* // Billboard Description */}
+
                 <View>
                     <StyledText style={styles.heading}>Description:</StyledText>
                     <TextInput
-                        className={`max-h-11 p-2.5 my-2.5 bg-white rounded w-full border`}
-                        multiline={true}
+                        className={`max-h-screen p-2.5 my-2.5 bg-white rounded border`}
+                        multiline
                         onChangeText={(description) => setDescription(description)}
+
                     />
                 </View>
-                {/* // Billboard Rent Duration */}
+
                 <View>
                     <StyledText style={styles.heading}>Duration:</StyledText>
-                    <TextInput
-                        className={`max-h-11 p-2.5 my-2.5 bg-white rounded w-full border`}
-                        onChangeText={(duration) => setDuration(duration)}
-                    />
+                    <View className={`p-2.5 my-2.5 bg-white rounded border`}>
+                        <View className={'w-full'}>
+                            <RNPickerSelect
+                                items={contractPeriods}
+                                onValueChange={(duration) => setDuration(duration)}
+                                useNativeAndroidPickerStyle={false}
+                                style={{
+                                    iconContainer: {
+                                        display: "flex"
+                                    }
+                                }}
+                                Icon={() => {
+                                    return <Ionicons name={"chevron-down-outline"}
+                                                     color={'gray'}
+                                                     size={20}/>
+                                }}
+                            />
+                        </View>
+                    </View>
                 </View>
                 <View className={`flex flex-1 flex-row justify-between items-center`}>
                     {/* <View className={`flex flex-1 mr-2.5`}>
@@ -247,14 +274,14 @@ const BillboardInput = () => {
                     {/*        {label: 'Hockey', value: 'hockey'},*/}
                     {/*    ]}>*/}
                 </View>
-                {/* // Random */}
+
                 <TouchableOpacity
-                    className={`w-full rounded-md bg-red-600 py-3 px-4 mt-2 mb-14`}
+                    className={`w-full rounded-md bg-red-600 py-3.5 px-5 mt-2 mb-14`}
                     onPress={() => postData()}
                 >
-                    <StyledText className={`text-white font-bold text-center`}>
+                    <Text className={`text-white text-lg font-bold text-center`}>
                         SUBMIT
-                    </StyledText>
+                    </Text>
                 </TouchableOpacity>
                 {/* <View>
                     <StyledText style={styles.heading}>City:</StyledText>
@@ -292,7 +319,7 @@ const BillboardInput = () => {
                 </View> */}
             </View>
 
-        </ScrollView>
+        </View>
 
     )
 }

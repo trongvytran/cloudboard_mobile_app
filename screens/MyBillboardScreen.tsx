@@ -19,6 +19,7 @@ const MyBillboardScreen = () => {
     useLayoutEffect(() => {
         navigation.setOptions({
             headerTitle: 'My Billboards',
+            headerTitleStyle: {fontSize: 18, lineHeight: 28},
             headerLeft: () => (
                 <TouchableOpacity onPress={() => navigation.goBack()}>
                     <Ionicons
@@ -34,7 +35,7 @@ const MyBillboardScreen = () => {
                     className="mr-2"
                     onPress={() => setModalVisible(!modalVisible)}
                 >
-                    <Ionicons name="ios-add" size={30} color={Colors.primaryColor}/>
+                    <Ionicons name="add" size={30} color={Colors.primaryColor}/>
                 </Pressable>
             ),
         })
@@ -48,22 +49,24 @@ const MyBillboardScreen = () => {
                     visible={modalVisible}
                 >
                     <SafeAreaView>
-                        <View className="relative flex flex-row items-center justify-center py-3">
+                        <View className="relatve flex flex-row items-center justify-center align-middle py-3">
                             <Pressable
                                 onPress={() => setModalVisible(!modalVisible)}
-                                className="absolute left-3 top-1"
+                                className="absolute left-3"
                             >
                                 <Ionicons
-                                    className="text-gray-900"
-                                    name="ios-close"
+                                    name="close"
+                                    color={Colors.primaryColor}
                                     size={30}
                                 />
                             </Pressable>
-                            <Text className="font-large text-gray-900">
-                                Add new billboard
-                            </Text>
+                            <View>
+                                <Text className="text-lg font-bold text-gray-900">
+                                    Add new billboard
+                                </Text>
+                            </View>
                         </View>
-                        <ScrollView className={`px-4`}>
+                        <ScrollView>
                             <BillboardInput/>
                         </ScrollView>
                     </SafeAreaView>
