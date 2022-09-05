@@ -27,7 +27,10 @@ const GoogleView: React.FC = () => {
                     accessToken: response.params.access_token,
                 })
                 .then((res) => {
+                    const controller = new AbortController()
                     dispatch(addUserLoginInfo(res.data.user))
+                    axios.patch(`${BaseUrl}/api/users/${res.data.user.id}`, {role: 2})
+                        .then(() => controller.abort())
                 })
         }
     }, [response])
@@ -36,8 +39,8 @@ const GoogleView: React.FC = () => {
         <Pressable
             className="bg-[#4285F4] my-1 rounded-lg px-5 py-3.5 shadow flex justify-center items-center"
             disabled={!request}
-            onPress={() => {
-                promptAsync({useProxy: true, showInRecents: true})
+            onPress={async () => {
+                await promptAsync({useProxy: true, showInRecents: true})
             }}
         >
             <Ionicons style={styles.icon} name="logo-google" size={20}/>
