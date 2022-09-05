@@ -1,14 +1,18 @@
 import {StyleSheet, Text, ScrollView, View, TouchableOpacity, Linking, Alert} from 'react-native'
 import {CardField, useStripe} from '@stripe/stripe-react-native';
-import React, {useEffect, useLayoutEffect, useState} from 'react'
+import React, {useEffect, useLayoutEffect, useRef, useState} from 'react'
 import Colors from '../constants/color'
 import {useNavigation} from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import axios from 'axios';
 import baseUrl from "../constants/baseUrl";
+import {useDispatch, useSelector} from "react-redux";
 
 const PaymentMethodScreen = () => {
     const navigation = useNavigation()
+    const {userLoginInfo} = useSelector((state: any) => state.userLoginInfo)
+    const stripe = useStripe();
+
     useLayoutEffect(() =>
         navigation.setOptions({
             headerTitle: 'Payment Information',
@@ -25,7 +29,6 @@ const PaymentMethodScreen = () => {
         })
     )
 
-    const stripe = useStripe();
     const getPaymentMethodId = async () => {
         const stripeResponse = await stripe?.createPaymentMethod({
             type: 'Card',
@@ -37,25 +40,10 @@ const PaymentMethodScreen = () => {
         return paymentMethod.id
     }
 
-    const postCreditCard = async () => {
-        const paymentMethodId = await getPaymentMethodId();
-        if (!paymentMethodId) {
-            return Alert.alert('Unable to process payment method.');
-        }
-        const stripeCustomerId = 'cus_MLom7df9sRBBTG'
-        await axios.post(`${baseUrl}/api/transactions/credit-cards`, {
-            paymentMethodId,
-            stripeCustomerId
-        })
-    }
+    const stripeCustomerId = userLoginInfo.stripeCustomerId
 
-    const getPaymentMethods = async () => {
-        await axios.get(`${baseUrl}/api/transactions/credit-cards`).then(res =>
-            res.data
-        )
-    }
     const manage = async () => {
-        const stripeCustomerId = 'cus_MLom7df9sRBBTG'
+        // const stripeCustomerId = 'cus_MLom7df9sRBBTG'
         await axios.post(`${baseUrl}/api/transactions/portal`, {
                 stripeCustomerId
             }
@@ -65,6 +53,30 @@ const PaymentMethodScreen = () => {
             })
 
     }
+    const postCreditCard = async () => {
+        const paymentMethodId = await getPaymentMethodId();
+
+        if (!paymentMethodId) {
+            return Alert.alert('Unable to process payment method.');
+        }
+        try {
+            await axios.post(`${baseUrl}/api/transactions/credit-cards`, {
+                    paymentMethodId,
+                    stripeCustomerId
+                }
+            ).then(() => Alert.alert('Payment added successfully!'))
+        } catch (e) {
+            throw new Error(`Error occured: ${e}`)
+        }
+    }
+
+
+    const getPaymentMethods = async () => {
+        await axios.get(`${baseUrl}/api/transactions/credit-cards`).then(res =>
+            res.data
+        )
+    }
+
 
     const [cardDetails, setCardDetails] = useState(null)
 
