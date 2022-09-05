@@ -20,6 +20,7 @@ const SearchScreen = () => {
     const [data, setData] = useState([])
 
     const searchData = async (searchValue: string) => {
+        const controller = new AbortController()
         if (searchValue === '') {
             await axios.get(`${BaseUrl}/api/billboards`).then((res) => {
                 setData(res.data)
@@ -30,6 +31,7 @@ const SearchScreen = () => {
                 .then((res) => {
                     setData(res.data)
                 })
+            controller.abort()
         }
     }
 

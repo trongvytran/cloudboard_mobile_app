@@ -3,6 +3,11 @@ import {FlatList, View, VirtualizedList} from 'react-native'
 import CardListItem from './CardListItem'
 
 const TopBillboardList = ({data}: any) => {
+
+    const topData = data.sort((a: any, b: any) => {
+        return a.view - b.view
+    })
+
     const getItemCount = (data) => data.length
 
     const getItem = (data, index) => (data[index]);
@@ -11,6 +16,7 @@ const TopBillboardList = ({data}: any) => {
     return (
         <View>
             <VirtualizedList
+                // data={topData}
                 data={data}
                 decelerationRate={'fast'}
                 getItemCount={getItemCount}

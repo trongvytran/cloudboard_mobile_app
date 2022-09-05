@@ -7,7 +7,6 @@ import ReadMore from 'react-native-read-more-text'
 import {useNavigation} from '@react-navigation/native'
 import ShareButton from '../UI/ShareButton'
 import {useSelector} from 'react-redux'
-import Colors from "../../constants/color";
 import baseUrl from "../../constants/baseUrl";
 import axios from "axios";
 
@@ -35,9 +34,6 @@ const BillboardDetail = ({item}: any) => {
         })
     }, [navigation])
 
-    const subscribeBillboard = async () => {
-
-    }
     const handleContact = () => {
         if (!userLoginInfo) {
             Alert.alert(
@@ -105,7 +101,7 @@ const BillboardDetail = ({item}: any) => {
                     {item.description}
                 </ReadMore>
                 <TouchableOpacity
-                    className={'py-4 flex justify-center items-center bg-cloudboard-orange w-full rounded-lg mb-2'}
+                    className={'py-4 flex justify-center items-center bg-cloudboard-orange w-full rounded-lg mt-4 mb-2'}
                     onPress={() => handleSubscribe()}
                 >
                     <Text className={'text-white font-bold'}>SUBSCRIBE</Text>
@@ -145,7 +141,7 @@ const BillboardDetail = ({item}: any) => {
 
 const _renderTruncatedFooter = (handlePress) => {
     return (
-        <View className="items-center justify-center py-3">
+        <View className="items-center justify-center pt-4">
             <Text className="text-amber-500" onPress={handlePress}>
                 Read more
             </Text>
@@ -155,7 +151,7 @@ const _renderTruncatedFooter = (handlePress) => {
 
 const _renderRevealedFooter = (handlePress) => {
     return (
-        <View className="items-center justify-center py-3">
+        <View className="items-center justify-center pt-4">
             <Text className="text-amber-500" onPress={handlePress}>
                 Close
             </Text>
