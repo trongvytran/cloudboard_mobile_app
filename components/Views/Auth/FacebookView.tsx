@@ -24,7 +24,10 @@ const FacebookView: React.FC = () => {
                     accessToken: response.params.access_token,
                 })
                 .then((res) => {
+                    const controller = new AbortController()
                     dispatch(addUserLoginInfo(res.data.user))
+                    axios.patch(`${BaseUrl}/api/users/${res.data.user.id}`, {role: 2})
+                        .then(() => controller.abort())
                 })
         }
     }, [response])
