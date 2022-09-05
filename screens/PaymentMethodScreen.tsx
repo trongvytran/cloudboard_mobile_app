@@ -1,9 +1,10 @@
-import {StyleSheet, Text, ScrollView, View, TouchableOpacity} from 'react-native'
+import {StyleSheet, Text, ScrollView, View, TouchableOpacity, Linking} from 'react-native'
 import {CardField, useStripe} from '@stripe/stripe-react-native';
 import React, {useLayoutEffect, useState} from 'react'
 import Colors from '../constants/color'
 import {useNavigation} from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import axios from 'axios';
 
 const PaymentMethodScreen = () => {
     const navigation = useNavigation()
@@ -22,7 +23,43 @@ const PaymentMethodScreen = () => {
             ),
         })
     )
-    const [cardDetails, setCardDetails] = useState('')
+
+    const stripe = useStripe();
+    const getPaymentMethodId = async () => {
+        const stripeResponse = await stripe?.createPaymentMethod({
+           type: 'Card',
+        });
+        const { error, paymentMethod } = stripeResponse;
+        if (error || !paymentMethod) {
+            return;
+        }
+        return paymentMethod.id;
+    }
+
+    const postcredit = async () => {
+        const paymentMethodId = await getPaymentMethodId();
+        if (!paymentMethodId) {
+            return;
+        }
+        const stripeCustomerId = 'cus_MLom7df9sRBBTG'
+        axios.post(`http://192.168.1.9:3000/api/transactions/credit-cards`, {
+            paymentMethodId,
+            stripeCustomerId
+        })
+    }
+    const manage = async () => {
+        const stripeCustomerId = 'cus_MLom7df9sRBBTG'
+        axios.post(`http://192.168.1.9:3000/api/transactions/portal`, {
+            stripeCustomerId
+        }
+      
+        )
+        .then((res) => {
+            Linking.openURL(res.data.url).catch(err => console.error("Couldn't load page", err));  
+        })
+           
+    }
+    const [cardDetails, setCardDetails] = useState(null)
     const secretKey = 'sk_test_51LcObsCml2Mz1p9rLENL5bDoJVbiHxmoxLLVFLqrJQp4kvzw6qZfvdIjLPYwf6PE0U8u70WTEAZ993qvf0bcMtCr00WaaKVaiA'
     const {confirmPayment} = useStripe()
     return (
@@ -46,9 +83,9 @@ const PaymentMethodScreen = () => {
                         height: 50,
                         marginVertical: 10,
                     }}
-                    onCardChange={() => {
-                        setCardDetails(cardDetails)
-                    }}
+                    onCardChange={
+                        setCardDetails
+                      }
                     onFocus={(focusedField) => {
                         console.log('focusField', focusedField);
                     }}
@@ -56,10 +93,14 @@ const PaymentMethodScreen = () => {
             </View>
             <View className={'px-4 mt-0.5'}>
                 <TouchableOpacity className={'px-1.5 py-2.5 bg-red-600 rounded-lg'}
-                                  onPress={() => confirmPayment(secretKey)}>
+                                  onPress={postcredit}>
                     <Text className={'text-white align-middle text-center font-bold text-lg'}>SUBMIT</Text>
                 </TouchableOpacity>
             </View>
+                <TouchableOpacity className={'px-1.5 py-2.5 bg-red-600 rounded-lg'}
+                                  onPress={manage}>
+                    <Text className={'text-white align-middle text-center font-bold text-lg'}>Manage</Text>
+                </TouchableOpacity>
             <View>
                 <Text className={`mx-4 mt-3 text-lg font-bold`}>Existing methods</Text>
                 <Text className={'mx-auto text-gray-400 my-10'}>Work In Progress..</Text>
