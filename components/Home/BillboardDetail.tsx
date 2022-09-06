@@ -10,7 +10,7 @@ import {useSelector} from 'react-redux'
 import Colors from "../../constants/color";
 import baseUrl from "../../constants/baseUrl";
 import axios from "axios";
-
+import moment from "moment";
 const BillboardDetail = ({item}: any) => {
     const navigation = useNavigation()
     const {userLoginInfo} = useSelector((state: any) => state.userLoginInfo)
@@ -77,13 +77,30 @@ const BillboardDetail = ({item}: any) => {
                     },
                 ]
             )
-        } else await axios.post(`${baseUrl}/api/subscriptions`,
+        } else 
+            {            const periodStart =  new Date()
+                const msdiff = item.duration.replace(" months", '');
+                const periodEnd = moment(periodStart).add(msdiff, 'month');
+            await axios.post(`${baseUrl}/api/subscriptions`,
             {
-                "name": "basic",
-                "status": "active"
+                "name": item.name,
+                "status": "active",
+                "periodStart": periodStart,
+                "periodEnd": periodEnd,
             })
+        }
     }
-
+    const Subscribe = () => {
+        const stripeCustomerId = 'cus_MLom7df9sRBBTG'
+        axios.post(`http://192.168.1.9:3000/api/subscriptions/subscribe`, {
+            stripeCustomerId
+        }
+      
+        )
+        .then((res) => {
+            console.log(res)
+        })
+      };
     return (
         <ScrollView>
             <Image className="w-full aspect-[4/3]" source={{uri: item.imageUrl}}/>
@@ -137,6 +154,13 @@ const BillboardDetail = ({item}: any) => {
                     >
                         <Marker coordinate={{latitude: item.lat, longitude: item.long}}/>
                     </MapView>
+                    {/* <TouchableOpacity
+                         onPress={Subscribe}
+                        >
+                        <Text >
+                            Subscribe
+                        </Text>
+                        </TouchableOpacity> */}
                 </View>
             </View>
         </ScrollView>
