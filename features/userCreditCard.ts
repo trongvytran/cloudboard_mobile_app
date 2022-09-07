@@ -6,15 +6,15 @@ const userCreditCard = createSlice({
     userCreditCard: null,
   },
   reducers: {
-    adduserCreditCard: (state, action) => {
+    addUserCreditCard: (state, action) => {
       state.userCreditCard = action.payload
     },
-    clearuserCreditCard: (state) => {
+    clearUserCreditCard: (state) => {
       state.userCreditCard = null
     }
   },
 })
 
-export const { adduserCreditCard, clearuserCreditCard} = userCreditCard.actions
+export const { addUserCreditCard, clearUserCreditCard} = userCreditCard.actions
 
 export default userCreditCard.reducer

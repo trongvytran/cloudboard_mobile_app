@@ -7,7 +7,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import axios from 'axios';
 import baseUrl from "../constants/baseUrl";
 import {useDispatch, useSelector} from "react-redux";
-import useCreditCard from '../features/userCreditCard'
+import {addUserCreditCard} from '../features/userCreditCard'
 const PaymentMethodScreen = () => {
     const navigation = useNavigation()
     const {userLoginInfo} = useSelector((state: any) => state.userLoginInfo)
@@ -76,7 +76,7 @@ const PaymentMethodScreen = () => {
         await axios.get(`${baseUrl}/api/transactions/credit-cards/${stripeCustomerId}`, {
         }
 
-        ).then(res =>dispatch(useCreditCard(res.data)
+        ).then((res) =>{dispatch(addUserCreditCard(res.data))}
         )
     }
 
