@@ -73,15 +73,15 @@ const PaymentMethodScreen = () => {
 
     const getPaymentMethods = async () => {
         await axios.get(`${baseUrl}/api/transactions/credit-cards`).then(res =>
-            res.data
+            setCardDetails(res.data)
         )
     }
 
 
-    const [cardDetails, setCardDetails] = useState(null)
+    const [cardDetails, setCardDetails] = useState([])
 
     useEffect(() => {
-        getPaymentMethods().then(r => console.log(r))
+        getPaymentMethods().then(() => console.log(cardDetails))
     })
 
     return (
@@ -123,7 +123,7 @@ const PaymentMethodScreen = () => {
             <View>
                 <Text className={`mx-4 mt-3 text-lg font-bold`}>Existing methods</Text>
                 <Text className={'mx-auto text-gray-400 my-10'}>Work In Progress..</Text>
-                {/*<Text className={'mx-auto text-gray-400 my-10'}>{card}</Text>*/}
+                {/*<Text className={'mx-auto text-gray-400 my-10'}>{cardDetails}</Text>*/}
             </View>
         </ScrollView>
     )

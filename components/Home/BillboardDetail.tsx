@@ -117,12 +117,12 @@ const BillboardDetail = ({item}: any) => {
                 >
                     {item.description}
                 </ReadMore>
-                <TouchableOpacity
-                    className={'py-4 flex justify-center items-center bg-cloudboard-orange w-full rounded-lg mt-4 mb-2'}
-                    onPress={() => handleSubscribe()}
-                >
-                    <Text className={'text-white font-bold'}>SUBSCRIBE</Text>
-                </TouchableOpacity>
+                {/*<TouchableOpacity*/}
+                {/*    className={'py-4 flex justify-center items-center bg-cloudboard-orange w-full rounded-lg mt-4 mb-2'}*/}
+                {/*    onPress={() => handleSubscribe()}*/}
+                {/*>*/}
+                {/*    <Text className={'text-white font-bold'}>SUBSCRIBE</Text>*/}
+                {/*</TouchableOpacity>*/}
                 <View className="flex flex-row items-center justify-between mt-2 mb-6">
                     <View className="flex flex-row items-center">
                         <Image
