@@ -73,16 +73,19 @@ const PaymentMethodScreen = () => {
 
     const getPaymentMethods = async () => {
         const stripeCustomerId = userLoginInfo.stripeCustomerId
+
         await axios.get(`${baseUrl}/api/transactions/credit-cards/${stripeCustomerId}`, {
         }
 
-        ).then((res) =>{dispatch(addUserCreditCard(res.data))}
+        ).then((res) =>{setUserCreditCards(res.data.data)}
         )
+
+ 
     }
 
-
+ 
     const [cardDetails, setCardDetails] = useState([])
-    
+    const [userCreditCard, setUserCreditCards] = useState([])
 
     useEffect(() => {
         getPaymentMethods()
@@ -126,6 +129,41 @@ const PaymentMethodScreen = () => {
             </View>
             <View>
                 <Text className={`mx-4 mt-3 text-lg font-bold`}>Existing methods</Text>
+           
+                        {userCreditCard.map(( index,i) => {
+                    
+                        return (
+                    <>
+                    <Text>Card {i+1}</Text>
+                    <Text>Brand: {userCreditCard[i].card.brand}</Text>
+                    <Text>Last 4: {userCreditCard[i].card.last4}</Text>
+                    <Text>Expire Month : {userCreditCard[i].card.exp_month}</Text>
+                    <Text>Expire Year : {userCreditCard[i].card.exp_year}</Text>
+                    </>
+                    //     <CardField  key={i}
+                    //     postalCodeEnabled={false}
+                    //     placeholder={{
+                    //         number: '**** **** **** ****  '+ userCreditCard[i].card.last4,
+                    //         expiration:""+userCreditCard[i].card.exp_month + "/" + userCreditCard[i].card.exp_year
+                    //     }}
+                    //     cardStyle={{
+                    //         backgroundColor: '#FFFFFF',
+                    //         borderColor: '#000000',
+                    //         borderWidth: 1,
+                    //         textColor: '#000000',
+                    //         textErrorColor: '#f81111'
+                    //     }}
+                    //     style={{
+                    //         width: '100%',
+                    //         height: 50,
+                    //         marginVertical: 10,
+                    //     }}
+                    // />
+                        )
+                       }
+                        )}
+       
+
                 <Text className={'mx-auto text-gray-400 my-10'}>Work In Progress..</Text>
                 {/*<Text className={'mx-auto text-gray-400 my-10'}>{cardDetails}</Text>*/}
             </View>
