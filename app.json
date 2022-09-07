@@ -11,6 +11,7 @@
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
+    "jsEngine": "hermes",
     "plugins": [
       [
         "expo-image-picker",
