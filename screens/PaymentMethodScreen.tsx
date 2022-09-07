@@ -7,12 +7,12 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import axios from 'axios';
 import baseUrl from "../constants/baseUrl";
 import {useDispatch, useSelector} from "react-redux";
-
+import useCreditCard from '../features/userCreditCard'
 const PaymentMethodScreen = () => {
     const navigation = useNavigation()
     const {userLoginInfo} = useSelector((state: any) => state.userLoginInfo)
     const stripe = useStripe();
-
+    const dispatch = useDispatch()
     useLayoutEffect(() =>
         navigation.setOptions({
             headerTitle: 'Payment Information',
@@ -72,16 +72,20 @@ const PaymentMethodScreen = () => {
 
 
     const getPaymentMethods = async () => {
-        await axios.get(`${baseUrl}/api/transactions/credit-cards`).then(res =>
-            setCardDetails(res.data)
+        const stripeCustomerId = userLoginInfo.stripeCustomerId
+        await axios.get(`${baseUrl}/api/transactions/credit-cards/${stripeCustomerId}`, {
+        }
+
+        ).then(res =>dispatch(useCreditCard(res.data)
         )
     }
 
 
     const [cardDetails, setCardDetails] = useState([])
+    
 
     useEffect(() => {
-        getPaymentMethods().then(() => console.log(cardDetails))
+        getPaymentMethods()
     })
 
     return (
