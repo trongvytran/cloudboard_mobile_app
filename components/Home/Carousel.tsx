@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, VirtualizedList} from 'react-native'
+import {Dimensions, View, VirtualizedList} from 'react-native'
 import CarouselItem from '../Home/CarouselItem'
 
 const Carousel = ({data}: any) => {
@@ -14,12 +14,13 @@ const Carousel = ({data}: any) => {
             getItem={getItem}
             horizontal
             //@ts-ignore
-            ItemSeparatorComponent={() => <View className="w-5"/>}
+            ItemSeparatorComponent={() => <View className="mx-2.5"/>}
             keyExtractor={(item) => item.id}
             maxToRenderPerBatch={5}
             renderItem={({item}) => <CarouselItem item={item}/>}
             scrollEnabled
-            snapToAlignment={'center'}
+            // snapToAlignment={'center'}
+            // snapToInterval={width - 32 * 8 / 5}
             showsHorizontalScrollIndicator={false}
         />
     )
