@@ -51,7 +51,9 @@ const BillboardDetail = ({item}: any) => {
                     },
                 ]
             )
-        } else navigation.navigate('ContactScreen' as never)
+        } else {
+            navigation.navigate('ContactScreen' as never, {item} as never)
+        }
     }
 
     const handleSubscribe = async () => {
