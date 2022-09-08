@@ -40,10 +40,10 @@ const Main = () => {
                 },
             })}
         >
-            <Tab.Screen name="Home" component={HomeNavigator}/>
+            <Tab.Screen name="Home" options={{lazy: false}} component={HomeNavigator}/>
             {userLoginInfo ? (
                 <Tab.Screen name="Subscriptions" component={SubscriptionNavigator}/>
-            ) : undefined}
+            ) : null}
             <Tab.Screen name="My Profile" component={ProfileNavigator}/>
         </Tab.Navigator>
     )

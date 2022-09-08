@@ -1,19 +1,19 @@
 import { createStackNavigator } from '@react-navigation/stack'
 import React from 'react'
-import SubscriptionScreen from '../screens/SubscriptionScreen'
+import SubscriptionsScreen from '../screens/SubscriptionsScreen'
 
-const SubscriptionStack = createStackNavigator()
+const SubscriptionsStack = createStackNavigator()
 
-const SubscriptionNavigator = () => {
+const SubscriptionsNavigator = () => {
   return (
-    <SubscriptionStack.Navigator>
-      <SubscriptionStack.Screen
-        name="SubscriptionScreen"
-        component={SubscriptionScreen}
+    <SubscriptionsStack.Navigator>
+      <SubscriptionsStack.Screen
+        name="SubscriptionsScreen"
+        component={SubscriptionsScreen}
         options={{ headerShown: false }}
       />
-    </SubscriptionStack.Navigator>
+    </SubscriptionsStack.Navigator>
   )
 }
 
-export default SubscriptionNavigator
+export default SubscriptionsNavigator
