@@ -1,4 +1,4 @@
-import {View, Text, Image, TouchableOpacity, Alert, ScrollView} from 'react-native'
+import {View, Text, Image, TouchableOpacity, Alert, ScrollView, Linking} from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import MapView, {Marker} from 'react-native-maps'
 import DurationBadge from '../UI/DurationBadge'
@@ -92,15 +92,34 @@ const BillboardDetail = ({item}: any) => {
     }
 
     const Subscribe = () => {
+        if (!userLoginInfo) {
+            Alert.alert(
+                'Warning',
+                'You need to login to subscribe. Continue?',
+                [
+                    {
+                        text: 'Cancel',
+                        style: 'cancel',
+                    },
+                    {
+                        text: 'OK',
+                        onPress: () => {
+                            navigation.navigate('My Profile' as never, {screen: 'ProfileScreen'} as never)
+                        },
+                    },
+                ]
+            )
+        } else {
         const stripeCustomerId = userLoginInfo.stripeCustomerId
-        axios.post(`${baseUrl}/api/subscriptions/subscribe`, {
+        axios.post(`${baseUrl}/api/transactions/session`, {
             stripeCustomerId
         }
-
+        
         )
         .then((res) => {
-            console.log(res)
+            Linking.openURL(res.data.url).catch(err => console.error("Couldn't load page", err));
         })
+        }
       };
 
     return (
@@ -151,6 +170,10 @@ const BillboardDetail = ({item}: any) => {
                         <Marker coordinate={{latitude: item.lat, longitude: item.long}}/>
                     </MapView>
                 </View>
+                <TouchableOpacity className={'px-2 py-3.5 w-1/2 mr-2 bg-blue-600 rounded-lg'}
+                                  onPress={() => Subscribe()}>
+                    <Text className={'text-white align-middle text-center font-bold text-lg'}>Subscribe</Text>
+                </TouchableOpacity>
             </View>
         </ScrollView>
     )

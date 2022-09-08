@@ -87,9 +87,9 @@ const PaymentMethodsScreen = () => {
     }
 
     const getPaymentMethods = async () => {
-
+        const stripeCustomerId = userLoginInfo.stripeCustomerId
         await axios.get(`${baseUrl}/api/transactions/credit-cards/${stripeCustomerId}`,
-        ).then((res) => dispatch(addUserCreditCard(res.data)))
+        ).then((res) => setUserCreditCards(res.data.data))
     }
 
 
@@ -97,7 +97,8 @@ const PaymentMethodsScreen = () => {
     const [userCreditCard, setUserCreditCards] = useState([])
 
     useEffect(() => {
-        getPaymentMethods().then(r => console.log(r))
+        getPaymentMethods()
+   
     })
 
     return (
