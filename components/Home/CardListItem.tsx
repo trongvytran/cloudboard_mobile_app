@@ -30,11 +30,12 @@ const CardListItem = ({item}: any) => {
                     className="rounded-t-lg aspect-[4/3] w-full"
                     source={{uri: item.imageUrl}}
                 />
-                <View className="p-5">
+                <View className="p-5" style={{height: 150}}>
                     <View className="flex flex-row items-center justify-between mb-2">
                         <Text ellipsizeMode='tail'
+
                               numberOfLines={2}
-                              className="text-lg w-1/2 font-bold tracking-tight text-gray-900 dark:text-white mr-2">
+                              className="text-lg w-1/2 h-14 my-auto font-bold tracking-tight text-gray-900 dark:text-white mr-2">
                             {item.name}
                         </Text>
                         <DurationBadge value={item.duration}/>
