@@ -4,8 +4,9 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import {useNavigation} from "@react-navigation/native";
 import Colors from "../../constants/color";
 
-const Contact = () => {
+const Contact = ({item}: any) => {
     const navigation = useNavigation()
+
     useLayoutEffect(() => {
             navigation.setOptions({
                 headerLeft: () =>
@@ -43,11 +44,11 @@ const Contact = () => {
                     <TouchableOpacity
                         className={'flex flex-row align-middle justify-center items-center bg-green-500'}
                         onPress={() => {
-                            makeACall('+84907604950')
+                            makeACall(item.user.phoneNumber)
                         }}>
                         <Ionicons name={'call'} color={'white'} size={24}/>
                         <Text className={'font-bold text-white align-middle ml-2 text-lg'}>
-                            0907604950
+                            {item.user.phoneNumber}
                         </Text>
                     </TouchableOpacity>
                 </View>
@@ -65,11 +66,11 @@ const Contact = () => {
                     <TouchableOpacity
                         className={'flex flex-row align-middle justify-center items-center'}
                         onPress={() => {
-                            sendAnEmail('john.appleseed@icloud.com')
+                            sendAnEmail(item.user.email)
                         }}>
                         <Ionicons name={'mail'} color={'white'} size={24}/>
                         <Text className={'font-bold text-white align-middle ml-2 text-lg'}>
-                            john.appleseed@icloud.com
+                            {item.user.email}
                         </Text>
                     </TouchableOpacity>
                 </View>

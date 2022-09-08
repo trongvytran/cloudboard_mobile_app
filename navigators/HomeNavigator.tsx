@@ -6,9 +6,6 @@ import BillboardDetailScreen from '../screens/BillboardDetailScreen'
 import SeeMoreBillboardListScreen from '../screens/SeeMoreBillboardListScreen'
 import ProfileScreen from '../screens/ProfileScreen'
 import ContactScreen from "../screens/ContactScreen";
-import MyBillboardScreen from "../screens/MyBillboardScreen";
-import PaymentMethodScreen from "../screens/PaymentMethodsScreen";
-import ProfileNavigator from "./ProfileNavigator";
 
 const HomeStack = createStackNavigator()
 
