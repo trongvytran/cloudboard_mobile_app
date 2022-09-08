@@ -12,6 +12,7 @@ const PaymentMethodScreen = () => {
     const navigation = useNavigation()
     const {userLoginInfo} = useSelector((state: any) => state.userLoginInfo)
     const stripe = useStripe();
+    const stripeCustomerId = userLoginInfo.stripeCustomerId
     const dispatch = useDispatch()
     useLayoutEffect(() =>
         navigation.setOptions({
@@ -40,7 +41,7 @@ const PaymentMethodScreen = () => {
         return paymentMethod.id
     }
 
-    const stripeCustomerId = userLoginInfo.stripeCustomerId
+   
 
     const manage = async () => {
         // const stripeCustomerId = 'cus_MLom7df9sRBBTG'
@@ -70,9 +71,18 @@ const PaymentMethodScreen = () => {
         }
     }
 
+    const setDefault = async (paymentMethodId) => {
+        await axios.post(`${baseUrl}/api/transactions/default`, {
+            paymentMethodId,
+            stripeCustomerId
+            
+        }
+        ).then(res =>{console.log(res.data)}
+        )
+
+    }
 
     const getPaymentMethods = async () => {
-        const stripeCustomerId = userLoginInfo.stripeCustomerId
 
         await axios.get(`${baseUrl}/api/transactions/credit-cards/${stripeCustomerId}`, {
         }
@@ -131,7 +141,7 @@ const PaymentMethodScreen = () => {
                 <Text className={`mx-4 mt-3 text-lg font-bold`}>Existing methods</Text>
            
                         {userCreditCard.map(( index,i) => {
-                    
+                           
                         return (
                     <>
                     <Text>Card {i+1}</Text>
@@ -139,6 +149,12 @@ const PaymentMethodScreen = () => {
                     <Text>Last 4: {userCreditCard[i].card.last4}</Text>
                     <Text>Expire Month : {userCreditCard[i].card.exp_month}</Text>
                     <Text>Expire Year : {userCreditCard[i].card.exp_year}</Text>
+                    <Text>Expire Year : {userCreditCard[i].id}</Text>
+                    <TouchableOpacity className={'px-2 py-3.5 w-1/2 bg-red-600 rounded-lg'}
+                                  onPress={() => setDefault(userCreditCard[i].id)}>
+                    <Text className={'text-white align-middle text-center font-bold text-lg'}>Set as default</Text>
+                    </TouchableOpacity>
+
                     </>
                     //     <CardField  key={i}
                     //     postalCodeEnabled={false}
@@ -164,7 +180,7 @@ const PaymentMethodScreen = () => {
                         )}
        
 
-                <Text className={'mx-auto text-gray-400 my-10'}>Work In Progress..</Text>
+
                 {/*<Text className={'mx-auto text-gray-400 my-10'}>{cardDetails}</Text>*/}
             </View>
         </ScrollView>
