@@ -2,7 +2,7 @@ import Ionicons from '@expo/vector-icons/Ionicons'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import Colors from '../constants/color'
 import ProfileNavigator from '../navigators/ProfileNavigator'
-import SubscriptionNavigator from '../navigators/SubscriptionNavigator'
+import SubscriptionNavigator from '../navigators/SubscriptionsNavigator'
 import React from 'react'
 import HomeNavigator from '../navigators/HomeNavigator'
 import {useSelector} from 'react-redux'
@@ -40,10 +40,10 @@ const Main = () => {
                 },
             })}
         >
-            <Tab.Screen name="Home" component={HomeNavigator}/>
+            <Tab.Screen name="Home" options={{lazy: false}} component={HomeNavigator}/>
             {userLoginInfo ? (
                 <Tab.Screen name="Subscriptions" component={SubscriptionNavigator}/>
-            ) : undefined}
+            ) : null}
             <Tab.Screen name="My Profile" component={ProfileNavigator}/>
         </Tab.Navigator>
     )

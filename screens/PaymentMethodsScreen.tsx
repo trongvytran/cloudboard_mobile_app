@@ -8,12 +8,14 @@ import axios from 'axios';
 import baseUrl from "../constants/baseUrl";
 import {useDispatch, useSelector} from "react-redux";
 import {addUserCreditCard} from '../features/userCreditCard'
-const PaymentMethodScreen = () => {
+
+const PaymentMethodsScreen = () => {
     const navigation = useNavigation()
     const {userLoginInfo} = useSelector((state: any) => state.userLoginInfo)
     const stripe = useStripe();
     const stripeCustomerId = userLoginInfo.stripeCustomerId
     const dispatch = useDispatch()
+
     useLayoutEffect(() =>
         navigation.setOptions({
             headerTitle: 'Payment Information',
@@ -30,6 +32,9 @@ const PaymentMethodScreen = () => {
         })
     )
 
+    useEffect(() => {
+    })
+
     const getPaymentMethodId = async () => {
         const stripeResponse = await stripe?.createPaymentMethod({
             type: 'Card',
@@ -44,7 +49,6 @@ const PaymentMethodScreen = () => {
    
 
     const manage = async () => {
-        // const stripeCustomerId = 'cus_MLom7df9sRBBTG'
         await axios.post(`${baseUrl}/api/transactions/portal`, {
                 stripeCustomerId
             }
@@ -84,21 +88,16 @@ const PaymentMethodScreen = () => {
 
     const getPaymentMethods = async () => {
 
-        await axios.get(`${baseUrl}/api/transactions/credit-cards/${stripeCustomerId}`, {
-        }
-
-        ).then((res) =>{setUserCreditCards(res.data.data)}
-        )
-
- 
+        await axios.get(`${baseUrl}/api/transactions/credit-cards/${stripeCustomerId}`,
+        ).then((res) => dispatch(addUserCreditCard(res.data)))
     }
 
- 
+
     const [cardDetails, setCardDetails] = useState([])
     const [userCreditCard, setUserCreditCards] = useState([])
 
     useEffect(() => {
-        getPaymentMethods()
+        getPaymentMethods().then(r => console.log(r))
     })
 
     return (
@@ -139,9 +138,8 @@ const PaymentMethodScreen = () => {
             </View>
             <View>
                 <Text className={`mx-4 mt-3 text-lg font-bold`}>Existing methods</Text>
-           
+
                         {userCreditCard.map(( index,i) => {
-                           
                         return (
                     <>
                     <Text>Card {i+1}</Text>
@@ -178,7 +176,7 @@ const PaymentMethodScreen = () => {
                         )
                        }
                         )}
-       
+
 
 
                 {/*<Text className={'mx-auto text-gray-400 my-10'}>{cardDetails}</Text>*/}
@@ -187,7 +185,7 @@ const PaymentMethodScreen = () => {
     )
 }
 
-export default PaymentMethodScreen
+export default PaymentMethodsScreen
 
 const styles = StyleSheet.create({
     container: {
