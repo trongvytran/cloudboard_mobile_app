@@ -67,7 +67,7 @@ const PaymentMethodsScreen = () => {
                     paymentMethodId,
                     stripeCustomerId
                 }
-            ).then(() => Alert.alert('Payment added successfully!')).then()
+            ).then(() => Alert.alert('Payment added successfully!'))
         } catch (e) {
             throw new Error(`Error occured: ${e}`)
         }
