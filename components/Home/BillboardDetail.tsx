@@ -84,6 +84,9 @@ const BillboardDetail = ({item}: any) => {
                 "periodStart": periodStart,
                 "periodEnd": periodEnd,
             })
+            .then((res) => {
+                console.log(res)
+            })
         }
     }
     const Subscribe = () => {
