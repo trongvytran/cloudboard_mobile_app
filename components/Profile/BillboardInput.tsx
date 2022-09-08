@@ -21,6 +21,7 @@ import baseUrl from "../../constants/baseUrl";
 import {useSelector} from "react-redux";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
+
 const BillboardInput = () => {
     const [open, setOpen] = useState(false);
     const [lat, setLat] = useState('')

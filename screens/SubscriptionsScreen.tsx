@@ -11,13 +11,16 @@ import baseUrl from "../constants/baseUrl";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import {LinearGradient} from "expo-linear-gradient";
 import Colors from "../constants/color";
+import {useStripe} from "@stripe/stripe-react-native";
 
 const SubscriptionsScreen = () => {
     const [data, setData] = useState([])
+    const stripe = useStripe()
     const {userLoginInfo} = useSelector((state: any) => state.userLoginInfo)
 
     const AnimatedImageBackground =
         Animated.createAnimatedComponent(LinearGradient)
+
 
     useEffect(() => {
         if (userLoginInfo !== null) {
