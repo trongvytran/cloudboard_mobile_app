@@ -27,7 +27,6 @@ const BillboardDetail = ({item}: any) => {
             headerRight: () => (
                 <View className="flex flex-row items-center mt-4 mr-4">
                     <ShareButton value={item}/>
-                    {/* <LikeButton value={item} /> */}
                 </View>
             ),
 
@@ -73,10 +72,10 @@ const BillboardDetail = ({item}: any) => {
                     },
                 ]
             )
-        } else 
+        } else
             {            const periodStart =  new Date()
-                const msdiff = item.duration.replace(" months", '');
-                const periodEnd = moment(periodStart).add(msdiff, 'month');
+                const msDiff = item.duration.replace(" months", '');
+                const periodEnd = moment(periodStart).add(msDiff, 'month');
             await axios.post(`${baseUrl}/api/subscriptions`,
             {
                 "name": item.name,
@@ -89,17 +88,19 @@ const BillboardDetail = ({item}: any) => {
             })
         }
     }
+
     const Subscribe = () => {
-        const stripeCustomerId = 'cus_MLom7df9sRBBTG'
-        axios.post(`http://192.168.1.9:3000/api/subscriptions/subscribe`, {
+        const stripeCustomerId = userLoginInfo.stripeCustomerId
+        axios.post(`${baseUrl}/api/subscriptions/subscribe`, {
             stripeCustomerId
         }
-      
+
         )
         .then((res) => {
             console.log(res)
         })
       };
+
     return (
         <ScrollView>
             <Image className="w-full aspect-[4/3]" source={{uri: item.imageUrl}}/>
@@ -120,12 +121,6 @@ const BillboardDetail = ({item}: any) => {
                 >
                     {item.description}
                 </ReadMore>
-                {/*<TouchableOpacity*/}
-                {/*    className={'py-4 flex justify-center items-center bg-cloudboard-orange w-full rounded-lg mt-4 mb-2'}*/}
-                {/*    onPress={() => handleSubscribe()}*/}
-                {/*>*/}
-                {/*    <Text className={'text-white font-bold'}>SUBSCRIBE</Text>*/}
-                {/*</TouchableOpacity>*/}
                 <View className="flex flex-row items-center justify-between mt-2 mb-6">
                     <View className="flex flex-row items-center">
                         <Image
@@ -153,13 +148,6 @@ const BillboardDetail = ({item}: any) => {
                     >
                         <Marker coordinate={{latitude: item.lat, longitude: item.long}}/>
                     </MapView>
-                    {/* <TouchableOpacity
-                         onPress={Subscribe}
-                        >
-                        <Text >
-                            Subscribe
-                        </Text>
-                        </TouchableOpacity> */}
                 </View>
             </View>
         </ScrollView>
