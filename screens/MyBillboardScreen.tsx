@@ -6,12 +6,15 @@ import {
     View,
     Pressable, TouchableOpacity,
 } from 'react-native'
-import React, {useLayoutEffect, useState} from 'react'
+import React, {useEffect, useLayoutEffect, useState} from 'react'
 import ContainerView from '../components/Views/ContainerView'
 import BillboardInput from '../components/Profile/BillboardInput'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import {useNavigation} from '@react-navigation/native'
 import Colors from "../constants/color";
+import MyBillboardList from "../components/Profile/MyBillboardList";
+import {BASE_URL} from "../constants/endpoints";
+import axios from "axios";
 
 const MyBillboardScreen = () => {
     const navigation = useNavigation()
@@ -40,6 +43,15 @@ const MyBillboardScreen = () => {
             ),
         })
     }, [navigation])
+
+    useEffect(() => {
+        const controller = new AbortController()
+        const getUserBillboards = async () => {
+            await axios.get(`${BASE_URL}/api/billboards`).then((res) => res.data)
+        }
+        getUserBillboards().then(r => console.log(r))
+        controller.abort()
+    })
     return (
         <ScrollView className="bg-white">
             <ContainerView>
@@ -72,6 +84,7 @@ const MyBillboardScreen = () => {
                     </SafeAreaView>
                 </Modal>
             </ContainerView>
+            <MyBillboardList data={data}/>
         </ScrollView>
     )
 }

@@ -11,7 +11,7 @@ import Ionicons from '@expo/vector-icons/Ionicons'
 import {useNavigation} from '@react-navigation/native'
 import SearchBillboardDataList from '../components/Search/SearchBillboardDataList'
 import axios from 'axios'
-import BaseUrl from '../constants/baseUrl'
+import{ BASE_URL } from '../constants/endpoints'
 import DelayInput from 'react-native-debounce-input'
 
 const SearchScreen = () => {
@@ -22,12 +22,12 @@ const SearchScreen = () => {
     const searchData = async (searchValue: string) => {
         const controller = new AbortController()
         if (searchValue === '') {
-            await axios.get(`${BaseUrl}/api/billboards`).then((res) => {
+            await axios.get(`${BASE_URL}/api/billboards`).then((res) => {
                 setData(res.data)
             })
         } else {
             await axios
-                .get(`${BaseUrl}/api/billboards?search=${searchValue}`)
+                .get(`${BASE_URL}/api/billboards?search=${searchValue}`)
                 .then((res) => {
                     setData(res.data)
                 })
@@ -37,7 +37,7 @@ const SearchScreen = () => {
 
     useEffect(() => {
         const controller = new AbortController()
-        axios.get(`${BaseUrl}/api/billboards`).then((res) => {
+        axios.get(`${BASE_URL}/api/billboards`).then((res) => {
             setData(res.data)
         })
         controller.abort()

@@ -14,7 +14,7 @@ const SectionHeading = ({name}: SectionHeadingProps) => {
             <Text className="text-2xl font-bold">{name}</Text>
             <TouchableOpacity
                 onPress={() =>
-                    navigation.navigate('SeeMoreBillboardListScreen' as never)
+                    navigation.navigate('SeeMoreBillboardScreen' as never)
                 }
             >
                 <Text className="font-medium text-amber-500">See more</Text>

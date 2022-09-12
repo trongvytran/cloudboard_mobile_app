@@ -31,7 +31,7 @@ const HomeScreen = ({navigation}: any) => {
                     style={styles.icon}
                     name="ios-search-outline"
                     size={32}
-                    onPress={() => navigation.navigate('Search')}
+                    onPress={() => navigation.navigate('SearchScreen')}
                 />
             ),
         })
@@ -63,7 +63,7 @@ const HomeScreen = ({navigation}: any) => {
                             Uh oh! Something is wrong...
                         </Text>
                         <Text className={`text-center text-gray-400`}>
-                            Error: {(error as Error).message}!
+                            {(error as Error).message}!
                         </Text>
                     </View>
                 ) : (

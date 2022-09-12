@@ -1,43 +1,46 @@
-import React, {useEffect, useState} from 'react'
-import ContainerView from '../components/Views/ContainerView'
-import Subscriptions from '../components/Home/Subscriptions'
+import React, {useState} from 'react'
 import axios from 'axios'
 import {useSelector} from 'react-redux'
-import TitleText from '../components/TitleText'
-import LayoutView from '../components/Views/LayoutView'
-import BaseUrl from '../constants/baseUrl'
-import {Alert, Animated, ImageBackground, Text, TouchableOpacity, View, Image} from "react-native";
-import baseUrl from "../constants/baseUrl";
+import {Alert, Animated, Text, TouchableOpacity, View, Image, Linking} from "react-native";
+import{ BASE_URL } from "../constants/endpoints";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import {LinearGradient} from "expo-linear-gradient";
 import Colors from "../constants/color";
 import {useStripe} from "@stripe/stripe-react-native";
+import moment from "moment/moment";
 
 const SubscriptionsScreen = () => {
     const [data, setData] = useState([])
     const stripe = useStripe()
     const {userLoginInfo} = useSelector((state: any) => state.userLoginInfo)
+    const stripeCustomerId = userLoginInfo.stripeCustomerId
 
     const AnimatedImageBackground =
         Animated.createAnimatedComponent(LinearGradient)
 
-
-    useEffect(() => {
-        if (userLoginInfo !== null) {
-            axios
-                .get(`${BaseUrl}/api/subscriptions/get-sub/${userLoginInfo.stripeCustomerId}`, {
-                    headers: {Authorization: `Bearer ${userLoginInfo}`},
-                })
-                .then((res) => {
-                    setData(res.data)
-                    console.log(data);
-                })
-        } else {
-            Alert.alert('No user logged in!')
-        }
-    }, [])
+    const subscribe = async (name: string) => {
+        const periodStart = new Date()
+        const periodEnd = moment(periodStart).add(1, 'month');
+            try {
+                await axios.post(`${BASE_URL}/api/subscriptions/subscribe`,
+                    {
+                        "name": name,
+                        "status": "active",
+                        "periodStart": periodStart,
+                        "periodEnd": periodEnd,
+                        "user": userLoginInfo
+                    })
+                    .then((res) => {
+                        console.log(res)
+                        Alert.alert('User subscribes successfully')
+                    })
+            } catch (e) {
+                throw new console.error(e)
+            }
+    }
 
     return (
+        // @ts-ignore
         <AnimatedImageBackground className={'h-screen'} source={require('../assets/img/cloudboard_background.png')}
                                  resizeMode={'cover'} colors={['rgba(255, 138, 0, 1)', Colors.primaryColor]}
                                  start={[0.4, 0.2]}
@@ -50,7 +53,8 @@ const SubscriptionsScreen = () => {
                         Up</Text> Your Place!</Text>
                 </View>
                 <View>
-                    <TouchableOpacity className={' flex flex-row bg-white rounded-lg py-6 my-3 shadow'}>
+                    <TouchableOpacity className={' flex flex-row bg-white rounded-lg py-6 my-3 shadow'}
+                                      onPress={() => subscribe('plus')}>
                         <View className={'flex'}>
                             <View className={'flex flex-row'}>
                                 <View className={'ml-5 mr-3 my-3'}>
@@ -81,7 +85,8 @@ const SubscriptionsScreen = () => {
                             </View>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity className={' flex flex-row bg-white rounded-lg py-6 mt-2 shadow'}>
+                    <TouchableOpacity className={' flex flex-row bg-white rounded-lg py-6 mt-2 shadow'}
+                                      onPress={() => subscribe('premium')}>
                         <View className={'flex'}>
                             <View className={'flex flex-row'}>
                                 <View className={'ml-5 mr-3 my-3'}>

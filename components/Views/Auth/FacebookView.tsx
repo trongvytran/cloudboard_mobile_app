@@ -6,7 +6,7 @@ import {useDispatch} from 'react-redux'
 import React from 'react'
 import axios from 'axios'
 import {addUserLoginInfo} from '../../../features/auth/userLoginInfo'
-import BaseUrl from '../../../constants/baseUrl'
+import{ BASE_URL } from '../../../constants/endpoints'
 
 const FacebookView: React.FC = () => {
     const dispatch = useDispatch()
@@ -20,13 +20,13 @@ const FacebookView: React.FC = () => {
     useEffect(() => {
         if (response?.type === 'success') {
             axios
-                .post(`${BaseUrl}/api/auth/facebook/login`, {
+                .post(`${BASE_URL}/api/auth/facebook/login`, {
                     accessToken: response.params.access_token,
                 })
                 .then((res) => {
                     const controller = new AbortController()
                     dispatch(addUserLoginInfo(res.data.user))
-                    axios.patch(`${BaseUrl}/api/users/${res.data.user.id}`, {role: 2})
+                    axios.patch(`${BASE_URL}/api/users/${res.data.user.id}`, {role: 2})
                         .then(() => controller.abort())
                 })
         }

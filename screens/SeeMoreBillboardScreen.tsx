@@ -9,9 +9,9 @@ import Colors from '../constants/color'
 import SeeMoreBillboardListItem from '../components/Home/SeeMoreBillboardListItem'
 import axios from 'axios'
 import Ionicons from '@expo/vector-icons/Ionicons'
-import baseUrl from "../constants/baseUrl";
+import{ BASE_URL } from "../constants/endpoints";
 
-const SeeMoreBillboardListScreen = ({ navigation }) => {
+const SeeMoreBillboardScreen = ({ navigation }) => {
   const [data, setData] = useState([])
 
   useLayoutEffect(() => {
@@ -37,7 +37,7 @@ const SeeMoreBillboardListScreen = ({ navigation }) => {
 
   useEffect(() => {
     axios
-      .get(`${baseUrl}/api/billboards`)
+      .get(`${BASE_URL}/api/billboards`)
       .then((res) => setData(res.data))
   }, [])
 
@@ -49,7 +49,7 @@ const SeeMoreBillboardListScreen = ({ navigation }) => {
     </ScrollView>
   )
 }
-export default SeeMoreBillboardListScreen
+export default SeeMoreBillboardScreen
 
 const styles = StyleSheet.create({
   container: {
