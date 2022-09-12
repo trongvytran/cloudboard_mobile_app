@@ -22,7 +22,7 @@ import {useSelector} from "react-redux";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 
-const BillboardInput = () => {
+const BillboardInput = (props: any) => {
     const [open, setOpen] = useState(false);
     const [lat, setLat] = useState('')
     const [long, setLong] = useState('')
@@ -131,6 +131,7 @@ const BillboardInput = () => {
             }
         )
         Alert.alert('Billboard Uploaded Successfully!')
+        props.handleClose()
     }
     return (
         <View className={'px-4'}>

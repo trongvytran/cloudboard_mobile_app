@@ -11,7 +11,7 @@ const MyBillboardList = ({data}: any) => {
             getItemCount={(data) => data.length}
             className={'px-4'}
             getItem={getItem}
-            horizontal
+            
             // @ts-ignore
             ItemSeparatorComponent={() => <View className="mx-2.5"/>}
             keyExtractor={(item) => item.id}
