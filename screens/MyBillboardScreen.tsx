@@ -6,6 +6,7 @@ import {
     View,
     Pressable, TouchableOpacity,
 } from 'react-native'
+import {useSelector} from 'react-redux'
 import React, {useEffect, useLayoutEffect, useState} from 'react'
 import ContainerView from '../components/Views/ContainerView'
 import BillboardInput from '../components/Profile/BillboardInput'
@@ -18,7 +19,9 @@ import axios from "axios";
 
 const MyBillboardScreen = () => {
     const navigation = useNavigation()
+    const [userBillboards, setUserBillboards] = useState([])
     const [modalVisible, setModalVisible] = useState(false)
+    const {userLoginInfo} = useSelector((state: any) => state.userLoginInfo)
     useLayoutEffect(() => {
         navigation.setOptions({
             headerTitle: 'My Billboards',
@@ -44,14 +47,14 @@ const MyBillboardScreen = () => {
         })
     }, [navigation])
 
+    const getUserBillboards = async () => {
+        const {data} = await axios.get(`${BASE_URL}/api/users/${userLoginInfo.id}`)
+        setUserBillboards(data.billboards)
+    }
+
     useEffect(() => {
-        const controller = new AbortController()
-        const getUserBillboards = async () => {
-            await axios.get(`${BASE_URL}/api/billboards`).then((res) => res.data)
-        }
-        getUserBillboards().then(r => console.log(r))
-        controller.abort()
-    })
+        getUserBillboards()
+    }, [])
     return (
         <ScrollView className="bg-white">
             <ContainerView>
@@ -61,7 +64,7 @@ const MyBillboardScreen = () => {
                     visible={modalVisible}
                 >
                     <SafeAreaView>
-                        <View className="relatve flex flex-row items-center justify-center align-middle py-3">
+                        <View className="flex flex-row items-center justify-center py-3 align-middle relatve">
                             <Pressable
                                 onPress={() => setModalVisible(!modalVisible)}
                                 className="absolute left-3"
@@ -79,12 +82,14 @@ const MyBillboardScreen = () => {
                             </View>
                         </View>
                         <ScrollView>
-                            <BillboardInput/>
+                            <BillboardInput handleClose={() => setModalVisible(!modalVisible)}/>
                         </ScrollView>
                     </SafeAreaView>
                 </Modal>
             </ContainerView>
-            <MyBillboardList data={data}/>
+            <View>
+                <MyBillboardList data={userBillboards}/>
+            </View>
         </ScrollView>
     )
 }

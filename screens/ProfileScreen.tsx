@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from 'react-redux'
-import {View, FlatList, Text, Pressable, Alert, VirtualizedList, TouchableOpacity, Image} from 'react-native'
+import {View, Text, Alert, VirtualizedList, TouchableOpacity, Image} from 'react-native'
 import LayoutView from '../components/Views/LayoutView'
 import TitleText from '../components/TitleText'
 import ContainerView from '../components/Views/ContainerView'
@@ -78,7 +78,7 @@ const ProfileScreen = ({navigation}: any) => {
                 onPress={handleSignOut}
                 className="bg-red-500 mt-6 rounded-lg px-5 py-3.5 shadow flex justify-center items-center"
             >
-                <Text className="font-semibold text-xl text-center text-white">Sign Out</Text>
+                <Text className="text-xl font-semibold text-center text-white">Sign Out</Text>
             </TouchableOpacity>
         </View>
     ) : (
