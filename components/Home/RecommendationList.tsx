@@ -1,5 +1,5 @@
 import React from 'react'
-import {Dimensions, FlatList, View, VirtualizedList} from 'react-native'
+import {Dimensions, View, VirtualizedList} from 'react-native'
 import CardListItem from './CardListItem'
 
 const RecommendationList = ({data}: any) => {

@@ -17,7 +17,7 @@ import {LinearGradient} from 'expo-linear-gradient'
 import * as ImagePicker from 'expo-image-picker'
 import Colors from '../../constants/color'
 import axios from "axios";
-import baseUrl from "../../constants/baseUrl";
+import{ BASE_URL } from "../../constants/endpoints";
 import {useSelector} from "react-redux";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
@@ -98,7 +98,7 @@ const BillboardInput = () => {
         Animated.createAnimatedComponent(LinearGradient)
 
     // const getPeriods = async () => {
-    //     await axios.get(`${baseUrl}/api/billboards`).then(res => res.data.)
+    //     await axios.get(`${BASE_URL}/api/billboards`).then(res => res.data.)
     // }
 
     const contractPeriods = [{label: '3 months', value: '3 months'}, {
@@ -110,7 +110,7 @@ const BillboardInput = () => {
     }]
 
     const postData = async () => {
-        await axios.post(`${baseUrl}/api/billboards`,
+        await axios.post(`${BASE_URL}/api/billboards`,
             {
                 "lat": lat,
                 "long": long,

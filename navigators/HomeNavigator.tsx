@@ -1,9 +1,11 @@
 import {createStackNavigator} from '@react-navigation/stack'
+import createAnimatedSwitchNavigator from 'react-navigation-animated-switch';
+import {Transition} from 'react-native-reanimated';
 import React from 'react'
 import HomeScreen from '../screens/HomeScreen'
 import SearchScreen from '../screens/SearchScreen'
 import BillboardDetailScreen from '../screens/BillboardDetailScreen'
-import SeeMoreBillboardListScreen from '../screens/SeeMoreBillboardListScreen'
+import SeeMoreBillboardScreen from '../screens/SeeMoreBillboardScreen'
 import ProfileScreen from '../screens/ProfileScreen'
 import ContactScreen from "../screens/ContactScreen";
 
@@ -14,13 +16,13 @@ const HomeNavigator = () => {
         <HomeStack.Navigator>
             <HomeStack.Screen name="HomeScreen" component={HomeScreen}/>
             <HomeStack.Screen
-                name="Search"
+                name="SearchScreen"
                 component={SearchScreen}
                 options={{headerShown: false}}
             />
             <HomeStack.Screen
-                name="SeeMoreBillboardListScreen"
-                component={SeeMoreBillboardListScreen}
+                name="SeeMoreBillboardScreen"
+                component={SeeMoreBillboardScreen}
             />
             <HomeStack.Screen
                 name="BillboardDetailScreen"

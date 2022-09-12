@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
-import BaseUrl from '../constants/baseUrl'
+import {BASE_URL} from '../constants/endpoints'
 
 const getBillboards = async () => {
-  const { data } = await axios.get(`${BaseUrl}/api/billboards`)
+  const { data } = await axios.get(`${BASE_URL}/api/billboards`)
   return data
 }
 

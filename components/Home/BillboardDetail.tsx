@@ -7,7 +7,7 @@ import ReadMore from 'react-native-read-more-text'
 import {useNavigation} from '@react-navigation/native'
 import ShareButton from '../UI/ShareButton'
 import {useSelector} from 'react-redux'
-import baseUrl from "../../constants/baseUrl";
+import{ BASE_URL } from "../../constants/endpoints";
 import axios from "axios";
 import moment from "moment";
 const BillboardDetail = ({item}: any) => {
@@ -55,72 +55,6 @@ const BillboardDetail = ({item}: any) => {
             navigation.navigate('ContactScreen' as never, {item} as never)
         }
     }
-
-    const handleSubscribe = async () => {
-        if (!userLoginInfo) {
-            Alert.alert(
-                'Warning',
-                'You need to login to subscribe. Continue?',
-                [
-                    {
-                        text: 'Cancel',
-                        style: 'cancel',
-                    },
-                    {
-                        text: 'OK',
-                        onPress: () => {
-                            navigation.navigate('My Profile' as never, {screen: 'ProfileScreen'} as never)
-                        },
-                    },
-                ]
-            )
-        } else
-            {            const periodStart =  new Date()
-                const msDiff = item.duration.replace(" months", '');
-                const periodEnd = moment(periodStart).add(msDiff, 'month');
-            await axios.post(`${baseUrl}/api/subscriptions`,
-            {
-                "name": item.name,
-                "status": "active",
-                "periodStart": periodStart,
-                "periodEnd": periodEnd,
-            })
-            .then((res) => {
-                console.log(res)
-            })
-        }
-    }
-
-    const Subscribe = () => {
-        if (!userLoginInfo) {
-            Alert.alert(
-                'Warning',
-                'You need to login to subscribe. Continue?',
-                [
-                    {
-                        text: 'Cancel',
-                        style: 'cancel',
-                    },
-                    {
-                        text: 'OK',
-                        onPress: () => {
-                            navigation.navigate('My Profile' as never, {screen: 'ProfileScreen'} as never)
-                        },
-                    },
-                ]
-            )
-        } else {
-        const stripeCustomerId = userLoginInfo.stripeCustomerId
-        axios.post(`${baseUrl}/api/transactions/session`, {
-            stripeCustomerId
-        }
-        
-        )
-        .then((res) => {
-            Linking.openURL(res.data.url).catch(err => console.error("Couldn't load page", err));
-        })
-        }
-      };
 
     return (
         <ScrollView>

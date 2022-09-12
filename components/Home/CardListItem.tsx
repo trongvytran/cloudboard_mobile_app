@@ -3,7 +3,7 @@ import {Pressable, View, Text, Image} from 'react-native'
 import axios from 'axios'
 import DurationBadge from '../UI/DurationBadge'
 import {useNavigation} from '@react-navigation/native'
-import baseUrl from "../../constants/baseUrl";
+import{ BASE_URL } from "../../constants/endpoints";
 
 const CardListItem = ({item}: any) => {
     const [view, setView] = useState(0)
@@ -16,7 +16,7 @@ const CardListItem = ({item}: any) => {
             } as never
         )
         const viewed = view + 1
-        await axios.patch(`${baseUrl}/api/billboards/${item.id}`, {
+        await axios.patch(`${BASE_URL}/api/billboards/${item.id}`, {
             view: viewed,
         })
     }

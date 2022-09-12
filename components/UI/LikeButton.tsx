@@ -5,7 +5,7 @@ import axios from 'axios'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { useNavigation } from '@react-navigation/native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import baseUrl from "../../constants/baseUrl";
+import{ BASE_URL } from "../../constants/endpoints";
 
 const LikeButton = (data: any) => {
 
@@ -37,7 +37,7 @@ const LikeButton = (data: any) => {
     setLiked((isLiked) => !isLiked)
     array.push(useremail)
     setLikeNumber(array.length)
-    await axios.patch(`${baseUrl}/api/billboards/${postid}`, {
+    await axios.patch(`${BASE_URL}/api/billboards/${postid}`, {
       like: array,
     })
   }
@@ -49,7 +49,7 @@ const LikeButton = (data: any) => {
         array.splice(i, 1)
       }
       setLikeNumber(array.length)
-      await axios.patch(`${baseUrl}/api/billboards/${postid}`, {
+      await axios.patch(`${BASE_URL}/api/billboards/${postid}`, {
         like: array,
       })
     }
@@ -84,10 +84,10 @@ const LikeButton = (data: any) => {
             text: 'OK',
             onPress: () => {
               navigation.navigate('ProfileScreen').
-              useLayoutEffect(() => 
+              useLayoutEffect(() =>
               {navigation.setOptions({
                 headerTitle: 'dsadas',
-            
+
               })})
             },
           },

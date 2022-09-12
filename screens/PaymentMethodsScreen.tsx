@@ -5,7 +5,7 @@ import Colors from '../constants/color'
 import {useNavigation} from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import axios from 'axios';
-import baseUrl from "../constants/baseUrl";
+import{ BASE_URL } from "../constants/endpoints";
 import {useDispatch, useSelector} from "react-redux";
 import {addUserCreditCard} from '../features/userCreditCard'
 import {PaymentIcon} from 'react-native-payment-icons'
@@ -56,14 +56,14 @@ const PaymentMethodsScreen = () => {
     //
     // }
 
-    const postCreditCard = useCallback(async () => {
+    const postCreditCard = async () => {
         const paymentMethodId = await getPaymentMethodId();
 
         if (!paymentMethodId) {
             return Alert.alert('Unable to process payment method.');
         }
         try {
-            await axios.post(`${baseUrl}/api/transactions/credit-cards`, {
+            await axios.post(`${BASE_URL}/api/transactions/credit-cards/${stripeCustomerId}`, {
                     paymentMethodId,
                     stripeCustomerId
                 }
@@ -71,10 +71,10 @@ const PaymentMethodsScreen = () => {
         } catch (e) {
             throw new Error(`Error occured: ${e}`)
         }
-    }, [userCreditCard])
+    }
 
     const setDefault = async (paymentMethodId) => {
-        await axios.post(`${baseUrl}/api/transactions/default`, {
+        await axios.post(`${BASE_URL}/api/transactions/default`, {
                 paymentMethodId,
                 stripeCustomerId
             }
@@ -92,7 +92,7 @@ const PaymentMethodsScreen = () => {
 
     useEffect(() => {
         const getPaymentMethods = async () => {
-            await axios.get(`${baseUrl}/api/transactions/credit-cards/${stripeCustomerId}`,
+            await axios.get(`${BASE_URL}/api/transactions/credit-cards/${stripeCustomerId}`,
             ).then((res) => dispatch(addUserCreditCard(res.data.data)))
         }
         getPaymentMethods().catch(console.error)
@@ -105,7 +105,7 @@ const PaymentMethodsScreen = () => {
                 <CardField
                     postalCodeEnabled={false}
                     placeholder={{
-                        number: '1234 5678 9764 9999',
+                        number: '•••• •••• •••• 1234',
                     }}
                     cardStyle={{
                         backgroundColor: '#FFFFFF',
@@ -121,11 +121,7 @@ const PaymentMethodsScreen = () => {
                     }}
                 />
             </View>
-            <View className={'flex flex-row justify-center mx-5 mt-0.5'}>
-                {/*<TouchableOpacity className={'px-2 py-3.5 w-1/2 mr-2 bg-blue-600 rounded-lg'}*/}
-                {/*                  onPress={() => manage()}>*/}
-                {/*    <Text className={'text-white align-middle text-center font-bold text-lg'}>MANAGE</Text>*/}
-                {/*</TouchableOpacity>*/}
+            <View className={'flex flex-row justify-center mx-4 mt-0.5'}>
                 <TouchableOpacity className={'px-2 py-3.5 w-full bg-red-600 rounded-lg'}
                                   onPress={() => postCreditCard()}>
                     <Text className={'text-white align-middle text-center font-bold text-lg'}>SUBMIT</Text>
@@ -133,24 +129,36 @@ const PaymentMethodsScreen = () => {
             </View>
             <View>
                 <Text className={`mx-4 mt-3 text-lg font-bold`}>Existing methods</Text>
-                {userCreditCard > 0 && userCreditCard.map((index, i) => {
+                {userCreditCard.map((index, i) => {
                         return (
-                            <View key={index}>
-                                <PaymentIcon type={userCreditCard[i].card.brand}></PaymentIcon>
-                                <Text>Brand: {userCreditCard[i].card.brand}</Text>
-                                <Text>Last 4: {userCreditCard[i].card.last4}</Text>
-                                <Text>Expire Month : {userCreditCard[i].card.exp_month}</Text>
-                                <Text>Expire Year : {userCreditCard[i].card.exp_year}</Text>
-                                <TouchableOpacity className={'px-2 py-3.5 w-1/2 bg-red-600 rounded-lg'}
-                                                  onPress={() => setDefault(userCreditCard[i].id)}>
-                                    <Text className={'text-white align-middle text-center font-bold text-lg'}>Set as
-                                        default</Text>
-                                </TouchableOpacity>
-
+                            <View className={'mx-4 mt-3 mb-2 p-4'} style={{borderBottomWidth: 0.5, borderBottomColor: 'gray'}} key={i}>
+                                <View className={'flex flex-row justify-between'}>
+                                    <View className={'flex flex-row mt-2'}>
+                                        <PaymentIcon height={30} type={userCreditCard[i].card.brand}></PaymentIcon>
+                                        <Text className={'text-lg ml-4 font-semibold'}>•••• ••••
+                                            •••• {userCreditCard[i].card.last4}</Text>
+                                    </View>
+                                    <TouchableOpacity>
+                                        <Ionicons className={'items-end'} size={20} color={'gray'} name={'close'}/>
+                                    </TouchableOpacity>
+                                </View>
+                                <View className={'flex justify-center items-end my-2'}>
+                                    <Text className={'text-lg'}><Text className={'font-bold'}>Exp.
+                                        Date:</Text> {userCreditCard[i].card.exp_month}/{userCreditCard[i].card.exp_year}
+                                    </Text>
+                                </View>
+                                <View className={'items-end'}>
+                                    <TouchableOpacity className={'px-1 py-2 mt-2 bg-sky-600 rounded-lg w-1/3'}
+                                                      onPress={() => setDefault(userCreditCard[i].id)}>
+                                        <Text className={'text-white align-middle text-center font-bold text-md'}>SET
+                                            DEFAULT</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </View>
                         )
                     }
-                )}
+                )
+                }
 
 
                 {/*<Text className={'mx-auto text-gray-400 my-10'}>{cardDetails}</Text>*/}
