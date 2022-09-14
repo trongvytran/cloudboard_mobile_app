@@ -7,6 +7,7 @@ import React from 'react'
 import axios from 'axios'
 import {addUserLoginInfo} from '../../../features/auth/userLoginInfo'
 import{ BASE_URL } from '../../../constants/endpoints'
+import { addIsLogged } from '../../../features/auth/isLogged'
 
 const FacebookView: React.FC = () => {
     const dispatch = useDispatch()
@@ -26,6 +27,7 @@ const FacebookView: React.FC = () => {
                 .then((res) => {
                     const controller = new AbortController()
                     dispatch(addUserLoginInfo(res.data.user))
+                    dispatch(addIsLogged(true))
                     axios.patch(`${BASE_URL}/api/users/${res.data.user.id}`, {role: 2})
                         .then(() => controller.abort())
                 })
