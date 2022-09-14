@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 29,
     width: "auto",
-    marginBottom: 14
+    marginBottom: 14,
+    textTransform: 'capitalize'
   },
 })

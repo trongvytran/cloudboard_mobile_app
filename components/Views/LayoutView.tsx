@@ -1,7 +1,6 @@
 import React from 'react'
-import { Keyboard, StyleSheet } from 'react-native'
+import { Keyboard } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import Colors from '../../constants/color'
 
 const LayoutView = ({ children }: any) => {
   const handleUnhandledTouches = () => {

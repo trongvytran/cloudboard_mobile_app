@@ -1,11 +1,11 @@
 import Ionicons from '@expo/vector-icons/Ionicons'
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Colors from '../constants/color'
 import ProfileNavigator from '../navigators/ProfileNavigator'
 import SubscriptionNavigator from '../navigators/SubscriptionsNavigator'
 import React from 'react'
 import HomeNavigator from '../navigators/HomeNavigator'
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 
 const Tab = createBottomTabNavigator()
 
@@ -24,15 +24,17 @@ const iconOptions = (options: any) => {
 }
 
 const Main = () => {
-    const {userLoginInfo} = useSelector((state: any) => state.userLoginInfo)
+    const { isLogged } = useSelector((state: any) => state.isLogged)
     return (
         <Tab.Navigator
             initialRouteName="Home"
-            screenOptions={({route}) => ({
+            screenOptions={({ route }) => ({
                 headerShown: false,
-                tabBarIcon: ({focused, color, size}) => {
-                    let iconName = iconOptions({route, focused})
-                    return <Ionicons name={iconName} size={size} color={color}/>
+                tabBarIcon: ({ focused, color, size }) => {
+                    let iconName = iconOptions({ route, focused })
+                    return (
+                        <Ionicons name={iconName} size={size} color={color} />
+                    )
                 },
                 tabBarActiveTintColor: Colors.primaryColor,
                 tabBarStyle: {
@@ -40,11 +42,18 @@ const Main = () => {
                 },
             })}
         >
-            <Tab.Screen name="Home" options={{lazy: false}} component={HomeNavigator}/>
-            {userLoginInfo ? (
-                <Tab.Screen name="Subscriptions" component={SubscriptionNavigator}/>
+            <Tab.Screen
+                name="Home"
+                options={{ lazy: false }}
+                component={HomeNavigator}
+            />
+            {isLogged ? (
+                <Tab.Screen
+                    name="Subscriptions"
+                    component={SubscriptionNavigator}
+                />
             ) : null}
-            <Tab.Screen name="My Profile" component={ProfileNavigator}/>
+            <Tab.Screen name="My Profile" component={ProfileNavigator} />
         </Tab.Navigator>
     )
 }

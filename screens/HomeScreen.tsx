@@ -1,4 +1,4 @@
-import React, {useLayoutEffect} from 'react'
+import React, { useLayoutEffect } from 'react'
 import {
     StyleSheet,
     ScrollView,
@@ -15,8 +15,8 @@ import useBillboards from '../hooks/useBillboards'
 import RecommendationList from '../components/Home/RecommendationList'
 import TopBillboardList from '../components/Home/TopBillboardList'
 
-const HomeScreen = ({navigation}: any) => {
-    const {status, data, error} = useBillboards()
+const HomeScreen = ({ navigation }: any) => {
+    const { status, data, error } = useBillboards()
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -52,7 +52,9 @@ const HomeScreen = ({navigation}: any) => {
                         />
                     </View>
                 ) : status === 'error' ? (
-                    <View className={`flex justify-center align-middle items-center`}>
+                    <View
+                        className={`flex justify-center align-middle items-center`}
+                    >
                         <Ionicons
                             name="warning-outline"
                             className={`flex justify-center items-center align-middle`}
@@ -67,15 +69,15 @@ const HomeScreen = ({navigation}: any) => {
                         </Text>
                     </View>
                 ) : (
-                    <ScrollView
-                        showsVerticalScrollIndicator={false}
-                    >
-                        <Text className="mx-4 text-2xl font-bold">Find Your Billboard</Text>
-                        <Carousel data={data}/>
-                        <SectionHeadingView name="Recommendations"/>
-                        <RecommendationList data={data}/>
-                        <SectionHeadingView name="Top Billboards"/>
-                        <TopBillboardList data={data}/>
+                    <ScrollView showsVerticalScrollIndicator={false}>
+                        <Text className="mx-4 text-2xl font-bold">
+                            Find Your Billboard
+                        </Text>
+                        <Carousel data={data} />
+                        <SectionHeadingView name="Recommendations" />
+                        <RecommendationList data={data} />
+                        <SectionHeadingView name="Top Billboards" />
+                        <TopBillboardList data={data} />
                     </ScrollView>
                 )}
             </View>
