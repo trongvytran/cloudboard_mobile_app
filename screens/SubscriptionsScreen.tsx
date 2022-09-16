@@ -50,6 +50,9 @@ const SubscriptionsScreen = () => {
             {userLoginInfo && userLoginInfo.subscription ? (
               <SafeAreaView edges={['right', 'left', 'top']} className='bg-white flex-1 px-4'>
                 <TitleText>{userLoginInfo.subscription.name}</TitleText>
+                  <TouchableOpacity className={'bg-red-600 py-4 rounded-xl'}>
+                      <Text className={'text-center text-white font-bold text-xl'}>CANCEL</Text>
+                  </TouchableOpacity>
               </SafeAreaView>
             ) : (
                 <AnimatedImageBackground
@@ -74,10 +77,9 @@ const SubscriptionsScreen = () => {
                                     'font-bold text-white text-3xl text-center'
                                 }
                             >
-                                <Text className={'italic underline'}>
-                                    Scale Up
+                                <Text>
+                                     <Text className={"underline italic"}>Scale Up</Text> Your Place!
                                 </Text>
-                                Your Place!
                             </Text>
                         </View>
                         <View>

@@ -16,6 +16,7 @@ const FacebookView: React.FC = () => {
         iosClientId: '403771287819141',
         androidClientId: '403771287819141',
         webClientId: '403771287819141',
+        clientId: '403771287819141'
     })
 
     useEffect(() => {
@@ -39,7 +40,7 @@ const FacebookView: React.FC = () => {
             disabled={!request}
             className="bg-[#3b5998] my-1 rounded-lg px-5 py-3.5 shadow flex justify-center items-center"
             onPress={() => {
-                promptAsync({useProxy: true, showInRecents: true})
+                promptAsync({useProxy: true, showInRecents: true}).then(() => console.log('Successfully logged in!'))
             }}
         >
             <Ionicons style={styles.icon} name="logo-facebook" size={25}/>
