@@ -45,6 +45,9 @@ const BillboardDetail = ({ item }: any) => {
     }, [navigation])
 
     useLayoutEffect(() => {
+        if (!userLoginInfo){
+            return;
+        } else
         axios.get(`${BASE_URL}/api/users/${userLoginInfo.id}`).then((res) => {
             const val = res.data.bookedBillboards.find(
                 (element: { id: any }) => {
@@ -89,6 +92,32 @@ const BillboardDetail = ({ item }: any) => {
             )
         } else {
             navigation.navigate('ContactScreen' as never, { item } as never)
+        }
+    }
+
+    const handleBook = () => {
+        if (!userLoginInfo) {
+            Alert.alert(
+                'Warning',
+                'You need to login to display contact information. Continue?',
+                [
+                    {
+                        text: 'Cancel',
+                        style: 'cancel',
+                    },
+                    {
+                        text: 'OK',
+                        onPress: () => {
+                            navigation.navigate(
+                                'My Profile' as never,
+                                { screen: 'ProfileScreen' } as never
+                            )
+                        },
+                    },
+                ]
+            )
+        } else {
+            bookBillboard()
         }
     }
 
@@ -155,7 +184,7 @@ const BillboardDetail = ({ item }: any) => {
                     </MapView>
                 </View>
                 <TouchableOpacity
-                    onPress={bookBillboard}
+                    onPress={handleBook}
                     className={
                         'px-2 py-2.5 w-full mr-2 bg-amber-500 rounded-lg my-3'
                     }
