@@ -56,7 +56,7 @@ const MyBillboardScreen = () => {
         getUserBillboards()
     }, [])
     return (
-        <ScrollView className="bg-white">
+        <View className="bg-white h-screen">
             <ContainerView>
                 <Modal
                     className="flex-1 bg-white"
@@ -87,10 +87,8 @@ const MyBillboardScreen = () => {
                     </SafeAreaView>
                 </Modal>
             </ContainerView>
-            <View>
-                <MyBillboardList data={userBillboards}/>
-            </View>
-        </ScrollView>
+            {userBillboards?<Text className={'mx-auto top-1/3 text-gray-400 text-lg'}>You have no billboards</Text>:<MyBillboardList data={userBillboards}/>}
+        </View>
     )
 }
 

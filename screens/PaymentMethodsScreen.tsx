@@ -35,26 +35,27 @@ const PaymentMethodsScreen = () => {
     )
 
     const getPaymentMethodId = async () => {
-        const stripeResponse = await stripe?.createPaymentMethod({
-            type: 'Card',
+        const stripeResponse = await stripe.createPaymentMethod({
+            paymentMethodType: "Card",
         });
         const {error, paymentMethod} = stripeResponse;
+
         if (error || !paymentMethod) {
             return console.error('Error occurred!');
         }
         return paymentMethod.id
     }
 
-    // const manage = async () => {
-    //     await axios.post(`${baseUrl}/api/transactions/portal`, {
-    //             stripeCustomerId
-    //         }
-    //     )
-    //         .then((res) => {
-    //             Linking.openURL(res.data.url).catch(err => console.error("Couldn't load page", err));
-    //         })
-    //
-    // }
+    const manage = async () => {
+        await axios.post(`${BASE_URL}/api/transactions/portal`, {
+                stripeCustomerId
+            }
+        )
+            .then((res) => {
+                Linking.openURL(res.data.url).catch(err => console.error("Couldn't load page", err));
+            })
+
+    }
 
     const postCreditCard = async () => {
         const paymentMethodId = await getPaymentMethodId();
@@ -104,7 +105,7 @@ const PaymentMethodsScreen = () => {
             <View className={`px-4`}>
                 <CardField
                     postalCodeEnabled={false}
-                    placeholder={{
+                    placeholders={{
                         number: '•••• •••• •••• 1234',
                     }}
                     cardStyle={{
@@ -125,6 +126,9 @@ const PaymentMethodsScreen = () => {
                 <TouchableOpacity className={'px-2 py-3.5 w-full bg-red-600 rounded-lg'}
                                   onPress={() => postCreditCard()}>
                     <Text className={'text-white align-middle text-center font-bold text-lg'}>SUBMIT</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => manage()}>
+                   <Text> Manage</Text>
                 </TouchableOpacity>
             </View>
             <View>
